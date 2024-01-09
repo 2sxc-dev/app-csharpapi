@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Reflection;
 using static ThisApp.Code.Constants;
 
@@ -11,11 +12,43 @@ namespace ThisApp.Code
       MemberInfo = mInfo;
       Name = mInfo.Name;
 
+      var labels = GetLabelAndDetails();
+      LabelExtended = labels.Details;
+      Label = labels.Label;
+
       OwnVisibility = new Visibility<MemberInfo>(mInfo, IsPublic, IsProtectedPublic);
       Visibility = new MemVisibility(OwnVisibility, parentVisibility, rule);
     }
 
+    private (string Label, string Details) GetLabelAndDetails()
+    {
+      if (MemberInfo is MethodInfo mInfoMethod) {
+        var parameters = mInfoMethod.GetParameters();
+        if (parameters.Length > 0) {
+          var parameterNames = string.Join(", ", parameters.Select(p => p.ParameterType.Name + " " + p.Name));
+          return (Name + $"({parameters.Count()})", Name + $"({parameterNames})");
+        } else {
+          return (Name + "()", Name + "()");
+        }
+      }
+
+      if (MemberInfo is PropertyInfo mInfoProp) {
+        var canRead = mInfoProp.CanRead;
+        var canWrite = mInfoProp.CanWrite;
+        if (canRead && canWrite) return (Name, Name + " { get; set; }");
+        if (canRead) return (Name, Name + " { get; }");
+        return (Name, Name + " { set; }");
+      }
+
+      return (Name, Name);
+    }
+
     public string Name { get; }
+
+    public string LabelExtended { get; }
+
+    public string Label { get; }
+
     public MemberInfo MemberInfo { get; }
     public FieldInfo FieldInfo => MemberInfo as FieldInfo;
     public PropertyInfo PropertyInfo => MemberInfo as PropertyInfo;
@@ -80,6 +113,9 @@ namespace ThisApp.Code
         case MemberTypes.NestedType:
           return new Status("❓", "nested type");
         case MemberTypes.Property:
+          if (PropertyInfo.CanRead && PropertyInfo.CanWrite) return new Status("🧊", "property r/w");
+          if (PropertyInfo.CanRead) return new Status("📤", "property r");
+          if (PropertyInfo.CanWrite) return new Status("📥", "property w");
           return new Status("🧊", "property");
         default:
           return new Status("❔", "other?");

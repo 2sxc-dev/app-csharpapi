@@ -16,6 +16,15 @@
     var tlb = cnf == null
       ? Kit.Toolbar.Empty().New("RuleClass", tweak: t => t.Prefill(new { Title = fullNs }))
       : Kit.Toolbar.Edit(cnf);
+
+    var configInfo = type.Rule?.IgnoreAllProperties == true
+      ? new Status("🦘", "Ignore all properties")
+      : type.RuleNamespace?.IgnoreTypeMembers == true
+        ? new Status("🦘", "Ignore all members")
+        : type.Rule?.IgnoreMembersWithoutSpecs == true
+          ? new Status("🛅", "Ignore members without specs")
+          : null;
+    
     <tr class='@(currentType == type.Name ? "selected" : "")' @tlb>
       <td title="@type.TypeSummary.Message">
         @type.TypeSummary.Icon
@@ -30,10 +39,11 @@
       @Html.Partial("./VisibilityColumns.cshtml", new { type.Visibility, Total = type.Overall })
 
       @* Configuration *@
+      <td title='@(configInfo?.Details)'>
+        @(configInfo?.Icon)
+      </td>
       <td>
-        @if (type.Rule != null) {
-          @(type.Rule.IgnoreAllProperties ? "🦘" : "")
-        }
+        
       </td>
     </tr>
   }
