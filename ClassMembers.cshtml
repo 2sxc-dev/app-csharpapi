@@ -1,0 +1,27 @@
+@inherits Custom.Hybrid.RazorTyped
+@using ThisApp.Code;
+
+@{
+  var currentType = MyModel.String("CurrentType");
+  var nsInfo = MyModel.Get<NamespaceInfo>("NsInfo");
+  var classInfo = MyModel.Get<TypeInfo>("ClassInfo");
+  var memName = MyModel.String("Member");
+}
+<table>
+  @Html.Partial("./VisibilityHeader.cshtml")
+
+  @foreach (var mem in classInfo.Members.Relevant)
+  {
+    <tr  class='@(memName == mem.Name ? "selected" : "")'>
+      <td title="@mem.TypeSummary.Message">
+        @mem.TypeSummary.Icon
+      </td>
+      <td>
+        <a href='@Link.To(parameters: MyPage.Parameters.Toggle("Member", mem.Name))'>
+          @mem.Name
+        </a>
+      </td>
+      @Html.Partial("./VisibilityColumns.cshtml", new { mem.Visibility })
+    </tr>
+  }
+</table>

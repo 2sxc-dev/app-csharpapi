@@ -1,0 +1,40 @@
+@inherits Custom.Hybrid.RazorTyped
+@using ThisApp.Code;
+
+@{
+  var currentType = MyModel.String("CurrentType");
+  var nsInfo = MyModel.Get<NamespaceInfo>("NsInfo");
+
+}
+<table>
+  @Html.Partial("./VisibilityHeader.cshtml")
+
+  @foreach (var type in nsInfo.Types.Relevant)
+  {
+    var fullNs = type.Namespace + "." + type.Name;
+    var cnf = type.Rule?.Item;
+    var tlb = cnf == null
+      ? Kit.Toolbar.Empty().New("RuleClass", tweak: t => t.Prefill(new { Title = fullNs }))
+      : Kit.Toolbar.Edit(cnf);
+    <tr class='@(currentType == type.Name ? "selected" : "")' @tlb>
+      <td title="@type.TypeSummary.Message">
+        @type.TypeSummary.Icon
+      </td>
+      <td>
+        <a href='@Link.To(parameters: MyPage.Parameters.Filter("Dll,Namespace,Type").Toggle("Type", type.Name))'>
+          @type.Name
+        </a>
+      </td>
+
+      @* Standard infos / checkboxes *@
+      @Html.Partial("./VisibilityColumns.cshtml", new { type.Visibility, Total = type.Overall })
+
+      @* Configuration *@
+      <td>
+        @if (type.Rule != null) {
+          @(type.Rule.IgnoreAllProperties ? "🦘" : "")
+        }
+      </td>
+    </tr>
+  }
+</table>

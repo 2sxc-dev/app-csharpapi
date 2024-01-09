@@ -1,0 +1,56 @@
+@inherits Custom.Hybrid.RazorTyped
+@using ToSic.Razor.Blade;
+@using ThisApp.Code;
+
+@{
+  var dllInfo = MyModel.Get<AssemblyInfo>("DllInfo");
+  var currentNs = MyModel.String("currentNs");
+}
+<table x-class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Σ</th>
+      <th>📊</th>
+      <th>⚙️</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var ns in dllInfo.Namespaces.Relevant) {
+      var title = ns.Namespace;
+      var trunc = title.Length < 10
+        ? title
+        : title
+            .Replace("ToSic.SexyContent.", "...SexyContent.")
+            .Replace("ToSic.", ".");
+
+      var cnf = ns.Rule?.Item;
+      var tlb = cnf == null
+        ? Kit.Toolbar.Empty().New("RuleNamespace", tweak: t => t.Prefill(new { Title = title }))
+        : Kit.Toolbar.Edit(cnf);
+
+      <tr class='@(ns.Namespace == currentNs ? "selected" : "")' @tlb>
+        <td>
+          <a href='@Link.To(parameters: MyPage.Parameters.Filter("Dll,Namespace").Toggle("Namespace", title))' title="@title">
+            @Html.Raw(Text.Ellipsis(trunc, 20))
+          </a>
+        </td>
+        <td>
+          @ns.Overall.Icon
+        </td>
+        <td>
+          @(ns.Types?.Summary)
+        </td>
+
+        @* Configuration *@
+        <td>
+          @if (ns.Rule != null) {
+            @(ns.Rule.IgnoreAll ? "🦘" : "")
+            @(ns.Rule.IgnoreTypeMembers ? "🎛️" : "")
+          }
+        </td>
+
+      </tr>
+    }
+  </tbody>
+</table>

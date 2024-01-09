@@ -1,0 +1,28 @@
+@inherits Custom.Hybrid.RazorTyped
+@using ThisApp.Code;
+
+@{
+  @* var currentType = MyModel.String("CurrentType");
+  var nsInfo = MyModel.Get<NamespaceInfo>("NsInfo");
+  var classInfo = MyModel.Get<TypeInfo>("ClassInfo"); *@
+  var classInfo = MyModel.Get<TypeInfo>("ClassInfo");
+  var memName = MyModel.String("Member");
+  var mem = classInfo.Members.Relevant.FirstOrDefault(m => m.Name == memName);
+
+  var declType = mem.MemberInfo.DeclaringType;
+  var isObject = declType == typeof(object);
+}
+
+<h2>Debug Class Member: @(classInfo.Name + "." + @mem.Name)</h2>
+
+<ol>
+  <li>
+    Name: @mem.Name
+  </li>
+  <li>
+    Summary: @mem.TypeSummary.Icon @mem.TypeSummary.Message
+  </li>
+  <li>
+    Declaring Member: @mem.MemberInfo.DeclaringType.Name (IsObject: @isObject)
+  </li>
+</ol>

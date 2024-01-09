@@ -1,0 +1,27 @@
+@inherits Custom.Hybrid.RazorTyped
+@using ThisApp.Code;
+
+@{
+  var visibility = MyModel.Get<IVisibility>("Visibility");
+  var total = MyModel.Get<Status>("Total", required: false);
+}
+
+<td title="@(total?.Details)">
+    @(total?.Icon)
+</td>
+
+<td title="@visibility.Summary.Details">
+  @visibility.Summary.Icon
+</td>
+
+<td>
+  @Show.BoolMoji(visibility.IsPublic, "👁️", "🔒")
+</td>
+
+<td title='@visibility.Docs.Details'>
+  @visibility.Docs.Icon
+</td>
+
+<td>
+  @Show.BoolMoji(visibility.ShowInIntelliSense, "👁️", "🔒")
+</td>

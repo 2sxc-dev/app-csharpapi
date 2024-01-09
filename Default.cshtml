@@ -1,0 +1,178 @@
+@inherits Custom.Hybrid.RazorTyped
+@using System.IO;
+@using ThisApp.Code;
+
+<h1 @Kit.Toolbar.Default()>Manage Public C# APIs</h1>
+
+@{
+  // Determine configuration based on url parameters
+  var pars = MyPage.Parameters;
+  var publicOnly = pars.Bool("PublicOnly", fallback: true);
+  var dllSelected = pars.IsNotEmpty("Dll");
+  var dllName = pars.Get("Dll", fallback: Constants.ToSicSxc);
+  var nsSelected = pars.IsNotEmpty("Namespace");
+  var currentNs = pars.Get("Namespace");
+
+  var typeSelected = pars.IsNotEmpty("Type");
+  var currentType = pars.Get("Type");
+
+  var memberSelected = pars.IsNotEmpty("Member");
+  var member = pars.Get("Member");
+}
+
+<a class='btn @(publicOnly ? "btn-primary" : "btn-secondary")' href='@Link.To(parameters: pars.Set("PublicOnly", !publicOnly))'>
+  @(publicOnly ? "✅" : "❌")
+  Public Only
+</a>
+
+<a type="button" class='btn @(dllName != "" ? "btn-primary" : "btn-secondary")' href='@Link.To(parameters: pars.Set("Dll", ""))'>
+  @if (dllName == "")
+  {
+    <text>➖ All Dlls</text>
+  }
+  else
+  {
+    <text>✅ @dllName</text>
+  }
+</a>
+
+@{
+  // Get the bin folder of the current razor
+
+  var dllPath = System.IO.Path.Combine(App.Folder.PhysicalPath, Constants.PathToDlls);
+  var dlls = new DirectoryInfo(dllPath).GetFiles("*.dll").Select(x => x.Name).ToList();
+  var currentDll = dllName + ".dll";
+}
+
+
+<div>
+  BasePath: @Constants.PathToDlls <br>
+  DllPath: @dllPath <br>
+  Dlls: @dlls.Count <br>
+  Current DLL: @currentDll <br>
+</div>
+
+@{
+  var rulesDll = AsItems(App.Data.GetStream("RuleDll")).ToList();
+  var rulesNs = AsItems(App.Data.GetStream("RuleNamespace")).ToList();
+  var rulesClass = AsItems(App.Data.GetStream("RuleClass")).ToList();
+
+  var dllInfo = new AssemblyInfo(System.IO.Path.Combine(dllPath, currentDll), rulesDll, rulesNs, rulesClass);
+  var nsInfo = dllInfo.Namespaces.All.FirstOrDefault(x => x.Namespace == currentNs);
+  var classInfo = nsInfo?.Types.All.FirstOrDefault(x => x.Name == currentType);
+}
+
+@* <h2>test</h2>
+@((typeof(Custom.Hybrid.CodePro)).HasPublicApi()) *@
+
+<h2>Stats @dllInfo.Name</h2>
+<ul>
+  <li>Types: @dllInfo.Types.Summary</li>
+  <li>Namespaces: @dllInfo.Namespaces.Summary</li>
+  @* <li>Methods: @dllInfo.Methods.Count</li>
+  <li>Properties: @dllInfo.Properties.Count</li>
+  <li>Fields: @dllInfo.Fields.Count</li>
+  <li>Events: @dllInfo.Events.Count</li> *@
+</ul>
+
+<div style="x-width: 1600px">
+  <table class="table">
+    <tr>
+      <th>Dll</th>
+      <th>Namespace in @dllInfo.Name (@dllInfo.Namespaces.Summary)</th>
+      <th>
+        Classes in @(nsInfo?.Namespace)
+        (@(nsInfo?.Types.Summary))
+        @(nsInfo?.Overall.Icon)
+      </th>
+      <th>
+        Members in @(classInfo?.Name)
+        (@(classInfo?.Members.Summary))
+        @(classInfo?.Overall.Icon)
+      </th>
+    </tr>
+    <tr>
+      <td>
+        @Html.Partial("./Dlls.cshtml", new { currentDll = dllName })
+      </td>
+      <td>
+        @* todo: if DllSelected *@
+        @if (dllSelected) {
+          @Html.Partial("./Namespaces.cshtml", new { dllInfo, currentNs, currentType })
+        } else {
+          <text>No Dll Selected</text>
+        }
+      </td>
+      <td>
+        @if (nsSelected) {
+          @Html.Partial("./Classes.cshtml", new { dllInfo, currentNs, currentType, nsInfo })
+        } else {
+          <text>No Namespace Selected</text>
+        }
+      </td>
+      <td>
+        @if (typeSelected) {
+          @Html.Partial("./ClassMembers.cshtml", new { dllInfo, currentNs, currentType, nsInfo, classInfo, member })
+        } else {
+          <text>No class Selected</text>
+        }
+      </td>
+    </tr>
+  </table>
+</div>
+
+@if (memberSelected) {
+  @Html.Partial("./ClassMembers Details.cshtml", new { member, classInfo })
+}
+
+@* 
+@{
+
+
+  // Read the Dll "abc.dll" and list all the public classes and methods
+  var dll = System.Reflection.Assembly.LoadFile(System.IO.Path.Combine(dllPath, currentDll));
+
+  var types = dll.GetTypes()
+    .Where(x => x.IsPublic)
+    .Select(t => new {
+      Namespace = t.Namespace,
+      Name = t.Name,
+      Type = t,
+      Methods = t.GetMethods().Select(m => new {
+        Name = m.Name,
+        Parameters = m.GetParameters().Select(p => new {
+          Name = p.Name,
+          Type = p.ParameterType.Name
+        })
+      })
+    })
+    .OrderBy(x => x.Namespace)
+    .ThenBy(x => x.Name)
+    .ToList();
+
+  // Get all namespaces in the dll-assembly
+  
+}
+
+<h2>@currentDll Types (public)</h2>
+@foreach (var type in types)
+{
+  <div>
+    @type.Namespace.@type.Name
+    <ul>
+      @foreach (var method in type.Type.GetMethods())
+      {
+        <li>@method.Name</li>
+      }
+    </ul>
+  </div>
+} *@
+
+<style>
+  a {
+    text-decoration: underline;
+  }
+  tr.selected {
+    background-color: #eee;
+  }
+</style>

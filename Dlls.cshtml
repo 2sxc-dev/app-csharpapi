@@ -1,0 +1,21 @@
+@inherits Custom.Hybrid.RazorTyped
+@using ThisApp.Code;
+
+@{
+  var currentDll = MyModel.String("currentDll");
+  var dllItems = AsItems(App.Data.GetStream("Dll"))
+    .OrderBy(x => x.Title)
+    .ToList();
+}
+<ol>
+  @foreach (var dllItem in dllItems) {
+    var title = dllItem.Title;
+    var trunc = title.Length < 10 ? title : title.Replace("ToSic.", "...");
+    <li>
+      @(title == currentDll ? "🎯" : "")
+      <a href='@Link.To(parameters: "Dll=" + title)'>
+        @trunc
+      </a>
+    </li>
+  }
+</ol>
