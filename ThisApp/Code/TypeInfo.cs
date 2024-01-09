@@ -18,7 +18,7 @@ namespace ThisApp.Code
       Visibility = new Visibility(type, type.IsPublic, type.IsAbstract, rule);
 
       var allMembers = type.GetMembers()
-        .Select(m => new MemInfo(m, Visibility))
+        .Select(m => new MemInfo(m, Visibility, rule))
         .ToList();
       var objType = typeof(object);
       var relevantMembers = type.GetMembers()
@@ -27,7 +27,7 @@ namespace ThisApp.Code
         // Filter out members which are from the object base class
         .Where(m => m.DeclaringType != objType)
         .OrderBy(m => m.Name)
-        .Select(m => new MemInfo(m, Visibility))
+        .Select(m => new MemInfo(m, Visibility, rule))
         .ToList();
       Members = new ThingStats<MemInfo>(allMembers, relevantMembers);
     }

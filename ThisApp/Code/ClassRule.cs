@@ -1,4 +1,3 @@
-using System;
 using ToSic.Sxc.Data;
 using ToSic.Sxc.Data.Experimental;
 
@@ -11,6 +10,8 @@ namespace ThisApp.Code
     public bool IgnoreAllProperties => GetThis<bool>();
     public bool ExpectedDocs => GetThis<bool>();
     public bool ExpectedIntellisense => GetThis<bool>();
+
+    public bool IgnoreMembersWithoutSpecs => GetThis<bool>();
   }
 
   public interface IExpectedDocsAndIntellisense

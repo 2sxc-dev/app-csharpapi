@@ -1,15 +1,18 @@
 using static ThisApp.Code.Show;
+using static ThisApp.Code.Constants;
 
 namespace ThisApp.Code
 {
-  public class VisibilityMulti: IVisibility
+  public class MemVisibility: IVisibility
   {
-    public VisibilityMulti(IVisibility memVis, IVisibility classVis) {
+    public MemVisibility(IVisibility memVis, IVisibility classVis, ClassRule rule) {
       MemVis = memVis;
       ClassVis = classVis;
+      ClassRule = rule;
     }
     private IVisibility MemVis { get; }
     private IVisibility ClassVis { get; }
+    private ClassRule ClassRule { get; }
 
     // This is only relevant if the parent is somehow public
     public bool IsPublic => MemVis.IsPublic;
@@ -46,8 +49,20 @@ namespace ThisApp.Code
     // For this only the own is relevant
     public bool ShowInIntelliSense => MemVis.ShowInIntelliSense;
 
-    public Status Summary => _summary ??= Visibility.GetSummary(this);
+    public Status Summary => _summary ??= GetSummary();
     private Status _summary;
+
+    private Status GetSummary()
+    {
+      // Special case, where nothing is actually set, and the parent is not visible, so things are just ok?
+      if (ClassRule?.IgnoreMembersWithoutSpecs == true && !MemVis.HasDocs && !MemVis.HasEditorBrowsable)
+        return new Status(true, "🦘", "ignore members without specs");
+
+      // Fallback: use default visibility check
+      return Visibility.GetSummary(this);
+      
+    }
+
 
     public Status Docs => _docs ??= GetDocs();
     private Status _docs;

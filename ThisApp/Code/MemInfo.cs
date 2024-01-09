@@ -6,13 +6,13 @@ namespace ThisApp.Code
 {
   public class MemInfo
   {
-    public MemInfo(MemberInfo mInfo, IVisibility parentVisibility)
+    public MemInfo(MemberInfo mInfo, IVisibility parentVisibility, ClassRule rule)
     {
       MemberInfo = mInfo;
       Name = mInfo.Name;
 
       OwnVisibility = new Visibility<MemberInfo>(mInfo, IsPublic, IsProtectedPublic);
-      Visibility = new VisibilityMulti(OwnVisibility, parentVisibility);
+      Visibility = new MemVisibility(OwnVisibility, parentVisibility, rule);
     }
 
     public string Name { get; }
