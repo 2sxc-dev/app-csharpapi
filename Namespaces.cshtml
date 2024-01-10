@@ -24,7 +24,7 @@
             .Replace("ToSic.SexyContent.", "...SexyContent.")
             .Replace("ToSic.", ".");
 
-      var cnf = ns.Rule?.Item;
+      var cnf = ns.Rule?.SharedRule == false ? ns.Rule?.Item : null;
       var tlb = cnf == null
         ? Kit.Toolbar.Empty().New("RuleNamespace", tweak: t => t.Prefill(new { Title = title }))
         : Kit.Toolbar.Edit(cnf);
@@ -43,7 +43,7 @@
         </td>
 
         @* Configuration *@
-        <td>
+        <td style='@(ns.Rule?.SharedRule == true ? "opacity: 0.4" : "")'>
           @if (ns.Rule != null) {
             @(ns.Rule.IgnoreAll ? "🦘" : "")
             @(ns.Rule.IgnoreTypeMembers ? "🎛️" : "")

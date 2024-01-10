@@ -11,16 +11,33 @@ namespace ThisApp.Code
       Path = path;
       Assembly = Assembly.LoadFrom(path);
 
+      var nsList = Analyze.GetNamespaces(Assembly).ToList();
+      var ruleInternal = new RuleNamespace(nsRules.FirstOrDefault(r => r.Title == "Special:*.Internal"), shared: true);
+      var ruleBackend = new RuleNamespace(nsRules.FirstOrDefault(r => r.Title == "Special:*.Backend"), shared: true);
+      var nsWithRules = nsList
+        .Select(ns =>
+        {
+          var currentNsRule = nsRules.FirstOrDefault(r => r.Title == ns);
+          var nsRule = currentNsRule == null ? null : new RuleNamespace(currentNsRule);
+          nsRule ??= ns?.Contains(".Internal") == true ? ruleInternal : null;
+          nsRule ??= ns?.Contains(".Backend") == true ? ruleBackend : null;
+
+          return new
+          {
+            Title = ns,
+            Rule = nsRule
+          };
+        })
+        .ToList();
+
       // Get all types in assembly - and filter out the ones we don't want
       var allTypes = Assembly.GetTypes()
         .Select(t =>
         {
           var ruleItem = rules.FirstOrDefault(r => r.Title == t.FullName);
           var rule = ruleItem == null ? null : new ClassRule(ruleItem);
-
-          var currentNsRule = nsRules.FirstOrDefault(r => r.Title == t.Namespace);
-          var nsRule = currentNsRule == null ? null : new RuleNamespace(currentNsRule);
-          return new TypeInfo(t, rule, nsRule);
+          var nsRule = nsWithRules.FirstOrDefault(r => r.Title == t.Namespace);
+          return new TypeInfo(t, rule, nsRule?.Rule);
         })
         .ToList();
       
@@ -35,12 +52,12 @@ namespace ThisApp.Code
       // From the remaining types, get the namespaces etc.
 
       // Figure out all Namespaces
-      var allNs = Analyze.GetNamespaces(Assembly)
+      var allNs = nsWithRules // nsList
         .Select(ns =>
         {
-          var ruleItem = nsRules.FirstOrDefault(r => r.Title == ns);
-          var rule = ruleItem == null ? null : new RuleNamespace(ruleItem);
-          return new NamespaceInfo(ns, Assembly, Types, rule);
+          // var ruleItem = nsRules.FirstOrDefault(r => r.Title == ns.Title);
+          // var rule = ruleItem == null ? null : new RuleNamespace(ruleItem);
+          return new NamespaceInfo(ns.Title, Assembly, Types, ns.Rule);
         })
         .ToList();
       

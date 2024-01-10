@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="17.00.00" ExportDate="2024-01-09T16:18:00.2447401+01:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="17.00.00" ExportDate="2024-01-10T14:42:00.1101817+01:00">
   <Header>
     <App Guid="9e126f21-f211-4bea-be14-3b5b9ad69d6d" />
     <Language Default="en-us" />
@@ -83,6 +83,13 @@
             <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
           </Entity>
         </Attribute>
+        <Attribute StaticName="IgnoreMembersWithoutSpecs" Type="Boolean" IsTitle="false">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="d8db749c-6f1e-4a9d-8e90-f66ed9a25584" Json="True" KeyNumber="35627">
+            <Value Key="InputType" Value="boolean-tristate" Type="String" />
+            <Value Key="Name" Value="IgnoreMembersWithoutSpecs" Type="String" />
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
+          </Entity>
+        </Attribute>
       </Attributes>
     </AttributeSet>
     <AttributeSet StaticName="decc1762-261a-42a7-bf31-7e245a10345f" Name="RuleDll" Scope="Default" AlwaysShareConfiguration="false">
@@ -124,6 +131,32 @@
             <Value Key="InputType" Value="boolean-tristate" Type="String" />
             <Value Key="Name" Value="IgnoreTypeMembers" Type="String" />
             <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="Notes" Type="String" IsTitle="false">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="9066cddd-c8c1-45c8-8c67-c5f1a3841a6b" Json="True" KeyNumber="35628">
+            <Value Key="CustomJavaScript" Value="" Type="String" />
+            <Value Key="DefaultValue" Value="" Type="String" />
+            <Value Key="Disabled" Value="False" Type="Boolean" />
+            <Value Key="DisableTranslation" Value="False" Type="Boolean" />
+            <Value Key="HelpLink" Value="" Type="Hyperlink" />
+            <Value Key="Information" Value="" Type="String" />
+            <Value Key="InputType" Value="string-default" Type="String" />
+            <Value Key="Name" Value="Notes" Type="String" />
+            <Value Key="Notes" Value="" Type="String" />
+            <Value Key="Placeholder" Value="" Type="String" />
+            <Value Key="Required" Value="False" Type="Boolean" />
+            <Value Key="Tooltip" Value="" Type="String" />
+            <Value Key="ValidationRegExJavaScript" Value="" Type="String" />
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
+          </Entity>
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@String" AttributeSetName="@String" EntityGUID="54a7f617-5424-4967-8cb4-cac906874613" Json="True" KeyNumber="35628">
+            <Value Key="DropdownValues" Value="" Type="String" />
+            <Value Key="InputType" Value="" Type="String" />
+          </Entity>
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@string-default" AttributeSetName="@string-default" EntityGUID="2b719486-e19a-44b9-b526-7fdb86132358" Json="True" KeyNumber="35628">
+            <Value Key="InputFontFamily" Value="" Type="String" />
+            <Value Key="RowCount" Value="3" Type="Number" />
           </Entity>
         </Attribute>
       </Attributes>
@@ -300,76 +333,6 @@
       <Value Key="Notes" Value="" Type="String" />
       <Value Key="Title" Value="ToSic.Sxc.Constants" Type="String" />
     </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="a04b6a32-4404-4156-bd8a-f0f0ad96fd94">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Sxc.Internal" Type="String" />
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="e03faa26-824b-4fa7-9558-261802ac82bd">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Sxc.Adam.Internal" Type="String" />
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="e2836921-260a-432b-9792-1dd5b8fd8126">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Sxc.Apps.Internal" Type="String" />
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="d3cf010a-cd5d-4302-93ec-762028a6a5da">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Sxc.Apps.Internal.ImportExport" Type="String" />
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="3a014fa4-93ce-4243-b0d9-0c7caab86f53">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Sxc.Apps.Internal.Work" Type="String" />
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="9f84fb8c-9cfe-438d-b540-4c3bff808369">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Sxc.Apps.Internal.Assets" Type="String" />
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="5e27c5ed-0cba-4d3e-924e-2bae0b6f2bb9">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Sxc.Blocks.Internal" Type="String" />
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="f095ca57-0667-4a46-9b97-7a8f2eb5da87">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Sxc.Blocks.Internal.Render" Type="String" />
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="a91c300b-70b7-4ddf-96e6-8d40d72e9f10">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Sxc.Blocks" Type="String" />
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="0142fbd1-8dc2-4728-b8fc-238965e90b78">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Sxc.Cms.Internal.Publishing" Type="String" />
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="f7eb225f-535b-4e86-9a45-1cf2722e4772">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Sxc.Compatibility.Internal" Type="String" />
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="f7c47fa6-fcc3-4c3e-afe3-25c9c2a70de4">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Sxc.Configuration.Internal" Type="String" />
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="b30f37bb-b452-4eb1-9949-277e7abc109a">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Sxc.Context.Internal" Type="String" />
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="3099c6c4-a6c5-4bba-a412-5f90c735bcb6">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Sxc.Context.Internal.Raw" Type="String" />
-    </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="58505cef-68c6-4cca-a340-87b87e6b1629">
       <Value Key="ExpectedDocs" Value="" Type="Boolean" />
       <Value Key="ExpectedIntellisense" Value="" Type="Boolean" />
@@ -391,20 +354,10 @@
       <Value Key="Notes" Value="" Type="String" />
       <Value Key="Title" Value="ToSic.Sxc.Context.Module`1" Type="String" />
     </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="20e6402b-17f6-42cf-86e1-4fce62bbe9e9">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Sxc.Data.Internal" Type="String" />
-    </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="9f6efae7-a395-4417-8403-5f0da1924afe">
       <Value Key="IgnoreAll" Value="True" Type="Boolean" />
       <Value Key="IgnoreTypeMembers" Value="" Type="Boolean" />
       <Value Key="Title" Value="ToSic.Sxc.Data.Experimental" Type="String" />
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="cc98d2da-9fd8-4693-a0ef-cf94f62b340b">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Sxc.Services.Internal" Type="String" />
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="28793932-2dbc-40ec-96e9-6ef622fd082f">
       <Value Key="ExpectedDocs" Value="True" Type="Boolean" />
@@ -427,77 +380,12 @@
       <Value Key="Notes" Value="" Type="String" />
       <Value Key="Title" Value="ToSic.Sxc.Data.DynamicEntity" Type="String" />
     </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="9bcd6aa7-1b62-47e7-9d4f-175ce5c4e74d">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Sxc.Data.Internal.Convert" Type="String" />
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="26d081e8-5809-42cd-b3a1-58dfc4eec5b6">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Sxc.Data.Internal.Docs" Type="String" />
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="589d666a-3577-4cdf-8c4e-c6c4909a9c4e">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Sxc.Data.Internal.Dynamic" Type="String" />
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="b86cd477-5ff5-444b-ac27-440d3e5d7047">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Sxc.Data.Internal.Typed" Type="String" />
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="64b2132c-a184-4445-8029-490be5ab87af">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Sxc.Data.Internal.Wrapper" Type="String" />
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="a93323ca-5494-474a-8907-786522d68604">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Sxc.DataSources.Internal" Type="String" />
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="b2ad3001-b5fa-42c3-8f24-b9bcba3c5e5d">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Sxc.DataSources.Internal.Compatibility" Type="String" />
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="e50c5ba5-fc3e-4a56-8b32-c20b644e717d">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Sxc.Code.Internal.CodeErrorHelp" Type="String" />
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="5cd71d26-4fec-4e4f-9374-faf5e9704de5">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Sxc.Code.Internal.CodeRunHelpers" Type="String" />
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="004a0951-221c-413c-a18f-2290585a9e61">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Sxc.Code.Internal.Documentation" Type="String" />
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="80205712-8b61-433c-b523-365cbd34f3cc">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Sxc.Code.Internal.HotBuild" Type="String" />
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="1d8edb92-64da-430a-8e9f-94d414821ca2">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Sxc.Code.Internal.SourceCode" Type="String" />
-    </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="71b313c0-ec96-4115-951e-197864f22cad">
       <Value Key="ExpectedDocs" Value="True" Type="Boolean" />
       <Value Key="ExpectedIntellisense" Value="False" Type="Boolean" />
       <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
       <Value Key="Notes" Value="Special case - must not disable IntelliSense as it would affect inherited custom code" Type="String" />
       <Value Key="Title" Value="ToSic.Sxc.Code.Internal.CustomCodeBase" Type="String" />
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="42a4adfb-0b53-4552-84e3-45f5cc093300">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Sxc.Code.Internal" Type="String" />
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="66b36d97-8d65-4560-98a0-be715aa59647">
       <Value Key="ExpectedDocs" Value="" Type="Boolean" />
@@ -520,50 +408,189 @@
       <Value Key="Notes" Value="" Type="String" />
       <Value Key="Title" Value="ToSic.Eav.DataSource.Icons" Type="String" />
     </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="ebb11793-156f-4523-ae53-9c8dd37104af">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Eav.DataSource.Internal.Caching" Type="String" />
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="54166c80-fb68-4820-ba4f-203cf1a9d46f">
+      <Value Key="ExpectedDocs" Value="" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="True" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Eav.LookUp.LookUpInDataSource" Type="String" />
     </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="a8136868-75b0-4e53-a88a-2e57a2d54dcb">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Eav.DataSource.Internal.Catalog" Type="String" />
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="d81e9718-85ee-443c-be05-67365551f5f4">
+      <Value Key="ExpectedDocs" Value="" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="True" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Eav.DataSource.CustomDataSourceAdvanced" Type="String" />
     </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="4e4eec69-bf41-4020-821e-229579caa09a">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Eav.DataSource.Internal.Configuration" Type="String" />
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="6a2a72d4-3fdc-4282-894f-d11a915f4431">
+      <Value Key="ExpectedDocs" Value="" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="True" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Eav.DataSource.IDataSourceOptions" Type="String" />
     </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="4308ffb7-bc0b-4719-b4f5-abc11ceb5643">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Eav.DataSource.Internal.Errors" Type="String" />
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="c557a4cd-e325-4880-a64e-37d9b35358fe">
+      <Value Key="ExpectedDocs" Value="" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="True" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Eav.DataSource.DataSourceOptions" Type="String" />
     </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="bbbdc6d4-bb0c-42f7-814d-382fa5b57b33">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Eav.DataSource.Internal.Inspect" Type="String" />
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="a6a431b7-9f61-4385-86b1-d8db7daead28">
+      <Value Key="ExpectedDocs" Value="" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="True" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Eav.DataSource.Internal.QuickSourceInfo" Type="String" />
     </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="b87a0eb4-e75a-47e1-8f48-3e1f9a37be47">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Eav.DataSource.Internal.Query" Type="String" />
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="16198362-51a1-40e1-9d07-f11df33a24c9">
+      <Value Key="ExpectedDocs" Value="False" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="True" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="True" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Eav.DataSources.Internal.MetadataDataSourceBase" Type="String" />
     </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="a9ce6a76-a84a-4e45-988c-bf05ebd3a393">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Eav.DataSource.Internal.AppDataSources" Type="String" />
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="fa8b0563-b2f8-4c19-9c0b-c54206514b06">
+      <Value Key="ExpectedDocs" Value="False" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="True" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="True" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Eav.DataSources.Internal.RelationshipDataSourceBase" Type="String" />
     </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="81d769c9-2dd7-4ab2-b589-c6fd4f1df7e2">
-      <Value Key="IgnoreAll" Value="" Type="Boolean" />
-      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Eav.DataSource.VisualQuery.Internal" Type="String" />
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="bf3d33e9-207d-4b67-9951-04b490355946">
+      <Value Key="ExpectedDocs" Value="" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="True" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Sxc.Polymorphism.IResolver" Type="String" />
     </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="113d42f1-1055-44e0-a822-9ba35be6b4ce">
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="3a5e546c-ca32-4d3b-896b-f90ee74317f7">
+      <Value Key="ExpectedDocs" Value="" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="True" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Sxc.Polymorphism.PolymorphResolverAttribute" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="b647d608-7d26-41b4-b3c6-1def9e27960b">
+      <Value Key="ExpectedDocs" Value="False" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="True" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="True" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Sxc.Services.Internal.ServiceForDynamicCode" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="02310513-504f-47d6-95b6-1073480fa820">
+      <Value Key="ExpectedDocs" Value="" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="True" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Sxc.Startup.SxcStartUpRegistrations" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="94ade9bf-14a7-49e5-a901-a34a33775475">
       <Value Key="IgnoreAll" Value="" Type="Boolean" />
       <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
-      <Value Key="Title" Value="ToSic.Eav.DataSource.Internal" Type="String" />
+      <Value Key="Notes" Value="Special rule for all internal namespaces" Type="String" />
+      <Value Key="Title" Value="Special:*.Internal" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="735254e4-64a3-4875-846f-37385af2bda1">
+      <Value Key="IgnoreAll" Value="True" Type="Boolean" />
+      <Value Key="IgnoreTypeMembers" Value="" Type="Boolean" />
+      <Value Key="Notes" Value="Special rule for all internal backend section" Type="String" />
+      <Value Key="Title" Value="Special:*.Backend" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="aa8e98db-3d94-4ded-95c6-456a4a245dc1">
+      <Value Key="ExpectedDocs" Value="" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="True" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="Custom.Dnn.Api12" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="ee9e00fc-b057-40a3-89f6-46c5f3131c39">
+      <Value Key="ExpectedDocs" Value="" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="True" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="Custom.Hybrid.Api12" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="dc13a2dd-59f6-43ac-a672-fc0e05f8cd30">
+      <Value Key="ExpectedDocs" Value="" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="True" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="Custom.Hybrid.Api14" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="e853e20a-7977-4fba-92ad-1cb2a79b2fde">
+      <Value Key="ExpectedDocs" Value="" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="Custom.Hybrid.ApiTyped" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="b1bb8519-1771-4830-b144-ef4ae85b5c0b">
+      <Value Key="IgnoreAll" Value="" Type="Boolean" />
+      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.SexyContent.WebApi" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="4da5e470-4d5c-4a25-a9ae-f32af9586357">
+      <Value Key="ExpectedDocs" Value="True" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="False" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Sxc.Dnn.ApiController" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="14db1480-5e2c-41a0-b6fb-4f1b4b103a35">
+      <Value Key="ExpectedDocs" Value="False" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="True" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="True" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Sxc.Dnn.WebApi.DnnApiControllerWithFixes" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="452f6dd4-db7c-4993-989e-a01ece47660f">
+      <Value Key="ExpectedDocs" Value="False" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="True" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="True" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Sxc.Dnn.WebApi.Internal.DnnSxcControllerBase" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="43245f74-3f89-4755-b094-d34900b1706b">
+      <Value Key="ExpectedDocs" Value="False" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="True" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="True" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Sxc.Dnn.WebApi.Internal.DnnSxcControllerRoot" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="5eb9c711-6a97-477a-8a9f-c79c77bf4e65">
+      <Value Key="ExpectedDocs" Value="False" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="True" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="True" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Sxc.Dnn.WebApi.Internal.DnnSxcCustomControllerBase" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="e44b51ce-e6fd-4bde-8c26-511f6bedc145">
+      <Value Key="IgnoreAll" Value="" Type="Boolean" />
+      <Value Key="IgnoreTypeMembers" Value="True" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Sxc.Dnn.Integration" Type="String" />
     </Entity>
   </Entities>
   <PortalFiles />
