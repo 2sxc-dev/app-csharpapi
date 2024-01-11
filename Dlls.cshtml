@@ -1,4 +1,6 @@
 @inherits Custom.Hybrid.RazorTyped
+@using System.Linq;
+@using System.Collections.Generic;
 @using ThisApp.Code;
 @using ThisApp.Data;
 
@@ -13,6 +15,7 @@
   <tr>
     <th>Current Dll</th>
     <td>⚙️</td>
+    <td>✏️</td>
   </tr>
   @foreach (var dllItem in dllItems) {
     var title = dllItem.Title;
@@ -23,8 +26,12 @@
           @trunc
         </a>
       </td>
-      <td>
+      <td title='@(dllItem.AssemblyInfo?.Overall.Details)'>
         @(dllItem.IgnoreAll ? "🚫" : "")
+        @(dllItem.AssemblyInfo?.Overall.Icon)
+      </td>
+      <td>
+        &nbsp;
       </td>
     </tr>
   }

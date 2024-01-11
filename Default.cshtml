@@ -57,7 +57,7 @@
   var rulesNs = AsItems(App.Data.GetStream("RuleNamespace")).ToList();
   var rulesClass = AsItems(App.Data.GetStream("RuleClass")).ToList();
 
-  var dllInfo = new AssemblyInfo(System.IO.Path.Combine(dllPath, currentDll), rulesDll, rulesNs, rulesClass);
+  var dllInfo = AssemblyInfo.Get(dllName, System.IO.Path.Combine(dllPath, currentDll), rulesDll, rulesNs, rulesClass);
   var nsInfo = dllInfo.Namespaces.All.FirstOrDefault(x => x.Namespace == currentNs);
   var classInfo = nsInfo?.Types.All.FirstOrDefault(x => x.Name == currentType);
 }

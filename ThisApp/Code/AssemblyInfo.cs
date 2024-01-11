@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using ToSic.Sxc.Data;
+using static ThisApp.Code.Constants;
 
 namespace ThisApp.Code
 {
@@ -82,6 +83,50 @@ namespace ThisApp.Code
 
     public ThingStats<TypeInfo> Types { get; }
 
+    #region Overall Status
+
+    public Status Overall => _overall ??= GetOverall(this);
+    private Status _overall;
+
+    public static Status GetOverall(AssemblyInfo assemblyInfo)
+    {
+      var relevant = assemblyInfo.Namespaces.Relevant;
+      var ok = relevant.All(m => m.Overall.Ok);
+      var notOk = relevant.Where(m => !m.Overall.Ok).ToList();
+      var percent = relevant.Count == 0
+        ? 100
+        : 100 - (int) (100 * (double) notOk.Count / relevant.Count);
+
+      // var skip = Rule?.IgnoreAll ?? false;
+      // if (skip) return new Status(true, Ok(100), "Ignored");
+      
+      return new Status(ok, Ok(percent),
+        ok
+          ? "All members are ok"
+          : $"{notOk.Count} members are not ok - {percent}%"
+      );
+    }
+
+    #endregion
+
+
+
+
+    #region Cache
+
+    public static IDictionary<string, AssemblyInfo> Cache = new Dictionary<string, AssemblyInfo>();
+
+    public static AssemblyInfo Get(string name, string path, List<ITypedItem> todo, List<ITypedItem> nsRules, List<ITypedItem> rules)
+    {
+      if (Cache.ContainsKey(name)) return Cache[name];
+      var assemblyInfo = new AssemblyInfo(path, todo, nsRules, rules);
+      Cache[name] = assemblyInfo;
+      return assemblyInfo;
+    }
+
+    public static AssemblyInfo GetIfCached(string path) => Cache.ContainsKey(path) ? Cache[path] : null;
+
+    #endregion
 
   }
 

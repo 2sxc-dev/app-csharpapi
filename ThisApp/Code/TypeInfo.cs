@@ -46,7 +46,6 @@ namespace ThisApp.Code
     public string Name { get; }
     public string Namespace { get; }
     public IVisibility Visibility { get; }
-    // public Visibility<Type> OwnVisibility { get; }
 
     public ThingStats<MemInfo> Members { get; }
 
