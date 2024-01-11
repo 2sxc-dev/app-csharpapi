@@ -14,6 +14,7 @@ namespace ThisApp.Code
       var nsList = Analyze.GetNamespaces(Assembly).ToList();
       var ruleInternal = new RuleNamespace(nsRules.FirstOrDefault(r => r.Title == "Special:*.Internal"), shared: true);
       var ruleBackend = new RuleNamespace(nsRules.FirstOrDefault(r => r.Title == "Special:*.Backend"), shared: true);
+      var ruleIntegration = new RuleNamespace(nsRules.FirstOrDefault(r => r.Title == "Special:*.Integration"), shared: true);
       var nsWithRules = nsList
         .Select(ns =>
         {
@@ -21,6 +22,7 @@ namespace ThisApp.Code
           var nsRule = currentNsRule == null ? null : new RuleNamespace(currentNsRule);
           nsRule ??= ns?.Contains(".Internal") == true ? ruleInternal : null;
           nsRule ??= ns?.Contains(".Backend") == true ? ruleBackend : null;
+          nsRule ??= ns?.Contains(".Integration") == true ? ruleIntegration : null;
 
           return new
           {

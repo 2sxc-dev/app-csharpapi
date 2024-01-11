@@ -39,6 +39,9 @@ namespace ThisApp.Code
     public static bool HasWorkInProgressApi(this MemberInfo type)
       => type.GetCustomAttributes(typeof(WorkInProgressApi), true).Length > 0;
 
+    public static bool HasObsolete(this MemberInfo type)
+      => type.GetCustomAttributes(typeof(ObsoleteAttribute), true).Length > 0;
+
     public static bool HasHideInIntellisense(this MemberInfo type)
     {
       // ATM this doesn't work, because we can't reference the type EditorBrowsable because System.Runtime.dll is not from the bin folder...?

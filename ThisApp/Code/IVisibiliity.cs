@@ -17,9 +17,10 @@ namespace ThisApp.Code
 
     bool HasDocs { get; }
     bool HasEditorBrowsable { get; }
+    bool HasObsolete { get; }
+    bool EditorHideOrWarn { get; }
 
-
-    bool ShowInIntelliSense { get; }
+    Status EditorStatus { get; }
     Status Summary { get; }
 
   }

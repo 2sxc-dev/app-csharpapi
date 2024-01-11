@@ -20,12 +20,13 @@ namespace ThisApp.Code
       var allMembers = type.GetMembers()
         .Select(m => new MemInfo(m, Visibility, rule))
         .ToList();
-      var objType = typeof(object);
+      var typeObject = typeof(object);
+      var typeEnum = typeof(Enum);
       var relevantMembers = type.GetMembers()
         // todo: what about constructors?
         .Where(m => !(m is MethodInfo mInfo) || !mInfo.IsSpecialName)
         // Filter out members which are from the object base class
-        .Where(m => m.DeclaringType != objType)
+        .Where(m => m.DeclaringType != typeObject && m.DeclaringType != typeEnum)
         .OrderBy(m => m.Name)
         .Select(m => new MemInfo(m, Visibility, rule))
         .ToList();
