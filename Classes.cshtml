@@ -12,7 +12,7 @@
   @foreach (var type in nsInfo.Types.Relevant)
   {
     var fullNs = type.Namespace + "." + type.Name;
-    var cnf = type.Rule?.Item;
+    var cnf = type.Rule; //?.Item;
     var tlb = cnf == null
       ? Kit.Toolbar.Empty().New("RuleClass", tweak: t => t.Prefill(new { Title = fullNs }))
       : Kit.Toolbar.Edit(cnf);
