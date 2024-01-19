@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="17.00.00" ExportDate="2024-01-11T07:36:12.5625921+01:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="17.00.01" ExportDate="2024-01-11T15:08:20.5467322+01:00">
   <Header>
     <App Guid="9e126f21-f211-4bea-be14-3b5b9ad69d6d" />
     <Language Default="en-us" />
@@ -348,21 +348,24 @@
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="58505cef-68c6-4cca-a340-87b87e6b1629">
       <Value Key="ExpectedDocs" Value="" Type="Boolean" />
       <Value Key="ExpectedIntellisense" Value="" Type="Boolean" />
-      <Value Key="IgnoreAllProperties" Value="True" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="True" Type="Boolean" />
       <Value Key="Notes" Value="" Type="String" />
       <Value Key="Title" Value="ToSic.Sxc.Context.IModule" Type="String" />
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="8c3287d5-9fef-4ba2-ae22-07735fe04ba0">
       <Value Key="ExpectedDocs" Value="" Type="Boolean" />
       <Value Key="ExpectedIntellisense" Value="" Type="Boolean" />
-      <Value Key="IgnoreAllProperties" Value="True" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="True" Type="Boolean" />
       <Value Key="Notes" Value="" Type="String" />
       <Value Key="Title" Value="ToSic.Sxc.Context.IPage" Type="String" />
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="22a35c45-542d-4678-b822-4030303efc62">
       <Value Key="ExpectedDocs" Value="" Type="Boolean" />
       <Value Key="ExpectedIntellisense" Value="" Type="Boolean" />
-      <Value Key="IgnoreAllProperties" Value="True" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="True" Type="Boolean" />
       <Value Key="Notes" Value="" Type="String" />
       <Value Key="Title" Value="ToSic.Sxc.Context.Module`1" Type="String" />
     </Entity>
@@ -393,9 +396,10 @@
       <Value Key="Title" Value="ToSic.Sxc.Data.DynamicEntity" Type="String" />
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="71b313c0-ec96-4115-951e-197864f22cad">
-      <Value Key="ExpectedDocs" Value="True" Type="Boolean" />
-      <Value Key="ExpectedIntellisense" Value="False" Type="Boolean" />
+      <Value Key="ExpectedDocs" Value="False" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="True" Type="Boolean" />
       <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="True" Type="Boolean" />
       <Value Key="Notes" Value="Special case - must not disable IntelliSense as it would affect inherited custom code" Type="String" />
       <Value Key="Title" Value="ToSic.Sxc.Code.Internal.CustomCodeBase" Type="String" />
     </Entity>
@@ -643,6 +647,86 @@
       <Value Key="IgnoreMembersWithoutSpecs" Value="" Type="Boolean" />
       <Value Key="Notes" Value="" Type="String" />
       <Value Key="Title" Value="ToSic.Sxc.LookUp.LookUpForTokenTemplate" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="c1466aca-a79c-4d73-a7de-ff53e0936d40">
+      <Value Key="ExpectedDocs" Value="" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="True" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Sxc.DataSources.AdamFiles" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="6bf8acf0-3415-4921-a65f-8f960c9589b7">
+      <Value Key="ExpectedDocs" Value="" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="True" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Sxc.DataSources.AppFiles" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="5c5267c6-9fcc-411f-ac78-5dd75688afb6">
+      <Value Key="ExpectedDocs" Value="" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="True" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Sxc.Apps.App" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="439457d9-7d20-442b-8bd5-98a43380a70a">
+      <Value Key="ExpectedDocs" Value="" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="True" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Sxc.Apps.AppFolder" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="6cd68e24-74fb-4456-b939-61ceae7f9731">
+      <Value Key="ExpectedDocs" Value="" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="True" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Sxc.Code.IDynamicCode" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="92a179d6-4c2d-4e1e-8308-9c7f83ad07db">
+      <Value Key="ExpectedDocs" Value="" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="True" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Sxc.Code.IDynamicCodeRoot" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="1b20c1c8-6d0f-4cee-834c-7fa1b2017b3a">
+      <Value Key="ExpectedDocs" Value="" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="True" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Eav.Context.ISite" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="cccfb1e3-1383-4a7d-947c-7f548710843b">
+      <Value Key="ExpectedDocs" Value="" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="True" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Eav.Context.Site`1" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="57af65af-2f00-45a3-aa6f-8c6ad595b5a4">
+      <Value Key="ExpectedDocs" Value="" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="True" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Eav.Context.IContextOfSite" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="b35e080d-5107-4038-a5aa-8dd984a2b212">
+      <Value Key="ExpectedDocs" Value="" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="True" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Eav.Context.IContextOfApp" Type="String" />
     </Entity>
   </Entities>
   <PortalFiles />
