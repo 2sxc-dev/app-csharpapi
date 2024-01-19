@@ -1,17 +1,15 @@
 using ToSic.Sxc.Data;
-using ToSic.Sxc.Data.Experimental;
 
 namespace ThisApp.Code
 {
-  public class ClassRule: TypedItem, IExpectedDocsAndIntellisense
+  public class ClassRule: Custom.Data.Item16Experimental, IExpectedDocsAndIntellisense
   {
     public ClassRule(ITypedItem item): base(item) { }
 
-    public bool IgnoreAllProperties => GetThis<bool>();
-    public bool ExpectedDocs => GetThis<bool>();
-    public bool ExpectedIntellisense => GetThis<bool>();
-
-    public bool IgnoreMembersWithoutSpecs => GetThis<bool>();
+    public bool IgnoreAllProperties => Bool();
+    public bool ExpectedDocs => Bool();
+    public bool ExpectedIntellisense => Bool();
+    public bool IgnoreMembersWithoutSpecs => Bool();
   }
 
   public interface IExpectedDocsAndIntellisense

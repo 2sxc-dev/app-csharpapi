@@ -1,10 +1,9 @@
 using ThisApp.Code;
 using ToSic.Sxc.Data;
-using ToSic.Sxc.Data.Experimental;
 
 namespace ThisApp.Data
 {
-  public abstract partial class DataModelBase: TypedItem
+  public abstract partial class DataModelBase: Custom.Data.Item16Experimental
   {
     public DataModelBase(ITypedItem item): base(item) { }
   }

@@ -1,17 +1,16 @@
 using ToSic.Sxc.Data;
-using ToSic.Sxc.Data.Experimental;
 
 namespace ThisApp.Code
 {
-  public class RuleNamespace: TypedItem
+  public class RuleNamespace: Custom.Data.Item16Experimental
   {
     public RuleNamespace(ITypedItem item, bool shared = false): base(item) {
       SharedRule = shared;
     }
 
-    public bool IgnoreAll => GetThis<bool>();
+    public bool IgnoreAll => Bool();
 
-    public bool IgnoreTypeMembers => GetThis<bool>();
+    public bool IgnoreTypeMembers => Bool();
 
     public bool SharedRule { get; }
   }
