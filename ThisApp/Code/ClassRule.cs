@@ -2,10 +2,8 @@ using ToSic.Sxc.Data;
 
 namespace ThisApp.Code
 {
-  public class ClassRule: Custom.Data.Item16Experimental, IExpectedDocsAndIntellisense
+  public class ClassRule: Custom.Data.Item16, IExpectedDocsAndIntellisense
   {
-    public ClassRule(ITypedItem item): base(item) { }
-
     public bool IgnoreAllProperties => Bool();
     public bool ExpectedDocs => Bool();
     public bool ExpectedIntellisense => Bool();

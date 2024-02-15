@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -6,21 +7,23 @@ using static ThisApp.Code.Constants;
 
 namespace ThisApp.Code
 {
-  public class AssemblyInfo
+  public class AssemblyInfo: Custom.Hybrid.CodeTyped
   {
-    public AssemblyInfo(string path, List<ITypedItem> todo, List<ITypedItem> nsRules, List<ITypedItem> rules) {
+    public AssemblyInfo Setup(string path, List<ITypedItem> todo, List<ITypedItem> nsRules, List<ITypedItem> rules) {
       Path = path;
       Assembly = Assembly.LoadFrom(path);
 
       var nsList = Analyze.GetNamespaces(Assembly).ToList();
-      var ruleInternal = new RuleNamespace(nsRules.FirstOrDefault(r => r.Title == "Special:*.Internal"), shared: true);
-      var ruleBackend = new RuleNamespace(nsRules.FirstOrDefault(r => r.Title == "Special:*.Backend"), shared: true);
-      var ruleIntegration = new RuleNamespace(nsRules.FirstOrDefault(r => r.Title == "Special:*.Integration"), shared: true);
+      var ruleInternal = As<RuleNamespace>(nsRules.FirstOrDefault(r => r.Title == "Special:*.Internal")).Setup(true); // new RuleNamespace(nsRules.FirstOrDefault(r => r.Title == "Special:*.Internal"), shared: true);
+      var ruleBackend = As<RuleNamespace>(nsRules.FirstOrDefault(r => r.Title == "Special:*.Backend")).Setup(true);
+      // var ruleBackend = new RuleNamespace(nsRules.FirstOrDefault(r => r.Title == "Special:*.Backend"), shared: true);
+      var ruleIntegration = As<RuleNamespace>(nsRules.FirstOrDefault(r => r.Title == "Special:*.Integration")).Setup(true);
+      // var ruleIntegration = new RuleNamespace(nsRules.FirstOrDefault(r => r.Title == "Special:*.Integration"), shared: true);
       var nsWithRules = nsList
         .Select(ns =>
         {
           var currentNsRule = nsRules.FirstOrDefault(r => r.Title == ns);
-          var nsRule = currentNsRule == null ? null : new RuleNamespace(currentNsRule);
+          var nsRule = currentNsRule == null ? null : As<RuleNamespace>(currentNsRule); // new RuleNamespace(currentNsRule);
           nsRule ??= ns?.Contains(".Internal") == true ? ruleInternal : null;
           nsRule ??= ns?.Contains(".Backend") == true ? ruleBackend : null;
           nsRule ??= ns?.Contains(".Integration") == true ? ruleIntegration : null;
@@ -38,7 +41,7 @@ namespace ThisApp.Code
         .Select(t =>
         {
           var ruleItem = rules.FirstOrDefault(r => r.Title == t.FullName);
-          var rule = ruleItem == null ? null : new ClassRule(ruleItem);
+          var rule = ruleItem == null ? null : As<ClassRule>(ruleItem);
           var nsRule = nsWithRules.FirstOrDefault(r => r.Title == t.Namespace);
           return new TypeInfo(t, rule, nsRule?.Rule);
         })
@@ -70,18 +73,20 @@ namespace ThisApp.Code
         .ToList();
 
       Namespaces = new ThingStats<NamespaceInfo>(allNs, relevantNs);
+
+      return this;
     }
 
-    public string Path { get; }
+    public string Path { get; private set; }
 
-    public Assembly Assembly { get; }
+    public Assembly Assembly { get; private set; }
 
     public string Name => System.IO.Path.GetFileName(Path);
 
 
-    public ThingStats<NamespaceInfo> Namespaces { get; }
+    public ThingStats<NamespaceInfo> Namespaces { get; private set; }
 
-    public ThingStats<TypeInfo> Types { get; }
+    public ThingStats<TypeInfo> Types { get; private set; }
 
     #region Overall Status
 
@@ -116,10 +121,10 @@ namespace ThisApp.Code
 
     public static IDictionary<string, AssemblyInfo> Cache = new Dictionary<string, AssemblyInfo>();
 
-    public static AssemblyInfo Get(string name, string path, List<ITypedItem> todo, List<ITypedItem> nsRules, List<ITypedItem> rules)
+    public static AssemblyInfo Get(string name, string path, List<ITypedItem> todo, List<ITypedItem> nsRules, List<ITypedItem> rules, Func<AssemblyInfo> generate)
     {
       if (Cache.ContainsKey(name)) return Cache[name];
-      var assemblyInfo = new AssemblyInfo(path, todo, nsRules, rules);
+      var assemblyInfo = generate().Setup(path, todo, nsRules, rules);
       Cache[name] = assemblyInfo;
       return assemblyInfo;
     }

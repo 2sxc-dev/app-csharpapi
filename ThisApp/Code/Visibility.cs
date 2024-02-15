@@ -22,7 +22,7 @@ namespace ThisApp.Code
       MemberInfo = memberInfo;
       Expected = expected;
 
-      ToSic.Sxc.Blocks.IRenderService x;
+      // ToSic.Sxc.Blocks.IRenderService x;
 
       if (memberInfo != null) {
         HasPrivateApi = memberInfo.HasPrivateApi();
