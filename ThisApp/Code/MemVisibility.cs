@@ -1,8 +1,6 @@
-using static ThisApp.Code.Show;
-using static ThisApp.Code.Constants;
 using System;
 
-namespace ThisApp.Code
+namespace AppCode
 {
   public class MemVisibility: IVisibility
   {

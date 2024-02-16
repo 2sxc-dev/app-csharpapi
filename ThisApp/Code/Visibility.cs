@@ -1,8 +1,8 @@
 using System.Reflection;
-using static ThisApp.Code.Show;
-using static ThisApp.Code.Constants;
+using static AppCode.Show;
+using static AppCode.Constants;
 
-namespace ThisApp.Code
+namespace AppCode
 {
   public class Visibility<T> : Visibility
   {

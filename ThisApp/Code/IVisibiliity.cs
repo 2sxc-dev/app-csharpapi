@@ -1,4 +1,4 @@
-namespace ThisApp.Code
+namespace AppCode
 {
   public interface IVisibility
   {

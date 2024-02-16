@@ -1,6 +1,6 @@
 using ToSic.Sxc.Data;
 
-namespace ThisApp.Code
+namespace AppCode
 {
   public class ClassRule: Custom.Data.Item16, IExpectedDocsAndIntellisense
   {

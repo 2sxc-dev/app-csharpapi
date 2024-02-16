@@ -1,6 +1,6 @@
 using System;
 
-namespace ThisApp.Code
+namespace AppCode
 {
   public static class Show
   {

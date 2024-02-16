@@ -1,8 +1,8 @@
 using System.Linq;
 using System.Reflection;
-using static ThisApp.Code.Constants;
+using static AppCode.Constants;
 
-namespace ThisApp.Code
+namespace AppCode
 {
   public class NamespaceInfo
   {

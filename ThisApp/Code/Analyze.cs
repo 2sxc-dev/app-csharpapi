@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using ToSic.Lib.Documentation;
 
-namespace ThisApp.Code
+namespace AppCode
 {
   public static class Analyze
   {

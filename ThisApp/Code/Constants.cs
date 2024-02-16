@@ -1,6 +1,6 @@
 using ToSic.Razor.Html5;
 
-namespace ThisApp.Code
+namespace AppCode
 {
   public static class Constants
   {

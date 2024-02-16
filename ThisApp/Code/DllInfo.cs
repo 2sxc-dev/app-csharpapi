@@ -1,7 +1,4 @@
-using ThisApp.Code;
-using ToSic.Sxc.Data;
-
-namespace ThisApp.Data
+namespace AppCode.Data
 {
   public abstract partial class DataModelBase: Custom.Data.Item16
   {
