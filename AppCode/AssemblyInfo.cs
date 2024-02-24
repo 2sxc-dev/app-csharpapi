@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using ToSic.Sxc.Data;
+using AppCode.Data;
 using static AppCode.Constants;
 
 namespace AppCode
@@ -41,7 +42,7 @@ namespace AppCode
         .Select(t =>
         {
           var ruleItem = rules.FirstOrDefault(r => r.Title == t.FullName);
-          var rule = ruleItem == null ? null : As<ClassRule>(ruleItem);
+          var rule = ruleItem == null ? null : As<RuleClass>(ruleItem);
           var nsRule = nsWithRules.FirstOrDefault(r => r.Title == t.Namespace);
           return new TypeInfo(t, rule, nsRule?.Rule);
         })

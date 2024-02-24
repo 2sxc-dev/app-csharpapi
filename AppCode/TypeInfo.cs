@@ -1,13 +1,14 @@
 using System;
 using System.Linq;
 using System.Reflection;
+using AppCode.Data;
 using static AppCode.Constants;
 
 namespace AppCode
 {
   public class TypeInfo
   {
-    public TypeInfo(Type type, ClassRule rule, RuleNamespace ruleNamespace)
+    public TypeInfo(Type type, RuleClass rule, RuleNamespace ruleNamespace)
     {
       Type = type;
       Rule = rule;
@@ -35,7 +36,7 @@ namespace AppCode
 
     public Type Type { get; }
 
-    public ClassRule Rule { get; }
+    public RuleClass Rule { get; }
 
     public RuleNamespace RuleNamespace { get; }
 

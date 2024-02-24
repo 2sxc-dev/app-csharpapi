@@ -1,11 +1,12 @@
 using System.Linq;
 using System.Reflection;
+using AppCode.Data;
 
 namespace AppCode
 {
   public class MemInfo
   {
-    public MemInfo(MemberInfo mInfo, IVisibility parentVisibility, ClassRule rule)
+    public MemInfo(MemberInfo mInfo, IVisibility parentVisibility, RuleClass rule)
     {
       MemberInfo = mInfo;
       Name = mInfo.Name;

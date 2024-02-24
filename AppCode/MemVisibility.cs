@@ -1,17 +1,18 @@
 using System;
+using AppCode.Data;
 
 namespace AppCode
 {
   public class MemVisibility: IVisibility
   {
-    public MemVisibility(IVisibility memVis, IVisibility classVis, ClassRule rule) {
+    public MemVisibility(IVisibility memVis, IVisibility classVis, RuleClass rule) {
       MemVis = memVis;
       ClassVis = classVis;
       ClassRule = rule;
     }
     private IVisibility MemVis { get; }
     private IVisibility ClassVis { get; }
-    private ClassRule ClassRule { get; }
+    private RuleClass ClassRule { get; }
 
     // This is only relevant if the parent is somehow public
     public bool IsPublic => MemVis.IsPublic;

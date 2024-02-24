@@ -1,22 +1,22 @@
-using ToSic.Sxc.Data;
+// using ToSic.Sxc.Data;
 
-namespace AppCode
-{
-  public class RuleNamespace: Custom.Data.Item16
-  {
-    // public RuleNamespace(ITypedItem item, bool shared = false): base(item) {
-    //   SharedRule = shared;
-    // }
-    public RuleNamespace Setup(bool shared = false) {
-      SharedRule = shared;
-      return this;
-    }
+// namespace AppCode
+// {
+//   public class RuleNamespace: Custom.Data.Item16
+//   {
+//     // public RuleNamespace(ITypedItem item, bool shared = false): base(item) {
+//     //   SharedRule = shared;
+//     // }
+//     public RuleNamespace Setup(bool shared = false) {
+//       SharedRule = shared;
+//       return this;
+//     }
 
-    public bool IgnoreAll => Bool();
+//     public bool IgnoreAll => Bool();
 
-    public bool IgnoreTypeMembers => Bool();
+//     public bool IgnoreTypeMembers => Bool();
 
-    public bool SharedRule { get; private set; }
-  }
+//     public bool SharedRule { get; private set; }
+//   }
 
-}
+// }
