@@ -7,9 +7,8 @@
 
 @{
   var currentDll = MyModel.String("currentDll");
-  var dllItems = AsItems(App.Data.GetStream("Dll"))
+  var dllItems = App.Data.GetAll<Dll>()
     .OrderBy(x => x.Title)
-    .Select(x => As<Dll>(x))
     .ToList();
 }
 <table>
