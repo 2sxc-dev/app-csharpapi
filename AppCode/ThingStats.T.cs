@@ -16,7 +16,7 @@ namespace AppCode
 
     public List<T> Relevant { get; }
 
-    public string Summary => $"{Relevant.Count}/{All.Count}"; // {typeof(T).Name}s";
+    public string Summary => $"{Relevant.Count}/{All.Count}";
   }
 
 }

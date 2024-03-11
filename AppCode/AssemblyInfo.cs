@@ -10,21 +10,19 @@ namespace AppCode
 {
   public class AssemblyInfo: Custom.Hybrid.CodeTyped
   {
-    public AssemblyInfo Setup(string path, List<ITypedItem> todo, List<ITypedItem> nsRules, List<ITypedItem> rules) {
+    public AssemblyInfo Setup(string path, List<RuleNamespace> nsRules, List<RuleClass> rules) {
       Path = path;
       Assembly = Assembly.LoadFrom(path);
 
       var nsList = Analyze.GetNamespaces(Assembly).ToList();
-      var ruleInternal = As<RuleNamespace>(nsRules.FirstOrDefault(r => r.Title == "Special:*.Internal")).Setup(true); // new RuleNamespace(nsRules.FirstOrDefault(r => r.Title == "Special:*.Internal"), shared: true);
+      var ruleInternal = As<RuleNamespace>(nsRules.FirstOrDefault(r => r.Title == "Special:*.Internal")).Setup(true);
       var ruleBackend = As<RuleNamespace>(nsRules.FirstOrDefault(r => r.Title == "Special:*.Backend")).Setup(true);
-      // var ruleBackend = new RuleNamespace(nsRules.FirstOrDefault(r => r.Title == "Special:*.Backend"), shared: true);
       var ruleIntegration = As<RuleNamespace>(nsRules.FirstOrDefault(r => r.Title == "Special:*.Integration")).Setup(true);
-      // var ruleIntegration = new RuleNamespace(nsRules.FirstOrDefault(r => r.Title == "Special:*.Integration"), shared: true);
       var nsWithRules = nsList
         .Select(ns =>
         {
           var currentNsRule = nsRules.FirstOrDefault(r => r.Title == ns);
-          var nsRule = currentNsRule == null ? null : As<RuleNamespace>(currentNsRule); // new RuleNamespace(currentNsRule);
+          var nsRule = currentNsRule == null ? null : As<RuleNamespace>(currentNsRule);
           nsRule ??= ns?.Contains(".Internal") == true ? ruleInternal : null;
           nsRule ??= ns?.Contains(".Backend") == true ? ruleBackend : null;
           nsRule ??= ns?.Contains(".Integration") == true ? ruleIntegration : null;
@@ -50,7 +48,7 @@ namespace AppCode
       
       var relevant = allTypes
         .Where(t => t.Visibility.IsPublic)
-        .Where(t => !Constants.FilterNamespaces.Contains(t.Namespace))
+        .Where(t => !FilterNamespaces.Contains(t.Namespace))
         .OrderBy(t => t.Name)
         .ToList();
 
@@ -69,7 +67,7 @@ namespace AppCode
         .ToList();
       
       var relevantNs = allNs
-        .Where(ns => !Constants.FilterNamespaces.Contains(ns.Namespace))
+        .Where(ns => !FilterNamespaces.Contains(ns.Namespace))
         .Where(ns => ns.Types.Relevant.Count > 0)
         .ToList();
 
@@ -122,10 +120,10 @@ namespace AppCode
 
     public static IDictionary<string, AssemblyInfo> Cache = new Dictionary<string, AssemblyInfo>();
 
-    public static AssemblyInfo Get(string name, string path, List<ITypedItem> todo, List<ITypedItem> nsRules, List<ITypedItem> rules, Func<AssemblyInfo> generate)
+    public static AssemblyInfo Get(string name, string path, List<RuleNamespace> nsRules, List<RuleClass> rules, Func<AssemblyInfo> generate)
     {
       if (Cache.ContainsKey(name)) return Cache[name];
-      var assemblyInfo = generate().Setup(path, todo, nsRules, rules);
+      var assemblyInfo = generate().Setup(path, nsRules, rules);
       Cache[name] = assemblyInfo;
       return assemblyInfo;
     }

@@ -1,6 +1,7 @@
 @inherits Custom.Hybrid.RazorTyped
 @using System.IO;
 @using AppCode
+@using AppCode.Data
 
 <h1 @Kit.Toolbar.Default()>Manage Public C# APIs</h1>
 
@@ -53,26 +54,18 @@
 </div>
 
 @{
-  var rulesDll = AsItems(App.Data.GetStream("RuleDll")).ToList();
-  var rulesNs = AsItems(App.Data.GetStream("RuleNamespace")).ToList();
-  var rulesClass = AsItems(App.Data.GetStream("RuleClass")).ToList();
+  var rulesNs = App.Data.GetAll<RuleNamespace>().ToList();
+  var rulesClass = App.Data.GetAll<RuleClass>().ToList();
 
-  var dllInfo = AssemblyInfo.Get(dllName, System.IO.Path.Combine(dllPath, currentDll), rulesDll, rulesNs, rulesClass, () => GetService<AssemblyInfo>());
+  var dllInfo = AssemblyInfo.Get(dllName, System.IO.Path.Combine(dllPath, currentDll), rulesNs, rulesClass, () => GetService<AssemblyInfo>());
   var nsInfo = dllInfo.Namespaces.All.FirstOrDefault(x => x.Namespace == currentNs);
   var classInfo = nsInfo?.Types.All.FirstOrDefault(x => x.Name == currentType);
 }
-
-@* <h2>test</h2>
-@((typeof(Custom.Hybrid.CodePro)).HasPublicApi()) *@
 
 <h2>Stats @dllInfo.Name</h2>
 <ul>
   <li>Types: @dllInfo.Types.Summary</li>
   <li>Namespaces: @dllInfo.Namespaces.Summary</li>
-  @* <li>Methods: @dllInfo.Methods.Count</li>
-  <li>Properties: @dllInfo.Properties.Count</li>
-  <li>Fields: @dllInfo.Fields.Count</li>
-  <li>Events: @dllInfo.Events.Count</li> *@
 </ul>
 
 <div style="x-width: 1600px">
