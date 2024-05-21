@@ -5,6 +5,11 @@
 
 <h1 @Kit.Toolbar.Default()>Manage Public C# APIs</h1>
 
+<p>
+  Important: ATM we cache too much! because of this, adding config (eg. per namespace) won't have an affect till the app is modified.
+  thish should be fixed some day...
+</p>
+
 @{
   // Determine configuration based on url parameters
   var pars = MyPage.Parameters;
@@ -54,10 +59,8 @@
 </div>
 
 @{
-  var rulesNs = App.Data.GetAll<RuleNamespace>().ToList();
-  var rulesClass = App.Data.GetAll<RuleClass>().ToList();
-
-  var dllInfo = AssemblyInfo.Get(dllName, System.IO.Path.Combine(dllPath, currentDll), rulesNs, rulesClass, () => GetService<AssemblyInfo>());
+  var assemblyInfoSvc = GetService<AssemblyInfo>();
+  var dllInfo = assemblyInfoSvc.GetOrCreate(dllName, System.IO.Path.Combine(dllPath, currentDll));
   var nsInfo = dllInfo.Namespaces.All.FirstOrDefault(x => x.Namespace == currentNs);
   var classInfo = nsInfo?.Types.All.FirstOrDefault(x => x.Name == currentType);
 }

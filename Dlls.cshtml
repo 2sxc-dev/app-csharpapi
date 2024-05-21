@@ -9,6 +9,8 @@
   var dllItems = App.Data.GetAll<Dll>()
     .OrderBy(x => x.Title)
     .ToList();
+
+  var assemblyInfoSvc = GetService<AssemblyInfo>();
 }
 <table>
   <tr>
@@ -19,15 +21,17 @@
   @foreach (var dllItem in dllItems) {
     var title = dllItem.Title;
     var trunc = title.Length < 10 ? title : title.Replace("ToSic.", "...");
+    var cached = assemblyInfoSvc.GetCached(dllItem.Name);
     <tr class='@(title == currentDll ? "selected" : "")' @Kit.Toolbar.Edit(dllItem)>
       <td>
         <a href='@Link.To(parameters: "Dll=" + title)'>
           @trunc
         </a>
       </td>
-      <td title='@(dllItem.AssemblyInfo?.Overall.Details)'>
+      <td title='@(cached?.Overall.Details)'>
         @(dllItem.IgnoreAll ? "🚫" : "")
-        @(dllItem.AssemblyInfo?.Overall.Icon)
+        @* @(dllItem.AssemblyInfo?.Overall.Icon) *@
+        @(cached?.Overall.Icon)
       </td>
       <td>
         &nbsp;

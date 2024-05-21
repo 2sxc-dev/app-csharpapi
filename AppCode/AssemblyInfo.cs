@@ -10,6 +10,25 @@ namespace AppCode
 {
   public class AssemblyInfo: Custom.Hybrid.CodeTyped
   {
+    public AssemblyInfo GetOrCreate(string name, string path)
+    {
+      var specs = Kit.Cache.CreateSpecs(name).WatchAppData().WatchAppFolder();
+      if (Kit.Cache.TryGet<AssemblyInfo>(specs, out var result))
+        return result;
+
+      var rulesNs = App.Data.GetAll<RuleNamespace>().ToList();
+      var rulesClass = App.Data.GetAll<RuleClass>().ToList();
+      var assemblyInfo = Setup(path, rulesNs, rulesClass);
+      Kit.Cache.Set(specs, assemblyInfo);
+      return assemblyInfo;
+    }
+
+    public AssemblyInfo GetCached(string name)
+    {
+      var specs = Kit.Cache.CreateSpecs(name).WatchAppData().WatchAppFolder();
+      return Kit.Cache.Get<AssemblyInfo>(specs);
+    }
+
     public AssemblyInfo Setup(string path, List<RuleNamespace> nsRules, List<RuleClass> rules) {
       Path = path;
       Assembly = Assembly.LoadFrom(path);
@@ -118,17 +137,17 @@ namespace AppCode
 
     #region Cache
 
-    public static IDictionary<string, AssemblyInfo> Cache = new Dictionary<string, AssemblyInfo>();
+    // private static IDictionary<string, AssemblyInfo> Cache = new Dictionary<string, AssemblyInfo>();
 
-    public static AssemblyInfo Get(string name, string path, List<RuleNamespace> nsRules, List<RuleClass> rules, Func<AssemblyInfo> generate)
-    {
-      if (Cache.ContainsKey(name)) return Cache[name];
-      var assemblyInfo = generate().Setup(path, nsRules, rules);
-      Cache[name] = assemblyInfo;
-      return assemblyInfo;
-    }
+    // public static AssemblyInfo Get(string name, string path, List<RuleNamespace> nsRules, List<RuleClass> rules, Func<AssemblyInfo> generate)
+    // {
+    //   if (Cache.ContainsKey(name)) return Cache[name];
+    //   var assemblyInfo = generate().Setup(path, nsRules, rules);
+    //   Cache[name] = assemblyInfo;
+    //   return assemblyInfo;
+    // }
 
-    public static AssemblyInfo GetIfCached(string path) => Cache.ContainsKey(path) ? Cache[path] : null;
+    // public static AssemblyInfo GetIfCached(string path) => Cache.ContainsKey(path) ? Cache[path] : null;
 
     #endregion
 
