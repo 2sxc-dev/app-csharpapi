@@ -3,7 +3,7 @@ namespace AppCode
   public static class Constants
   {
     public const string PathToDlls = "..\\..\\..\\..\\bin";
-    public const string ToSicSxc = "ToSic.Sxc";
+    public const string ToSicSxc = "ToSic.Sxc.Core";
 
     public static string[] FilterNamespaces = new string[] {
       null,
