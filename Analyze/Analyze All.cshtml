@@ -1,0 +1,57 @@
+@inherits Custom.Hybrid.RazorTyped
+@using System.IO
+@using AppCode
+@using AppCode.Data
+@using AppCode.Analyzers
+
+<h1>Analyze All</h1>
+
+<p>
+  This runs the analyzer for all DLLs to put into cache, for a better overview.
+  Each reload will analyze all, so you probably don't want to do this often.
+</p>
+
+@{
+  // Determine configuration based on url parameters
+  var pars = MyPage.Parameters;
+}
+
+@{
+  // Get the bin folder of the current razor
+    
+  var dllPath = System.IO.Path.Combine(App.Folder.PhysicalPath, Constants.PathToDlls);
+  var dlls = new DirectoryInfo(dllPath)
+    .GetFiles("*.dll")
+    .Select(x => x.Name)
+    .ToList();
+
+  var allDlls = App.Data.GetAll<Dll>().ToList();
+  var loader = GetService<AssemblyInfoManager>();
+}
+
+<ol>
+  @foreach (var dll in allDlls)
+  {
+    var currentDll = dll.Name + ".dll";
+
+    <li>
+      @{
+        try {
+          var dllInfo = loader.GetOrCreate(name: dll.Name, path: System.IO.Path.Combine(dllPath, currentDll), alwaysRecreate: true);
+          <div>
+            DLL: @dll.Name
+          </div>
+        }
+        catch (Exception ex)
+        {
+          <div class="alert alert-danger">
+            Error analyzing DLL @dll.Name: @ex.Message
+          </div>
+        }
+      }
+    </li>
+  }
+</ol>
+<p>
+  Success, all processed.
+</p>

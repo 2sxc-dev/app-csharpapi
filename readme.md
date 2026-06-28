@@ -48,12 +48,10 @@ Typical fixes are:
 
 Each DLL has an entry in the table with the basic name like `ToSic.Sxc.Dnn.Core`.
 The main purpose is use it to build the list of DLLs, and to possibly sign all of it as not-exportable (IgnoreAll).
-The information if a dll is all ok is processed the first time the DLL is analyzed and then cached to memory, so only some DLLs show a 
+The information if a dll is all ok is processed the first time the DLL is analyzed and then cached to memory.
 
 ## To Do
 
-1. improve explicit that `[InternalApi_DoNotUse_MayChangeWithoutNotice]` works with show-never and doesn't create warning
-1. Add ability to scan all DLLs and put into cache
 1. wait for c# 10 support for records, then change the data objects to be records - would allow better copying / nicer code
 
 ## History
@@ -71,3 +69,6 @@ The information if a dll is all ok is processed the first time the DLL is analyz
 1. Separate AssemblyInfo object from the service which creates it
 1. Separate TypeInfo object from the service which creates it
 1. Improve visibility code, separate...
+1. major enhancements to stats being displayed
+1. improve explicit that `[InternalApi_DoNotUse_MayChangeWithoutNotice]` works with show-never and doesn't create warning
+1. Add ability to scan all DLLs and put into cache
