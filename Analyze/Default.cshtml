@@ -26,12 +26,12 @@
   var member = pars.Get("Member");
 }
 
-<a class='btn @(publicOnly ? "btn-primary" : "btn-secondary")' href='@Link.To(parameters: pars.Set("PublicOnly", !publicOnly))'>
+<a class='btn @(publicOnly ? "btn-primary" : "btn-secondary")' href='@Link.To(parameters: pars.Toggle("PublicOnly", false))'>
   @(publicOnly ? "✅" : "❌")
   Public Only
 </a>
 
-<a type="button" class='btn @(dllName != "" ? "btn-primary" : "btn-secondary")' href='@Link.To(parameters: pars.Set("Dll", ""))'>
+<a type="button" class='btn @(dllName != "" ? "btn-primary" : "btn-secondary")' href='@Link.To(parameters: pars.Toggle("Dll", dllName))'>
   @if (dllName == "")
   {
     <text>➖ All Dlls</text>
@@ -172,3 +172,4 @@
     background-color: #eee;
   }
 </style>
+

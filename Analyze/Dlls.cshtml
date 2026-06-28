@@ -14,16 +14,18 @@
 }
 <table>
   <tr>
-    <th>Current Dll</th>
-    <td>⚙️</td>
-    <td>✏️</td>
+    <th title="The currently selected DLL - truncated if too long" >Current Dll</th>
+    <th title="Assembly information incl. ignore All and overall status (if already analyzed and the analysis is cached)" >⚙️</th>
+    <th title="Edit (on hover)" >✏️</th>
   </tr>
   @foreach (var dllItem in dllItems) {
+
     var title = dllItem.Title;
     var trunc = title.Length < 10 ? title : title.Replace("ToSic.", "...");
     var cached = assemblyInfoSvc.GetCached(dllItem.Name);
+
     <tr class='@(title == currentDll ? "selected" : "")' @Kit.Toolbar.Edit(dllItem)>
-      <td>
+      <td title="@title">
         <a href='@Link.To(parameters: "Dll=" + title)'>
           @trunc
         </a>
