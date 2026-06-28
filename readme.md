@@ -20,6 +20,30 @@ Rules are about:
 - Which Types should be considered `RuleClass`
 - Which Members should be considered `Rule???`
 
+## How we Work with it
+
+1. First select a DLL to analyze. This will show all namespaces and types in that DLL.
+1. Many namespaces should be ok (showing a ✅)
+1. If some are not ok, we must determine what to do with it
+    1. 
+1. Then select a namespace to analyze. This will show all types in that namespace.
+
+What could be not-ok?
+
+1. Often we have a public API which is either missing the `[PublicApi]` attribute or has a `[PrivateApi]` attribute.
+    This is a problem because it will be exported to the XML file and thus show up in intellisense, even though we don't want it to.
+1. ...and/or it's missing the `[ShowApiWhenReleased(ShowApiMode.Never)]` attribute
+1. or it has conflicting information (e.g. `[PublicApi]` and `[ShowApiWhenReleased(ShowApiMode.Never)]`)
+
+In such situations, we should either sync the attributes, or add an explicit rule that this is how we want it to be.
+
+Typical fixes are:
+
+1. make something internal (non-public) to avoid the API from being exported
+1. Add `[PublicApi]` to make it public and thus exported; or `[PrivateApi]` to make it private and thus not exported
+1. Add `[ShowApiWhenReleased(ShowApiMode.Never)]` to make it not exported (we don't usually add `[ShowApiWhenReleased(ShowApiMode.Always)]` as that's the default)
+1. Add a rule to skip checking this (🦘) - typically for some system namespaces like `System.Diagnostics` which we don't care about so we shouldn't see warnings.
+
 ### DLL Management
 
 Each DLL has an entry in the table with the basic name like `ToSic.Sxc.Dnn.Core`.
@@ -36,3 +60,4 @@ The information if a dll is all ok is processed the first time the DLL is analyz
 1. introduce some docs
 1. improve view (make wider)
 1. group by DllGroup
+1. Fix detection of `ShowApiWhenReleased` during debug build, which replaces it with another class

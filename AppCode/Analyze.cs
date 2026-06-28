@@ -44,15 +44,24 @@ namespace AppCode
 
     public static bool HasHideInIntellisense(this MemberInfo type)
     {
-      // ATM this doesn't work, because we can't reference the type EditorBrowsable because System.Runtime.dll is not from the bin folder...?
+      // ATM the following won't work, because we can't reference the type EditorBrowsable because System.Runtime.dll is not from the bin folder...?
       // var attribs = type.GetCustomAttributes(typeof(System.ComponentModel.EditorBrowsable), true);
-      var attribs = type.GetCustomAttributes().Where(a => a.GetType().FullName == "System.ComponentModel.EditorBrowsableAttribute").ToArray();
-      if (attribs.Length == 0) return false;
+      var attribs = type.GetCustomAttributes()
+        .Where(a => FullNamesForHidden.Contains(a.GetType().FullName))
+        .ToArray();
 
-      // todo: check if it's set to never
-      return true;
-      // type.GetCustomAttributes(typeof(HideFromIntellisense), true).Length > 0;
+      // todo: check if it's set to 'Never'
+
+      return attribs.Length > 0;
     }
+
+    private static readonly List<string> FullNamesForHidden = new List<string>
+    {
+      // The standard EditorBrowsableAttribute is in System.Runtime.dll
+      "System.ComponentModel.EditorBrowsableAttribute",
+      // The custom one, used during debug builds; it's fake but this checker should still recognize it.
+      "FixEditorBrowsable.FakeEditorBrowsableAttribute",
+    };
   }
 
 }
