@@ -34,3 +34,5 @@ The information if a dll is all ok is processed the first time the DLL is analyz
 1. introduce `DllGroup` for better UI; assign to all Dll data entries
 1. move csharp into subfolder `Analyze` to keep things cleaner
 1. introduce some docs
+1. improve view (make wider)
+1. group by DllGroup

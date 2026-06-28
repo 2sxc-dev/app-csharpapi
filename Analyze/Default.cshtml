@@ -71,7 +71,7 @@
   <li>Namespaces: @dllInfo.Namespaces.Summary</li>
 </ul>
 
-<div style="width: 1600px; background: white">
+<div class="viewport-breakout" style="background: white; padding-left: 10px">
   <table class="table">
     <tr>
       <th>Dll</th>
@@ -170,6 +170,22 @@
   }
   tr.selected {
     background-color: #eee;
+  }
+
+  .viewport-breakout {
+    /* Step 1: Make the width 100vw minus the 80px sidebar */
+    width: calc(100vw - 80px);
+    
+    position: relative;
+    
+    /* Step 2: Push it 80px to the right to clear the CMS bar, 
+      then pull it back by half of the NEW viewport width */
+    /* left: calc(50% + 80px); */
+    left: calc(50% + 0px);
+    right: 50%;
+    
+    margin-left: calc(-50vw + 40px); /* 40px is half of 80px */
+    margin-right: -50vw;
   }
 </style>
 

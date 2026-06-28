@@ -6,38 +6,48 @@
 
 @{
   var currentDll = MyModel.String("currentDll");
-  var dllItems = App.Data.GetAll<Dll>()
+  var assemblyInfoSvc = GetService<AssemblyInfo>();
+
+  var dllGroups = App.Data.GetAll<DllGroup>()
+    .OrderBy(g => g.Order)
+    .ToList();
+}
+@foreach (var dllGroup in dllGroups)
+{
+  var dllItems = dllGroup.Parents<Dll>()
     .OrderBy(x => x.Title)
     .ToList();
-
-  var assemblyInfoSvc = GetService<AssemblyInfo>();
-}
-<table>
-  <tr>
-    <th title="The currently selected DLL - truncated if too long" >Current Dll</th>
-    <th title="Assembly information incl. ignore All and overall status (if already analyzed and the analysis is cached)" >⚙️</th>
-    <th title="Edit (on hover)" >✏️</th>
-  </tr>
-  @foreach (var dllItem in dllItems) {
-
-    var title = dllItem.Title;
-    var trunc = title.Length < 10 ? title : title.Replace("ToSic.", "...");
-    var cached = assemblyInfoSvc.GetCached(dllItem.Name);
-
-    <tr class='@(title == currentDll ? "selected" : "")' @Kit.Toolbar.Edit(dllItem)>
-      <td title="@title">
-        <a href='@Link.To(parameters: "Dll=" + title)'>
-          @trunc
-        </a>
-      </td>
-      <td title='@(cached?.Overall.Details)'>
-        @(dllItem.IgnoreAll ? "🚫" : "")
-        @* @(dllItem.AssemblyInfo?.Overall.Icon) *@
-        @(cached?.Overall.Icon)
-      </td>
-      <td>
-        &nbsp;
-      </td>
+  
+  <table>
+    <tr>
+      <th title="The currently selected DLL - truncated if too long">@dllGroup.Title</th>
+      <th title="Assembly information incl. ignore All and overall status (if already analyzed and the analysis is cached)" >⚙️</th>
+      <th title="Edit (on hover)" >✏️</th>
     </tr>
-  }
-</table>
+    @foreach (var dllItem in dllItems) {
+
+      var title = dllItem.Title;
+      var trunc = title.Length < 10
+        ? title
+        : title.Replace("ToSic.", "...");
+      var cached = assemblyInfoSvc.GetCached(dllItem.Name);
+
+      <tr class='@(title == currentDll ? "selected" : "")' @Kit.Toolbar.Edit(dllItem)>
+        <td title="@title">
+          <a href='@Link.To(parameters: "Dll=" + title)'>
+            @trunc
+          </a>
+        </td>
+        <td title='@(cached?.Overall.Details)'>
+          @(dllItem.IgnoreAll ? "🚫" : "")
+          @* @(dllItem.AssemblyInfo?.Overall.Icon) *@
+          @(cached?.Overall.Icon)
+        </td>
+        <td>
+          &nbsp;
+        </td>
+      </tr>
+    }
+  </table>
+
+}
