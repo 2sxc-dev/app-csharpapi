@@ -1,117 +1,51 @@
-using System.Linq;
 using System.Reflection;
-using AppCode.Analyzers;
-using AppCode.Data;
 
 namespace AppCode.Models
 {
   public class ApiMemberInfo
   {
-    public ApiMemberInfo(MemberInfo mInfo, IVisibility parentVisibility, RuleClass rule)
-    {
-      MemberInfo = mInfo;
-      Name = mInfo.Name;
+    public string Name { get; internal set; }
 
-      var labels = GetLabelAndDetails();
-      LabelExtended = labels.Details;
-      Label = labels.Label;
+    public string LabelExtended { get; internal set; }
 
-      var visManager = new VisibilityManager();
-      OwnVisibility = visManager.Create(mInfo, IsPublic, IsProtectedPublic);
-      Visibility = new ApiVisibilityOfMember(OwnVisibility, parentVisibility, rule);
-    }
+    public string Label { get; internal set; }
 
-    private (string Label, string Details) GetLabelAndDetails()
-    {
-      if (MemberInfo is MethodInfo mInfoMethod) {
-        var parameters = mInfoMethod.GetParameters();
-        if (parameters.Length > 0) {
-          var parameterNames = string.Join(", ", parameters.Select(p => p.ParameterType.Name + " " + p.Name));
-          return (Name + $"({parameters.Count()})", Name + $"({parameterNames})");
-        } else {
-          return (Name + "()", Name + "()");
-        }
-      }
+    public MemberInfo MemberInfo { get; internal set; }
 
-      if (MemberInfo is PropertyInfo mInfoProp) {
-        var canRead = mInfoProp.CanRead;
-        var canWrite = mInfoProp.CanWrite;
-        if (canRead && canWrite)
-          return (Name, Name + " { get; set; }");
-        if (canRead)
-          return (Name, Name + " { get; }");
-        return (Name, Name + " { set; }");
-      }
+    public bool IsPublic { get; internal set; }
 
-      return (Name, Name);
-    }
+    public bool IsStatic { get; internal set; }
 
-    public string Name { get; }
+    public bool IsAbstract { get; internal set; }
 
-    public string LabelExtended { get; }
+    public bool IsVirtual { get; internal set; }
 
-    public string Label { get; }
-
-    public MemberInfo MemberInfo { get; }
-    public FieldInfo FieldInfo => MemberInfo as FieldInfo;
-    public PropertyInfo PropertyInfo => MemberInfo as PropertyInfo;
-    public MethodInfo MethodInfo => MemberInfo as MethodInfo;
-
-    public bool IsPublic => _isPublic ?? (_isPublic = FieldInfo?.IsPublic
-      ?? PropertyInfo?.GetMethod.IsPublic
-      ?? MethodInfo?.IsPublic
-      ?? false).Value;
-    private bool? _isPublic;
-
-    public bool IsStatic => _isStatic ?? (_isStatic = FieldInfo?.IsStatic
-      ?? PropertyInfo?.GetMethod.IsStatic
-      ?? MethodInfo?.IsStatic
-      ?? false).Value;
-    private bool? _isStatic;
-
-    public bool IsAbstract => _isAbstract ?? (_isAbstract =
-      PropertyInfo?.GetMethod.IsAbstract
-      ?? MethodInfo?.IsAbstract
-      ?? false).Value;
-    private bool? _isAbstract;
-
-    public bool IsVirtual => _isVirtual ?? (_isVirtual =
-      PropertyInfo?.GetMethod.IsVirtual
-      ?? MethodInfo?.IsVirtual
-      ?? false).Value;
-    private bool? _isVirtual;
-
-    public bool IsPrivate => _isPrivate ?? (_isPrivate = FieldInfo?.IsPrivate
-      ?? PropertyInfo?.GetMethod.IsPrivate
-      ?? MethodInfo?.IsPrivate
-      ?? false).Value;
-    private bool? _isPrivate;
+    public bool IsPrivate { get; internal set; }
 
     // note: IsFamilyOrAssembly or IsFamilyAndAssembly would be protected not public
     // https://learn.microsoft.com/en-us/dotnet/api/system.reflection.methodbase.isfamily?view=net-8.0
-    public bool IsProtectedPublic => _isProtected ?? (_isProtected = FieldInfo?.IsFamily
-      ?? PropertyInfo?.GetMethod.IsFamily
-      ?? MethodInfo?.IsFamily
-      ?? false).Value;
-    private bool? _isProtected;
+    public bool IsProtectedPublic { get; internal set; }
 
-    public IVisibility Visibility { get; }
-    public IVisibility OwnVisibility { get; }
+    public IVisibility Visibility { get; internal set; }
+    public IVisibility OwnVisibility { get; internal set; }
 
-    public Status TypeSummary => _typeSummary ??= GetTypeSummary();
+    public Status TypeSummary => _typeSummary ??= GetTypeStatus();
     private Status _typeSummary;
 
-    private Status GetTypeSummary() => MemberInfo.MemberType switch
+    private Status GetTypeStatus() => MemberInfo.MemberType switch
     {
       MemberTypes.Constructor => new Status("🏗️", "constructor"),
       MemberTypes.Event => new Status("🔫", "event"),
       MemberTypes.Field => new Status("⏹️", "field"),
       MemberTypes.Method => new Status("🚀", "method"),
       MemberTypes.NestedType => new Status("❓", "nested type"),
-      MemberTypes.Property when PropertyInfo.CanRead && PropertyInfo.CanWrite => new Status("🧊", "property r/w"),
-      MemberTypes.Property when PropertyInfo.CanRead => new Status("📤", "property r"),
-      MemberTypes.Property when PropertyInfo.CanWrite => new Status("📥", "property w"),
-      MemberTypes.Property => new Status("🧊", "property"),
+      MemberTypes.Property => (MemberInfo as PropertyInfo) switch
+      {
+        { CanRead: true, CanWrite: true } => new Status("🧊", "property r/w"),
+        { CanRead: true } => new Status("📤", "property r"),
+        { CanWrite: true } => new Status("📥", "property w"),
+        _ => new Status("🧊", "property")
+      },
       _ => new Status("❔", "other?"),
     };
   }

@@ -99,13 +99,13 @@ namespace AppCode.Analyzers
         .OrderBy(t => t.Name)
         .ToList();
 
-      var types = new ThingStats<ApiTypeInfo>(allTypes, relevant);
+      var typeStats = new ThingStats<ApiTypeInfo>(allTypes, relevant);
 
       // From the remaining types, get the namespaces etc.
 
       // Figure out all Namespaces
       var allNs = nsWithRules // nsList
-        .Select(ns => new ApiNamespaceInfo(ns.Title, assembly, types, ns.Rule))
+        .Select(ns => new ApiNamespaceInfo(ns.Title, assembly, typeStats, ns.Rule))
         .ToList();
       
       var relevantNs = allNs
@@ -113,16 +113,16 @@ namespace AppCode.Analyzers
         .Where(ns => ns.Types.Relevant.Count > 0)
         .ToList();
 
-      var namespaces = new ThingStats<ApiNamespaceInfo>(allNs, relevantNs);
+      var nsStats = new ThingStats<ApiNamespaceInfo>(allNs, relevantNs);
 
       var result = new ApiAssemblyInfo
       {
         Path = path,
         Name = System.IO.Path.GetFileName(path),
         Assembly = assembly,
-        Namespaces = namespaces,
-        Types = types,
-        Overall = GetOverall(namespaces.Relevant)
+        Namespaces = nsStats,
+        Types = typeStats,
+        Overall = GetOverall(nsStats.Relevant)
       };
       return result;
     }

@@ -1,7 +1,7 @@
 using System;
 using AppCode.Data;
 
-namespace AppCode
+namespace AppCode.Models
 {
   public class ApiVisibilityOfMember: IVisibility
   {

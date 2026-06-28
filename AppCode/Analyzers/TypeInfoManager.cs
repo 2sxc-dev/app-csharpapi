@@ -15,8 +15,9 @@ namespace AppCode.Analyzers
     {
       var visManager = new VisibilityManager();
       var visibility = visManager.Create(type, type.IsPublic, type.IsAbstract, rule);
+      var apiMemberInfoManager = new ApiMemberInfoManager();
       var allMembers = type.GetMembers()
-        .Select(m => new ApiMemberInfo(m, visibility, rule))
+        .Select(m => apiMemberInfoManager.Create(m, visibility, rule))
         .ToList();
       var typeObject = typeof(object);
       var typeEnum = typeof(Enum);
@@ -26,7 +27,7 @@ namespace AppCode.Analyzers
         // Filter out members which are from the object base class
         .Where(m => m.DeclaringType != typeObject && m.DeclaringType != typeEnum)
         .OrderBy(m => m.Name)
-        .Select(m => new ApiMemberInfo(m, visibility, rule))
+        .Select(m => apiMemberInfoManager.Create(m, visibility, rule))
         .ToList();
 
       var members = new ThingStats<ApiMemberInfo>(allMembers, relevantMembers);
