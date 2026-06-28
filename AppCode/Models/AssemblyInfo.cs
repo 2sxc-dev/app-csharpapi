@@ -1,14 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using AppCode.Data;
-using ToSic.Sxc.Services.Cache;
-using static AppCode.Constants;
 
-namespace AppCode
+namespace AppCode.Models
 {
-  public class AssemblyInfo // : Custom.Hybrid.CodeTyped
+  public class AssemblyInfo
   {
     public string Path { get; internal set; }
 
