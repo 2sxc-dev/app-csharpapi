@@ -42,40 +42,31 @@ namespace AppCode.Analyzers
         Visibility = visibility,
 
         Members = members,
-        TypeInfo = TypeInfo(type),
+        TypeInfo = type.IsClass
+          ? new InfoWithIcon(IconClass, "class")
+          : new InfoWithIcon(IconInterface, "interface"),
         Overall = GetOverall(members.Relevant, visibility, rule, ruleNamespace),
       };
       return result;
     }
 
-    private InfoWithIcon TypeInfo(Type type) =>
-      type.IsClass ? new InfoWithIcon(IconClass, "class") : new InfoWithIcon(IconInterface, "interface");
-
     private Status GetOverall(List<ApiMemberInfo> relevant, IVisibility visibility, RuleClass? rule, RuleNamespace? ruleNamespace)
     {
-
-      var ok = relevant.All(m => m.Visibility.Summary.Ok);
-      var notOk = relevant.Where(m => !m.Visibility.Summary.Ok).ToList();
-      var percent = relevant.Count == 0
-        ? 100
-        : 100 - (int) (100 * (double) notOk.Count / relevant.Count);
-
       var skip = rule?.IgnoreAllProperties ?? ruleNamespace?.IgnoreTypeMembers ?? false;
-      if (skip) {
-        ok = true;
-        percent = 100;
-      }
+      if (skip)
+        return Status.Ignored();
 
-      if (!visibility.Summary.Ok) {
-        ok = false;
-        percent /= 2;
-      }
-      // ok = ok && visSum.Ok;
-      return new Status(ok, Ok(percent),
-        ok
-          ? "All members are ok"
-          : $"{notOk.Count} members are not ok - {percent}%"
-      );
+      var toUse = relevant.Select(m => m.Visibility.Summary).ToList();
+      var initial = Status.GetFromRelevantInfos(toUse);
+      if (visibility.Summary.Ok)
+        return initial;
+
+      var newPercent = initial.Percent / 2;
+      return new Status(false, Ok(newPercent), initial.Message, initial.Icons,
+        $"**Own** {visibility.Summary.Details}\n\n**Members** {initial.Details}")
+      {
+        Percent = newPercent,
+      };
     }
   }
 

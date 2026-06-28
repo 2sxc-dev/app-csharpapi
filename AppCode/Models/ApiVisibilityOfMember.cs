@@ -64,16 +64,16 @@ namespace AppCode.Models
     })();
 
 
-    public Status Docs => _docs ??= GetMemVisibilityDocs();
+    public Status Docs => _docs ??= GetMemberDocsVisibilityStatus();
 
     public bool HasObsolete => MemVis.HasObsolete;
 
     private Status _docs;
 
-    private Status GetMemVisibilityDocs()
+    private Status GetMemberDocsVisibilityStatus()
     {
       var docs = this.GetDocsStatus();
-      return new Status(docs.Icon, docs.Message, /* docs.Icons, */ 
+      return new Status(docs.Ok, docs.Icon, docs.Message, docs.Icons,
         "**Own** "
         + MemVis?.Docs.Details
         + "\n\n**Parent** "
