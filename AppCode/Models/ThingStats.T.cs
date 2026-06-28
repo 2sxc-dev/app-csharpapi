@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 
-namespace AppCode
+namespace AppCode.Models
 {
   public class ThingStats<T>
   {

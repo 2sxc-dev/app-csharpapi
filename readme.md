@@ -54,6 +54,7 @@ The information if a dll is all ok is processed the first time the DLL is analyz
 
 1. improve explicit that `[InternalApi_DoNotUse_MayChangeWithoutNotice]` works with show-never and doesn't create warning
 1. Add ability to scan all DLLs and put into cache
+1. wait for c# 10 support for records, then change the data objects to be records - would allow better copying / nicer code
 
 ## History
 
@@ -69,3 +70,4 @@ The information if a dll is all ok is processed the first time the DLL is analyz
 1. Change loading Assembly info to always recreate for the current DLL
 1. Separate AssemblyInfo object from the service which creates it
 1. Separate TypeInfo object from the service which creates it
+1. Improve visibility code, separate...

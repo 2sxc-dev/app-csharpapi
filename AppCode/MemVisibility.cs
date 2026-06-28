@@ -3,9 +3,9 @@ using AppCode.Data;
 
 namespace AppCode
 {
-  public class MemVisibility: IVisibility
+  public class ApiVisibilityOfMember: IVisibility
   {
-    public MemVisibility(IVisibility memVis, IVisibility classVis, RuleClass rule) {
+    public ApiVisibilityOfMember(IVisibility memVis, IVisibility classVis, RuleClass rule) {
       MemVis = memVis;
       ClassVis = classVis;
       ClassRule = rule;
@@ -20,7 +20,7 @@ namespace AppCode
     // For this only the own is relevant
     public bool IsProtected => MemVis.IsProtected;
 
-    public bool ShowInDocs => _showInDocs ?? (_showInDocs = MergeShowInDocs(MemVis, ClassVis)).Value;
+    public bool ShowInDocs => _showInDocs ??= MergeShowInDocs(MemVis, ClassVis);
     private bool? _showInDocs;
     private bool MergeShowInDocs(IVisibility own, IVisibility parent) {
       if (!own.IsPublic)
@@ -51,7 +51,7 @@ namespace AppCode
     public bool HasEditorBrowsable => MemVis.HasEditorBrowsable;
 
     private Status _editorStatus;
-    public Status EditorStatus => _editorStatus ??= Visibility.GetEditorStatus(MemVis);
+    public Status EditorStatus => _editorStatus ??= MemVis.GetEditorStatus();
 
     private Status _summary;
     public Status Summary => _summary ??= new Func<Status>(() => {
@@ -60,19 +60,19 @@ namespace AppCode
         return new Status(true, "🛅", "ignore members without specs");
 
       // Fallback: use default visibility check
-      return Visibility.GetSummary(this);
+      return this.GetSummary();
     })();
 
 
-    public Status Docs => _docs ??= GetDocs();
+    public Status Docs => _docs ??= GetMemVisibilityDocs();
 
     public bool HasObsolete => MemVis.HasObsolete;
 
     private Status _docs;
 
-    private Status GetDocs()
+    private Status GetMemVisibilityDocs()
     {
-      var docs = Visibility.GetDocs(this);
+      var docs = this.GetDocsStatus();
       return new Status(docs.Icon, docs.Message, docs.Icons, 
         "**Own** "
         + MemVis?.Docs.Details

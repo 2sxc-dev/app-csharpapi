@@ -1,11 +1,12 @@
 @inherits Custom.Hybrid.RazorTyped
 @using AppCode
+@using AppCode.Models
 
 @{
   @* var currentType = MyModel.String("CurrentType");
   var nsInfo = MyModel.Get<NamespaceInfo>("NsInfo");
   var classInfo = MyModel.Get<TypeInfo>("ClassInfo"); *@
-  var classInfo = MyModel.Get<TypeInfo>("ClassInfo");
+  var classInfo = MyModel.Get<ApiTypeInfo>("ClassInfo");
   var memName = MyModel.String("Member");
   var mem = classInfo.Members.Relevant.FirstOrDefault(m => m.Name == memName);
 

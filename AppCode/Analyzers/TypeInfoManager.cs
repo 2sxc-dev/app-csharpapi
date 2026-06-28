@@ -13,7 +13,8 @@ namespace AppCode.Analyzers
   {
     public ApiTypeInfo Create(Type type, RuleClass rule, RuleNamespace ruleNamespace)
     {
-      var visibility = new Visibility(type, type.IsPublic, type.IsAbstract, rule);
+      var visManager = new VisibilityManager();
+      var visibility = visManager.Create(type, type.IsPublic, type.IsAbstract, rule);
       var allMembers = type.GetMembers()
         .Select(m => new ApiMemberInfo(m, visibility, rule))
         .ToList();

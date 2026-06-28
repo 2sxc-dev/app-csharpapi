@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Reflection;
+using AppCode.Analyzers;
 using AppCode.Data;
 
 namespace AppCode.Models
@@ -15,8 +16,9 @@ namespace AppCode.Models
       LabelExtended = labels.Details;
       Label = labels.Label;
 
-      OwnVisibility = new Visibility<MemberInfo>(mInfo, IsPublic, IsProtectedPublic);
-      Visibility = new MemVisibility(OwnVisibility, parentVisibility, rule);
+      var visManager = new VisibilityManager();
+      OwnVisibility = visManager.Create(mInfo, IsPublic, IsProtectedPublic);
+      Visibility = new ApiVisibilityOfMember(OwnVisibility, parentVisibility, rule);
     }
 
     private (string Label, string Details) GetLabelAndDetails()
@@ -94,7 +96,7 @@ namespace AppCode.Models
     private bool? _isProtected;
 
     public IVisibility Visibility { get; }
-    public Visibility<MemberInfo> OwnVisibility { get; }
+    public IVisibility OwnVisibility { get; }
 
     public Status TypeSummary => _typeSummary ??= GetTypeSummary();
     private Status _typeSummary;
