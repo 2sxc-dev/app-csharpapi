@@ -62,26 +62,27 @@ namespace AppCode
 
     #region GetSummary
 
-    public static Status GetSummary(this IVisibility v)
+    public static Status GetApiStatus(this IVisibility v)
     {
       // not public, all is ok
       if (!v.IsPublic)
-        return new Status(true, Ok100, "Not public");
+        return Status.Perfect("Not public");
 
       // public, but private in docs and intellisense
       if (!v.ShowInDocs && !v.EditorStatus.Ok)
-        return new Status(true, Ok100, "Private/warned in docs and intellisense");
+        return Status.Perfect("Private/warned in docs and intellisense");
 
       // public, but show in both docs and intellisense
       if (v.ShowInDocs && v.EditorStatus.Ok)
-        return new Status(true, Ok75, "Public in docs and intellisense");
+        return new Status(true, Ok99, "Public in docs and intellisense");
+
+      // internal, but show in docs and hide in intellisense
+      if (v.ShowInDocs && v.HasInternalApi && !v.EditorStatus.Ok)
+        return new Status(true, Ok99, "Docs: Internal, hide intellisense");
 
       var exp = (v as ApiVisibility)?.Expected;
-      if (exp != null)
-      {
-        if (exp.ExpectedDocs == v.ShowInDocs && exp.ExpectedIntellisense == v.EditorStatus.Ok)
-          return new Status(true, Ok75, "Expected override in rule");
-      }
+      if (exp != null && exp.ExpectedDocs == v.ShowInDocs && exp.ExpectedIntellisense == v.EditorStatus.Ok)
+        return new Status(true, Ok75, "Expected override in rule");
 
       // something not ok
       return new Status(false, Ok0, "Something not ok.\n"
@@ -100,10 +101,15 @@ namespace AppCode
 
     public static Status GetEditorStatus(this IVisibility v)
     {
+      // Problem: is browsable but obsolete, not ok; obsolete should be non-browsable
       if (v.HasEditorBrowsable && v.HasObsolete)
         return new Status(false, "🫥", "obsolete & hide in intellisense");
+
+      // is browsable, could be a problem
       if (v.HasEditorBrowsable)
         return new Status(false, "🔒", "hide in intellisense");
+
+      // Is Obsolete, could be a problem
       if (v.HasObsolete)
         return new Status(false, "👮", "obsolete");
 

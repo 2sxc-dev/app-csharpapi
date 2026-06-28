@@ -57,10 +57,10 @@ namespace AppCode.Models
     public Status Summary => _summary ??= new Func<Status>(() => {
       // Special case, where nothing is actually set, and the parent is not visible, so things are just ok?
       if (ClassRule?.IgnoreMembersWithoutSpecs == true && !MemVis.HasDocs && !MemVis.HasEditorBrowsable)
-        return new Status(true, "🛅", "ignore members without specs");
+        return Status.Ignored("🛅", "ignore members without specs");
 
       // Fallback: use default visibility check
-      return this.GetSummary();
+      return this.GetApiStatus();
     })();
 
 

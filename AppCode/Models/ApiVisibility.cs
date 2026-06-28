@@ -44,7 +44,7 @@ namespace AppCode.Models
 
     #endregion
 
-    public Status Summary => _summary ??= this.GetSummary();
+    public Status Summary => _summary ??= this.GetApiStatus();
     private Status _summary;
 
   }

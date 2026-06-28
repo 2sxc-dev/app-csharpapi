@@ -122,28 +122,9 @@ namespace AppCode.Analyzers
         Assembly = assembly,
         Namespaces = nsStats,
         Types = typeStats,
-        Overall = GetOverall(nsStats.Relevant)
+        Overall = Status.GetFromRelevantInfos(nsStats.Relevant.Select(ns => ns.Overall).ToList()),
       };
       return result;
     }
-
-    private static Status GetOverall(List<ApiNamespaceInfo> relevant)
-    {
-      var ok = relevant.All(m => m.Overall.Ok);
-      var notOk = relevant.Where(m => !m.Overall.Ok).ToList();
-      var percent = relevant.Count == 0
-        ? 100
-        : 100 - (int) (100 * (double) notOk.Count / relevant.Count);
-
-      // var skip = Rule?.IgnoreAll ?? false;
-      // if (skip) return new Status(true, Ok(100), "Ignored");
-      
-      return new Status(ok, Ok(percent),
-        ok
-          ? "All members are ok"
-          : $"{notOk.Count} members are not ok - {percent}%"
-      );
-    }
-
   }
 }
