@@ -50,6 +50,11 @@ Each DLL has an entry in the table with the basic name like `ToSic.Sxc.Dnn.Core`
 The main purpose is use it to build the list of DLLs, and to possibly sign all of it as not-exportable (IgnoreAll).
 The information if a dll is all ok is processed the first time the DLL is analyzed and then cached to memory, so only some DLLs show a 
 
+## To Do
+
+1. improve explicit that `[InternalApi_DoNotUse_MayChangeWithoutNotice]` works with show-never and doesn't create warning
+1. Add ability to scan all DLLs and put into cache
+
 ## History
 
 ### 2026-06-28 (@iJungleboy)
@@ -62,3 +67,4 @@ The information if a dll is all ok is processed the first time the DLL is analyz
 1. group by DllGroup
 1. Fix detection of `ShowApiWhenReleased` during debug build, which replaces it with another class
 1. Change loading Assembly info to always recreate for the current DLL
+1. Separate AssemblyInfo object from the service which creates it

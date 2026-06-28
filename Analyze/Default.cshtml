@@ -1,6 +1,7 @@
 @inherits Custom.Hybrid.RazorTyped
 @using System.IO
 @using AppCode
+@using AppCode.Analyzers
 
 <h1 @Kit.Toolbar.Default()>Manage Public C# APIs</h1>
 
@@ -60,7 +61,7 @@
 </div>
 
 @{
-  var assemblyInfoSvc = GetService<AssemblyInfo>();
+  var assemblyInfoSvc = GetService<AssemblyInfoManager>();
   var dllInfo = assemblyInfoSvc
     .GetOrCreate(name: dllName, path: System.IO.Path.Combine(dllPath, currentDll), alwaysRecreate: true);
   var nsInfo = dllInfo.Namespaces.All

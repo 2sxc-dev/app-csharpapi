@@ -3,10 +3,11 @@
 @using System.Collections.Generic;
 @using AppCode
 @using AppCode.Data
+@using AppCode.Analyzers
 
 @{
   var currentDll = MyModel.String("currentDll");
-  var assemblyInfoSvc = GetService<AssemblyInfo>();
+  var assemblyInfoSvc = GetService<AssemblyInfoManager>();
 
   var dllGroups = App.Data.GetAll<DllGroup>()
     .OrderBy(g => g.Order)
