@@ -32,7 +32,7 @@ namespace AppCode
     public static string Ok(int percent)
     {
       if (percent >= 100) return Ok100;
-      // if (percent >= 75) return Ok75;
+      if (percent >= 75) return Ok75;
       if (percent >= 50) return Ok50;
       if (percent >= 25) return Ok25;
       return Ok0;
