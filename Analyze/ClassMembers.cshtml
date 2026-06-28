@@ -22,7 +22,7 @@
           @member.Label
         </a>
       </td>
-      @Html.Partial("./VisibilityColumns.cshtml", new { member.Visibility })
+      @Html.Partial("./VisibilityColumns.cshtml", new { visibility = member.Visibility })
     </tr>
   }
 </table>

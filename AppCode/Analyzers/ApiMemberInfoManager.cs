@@ -47,8 +47,8 @@ namespace AppCode.Analyzers
       var labels = GetLabelAndDetails(MemberInfo, MemberInfo.Name);
 
       var visManager = new VisibilityManager();
-      var OwnVisibility = visManager.Create(MemberInfo, IsPublic, IsProtectedPublic);
-      var Visibility = new ApiVisibilityOfMember(OwnVisibility, parentVisibility, rule);
+      var ownVisibility = visManager.Create(MemberInfo, IsPublic, IsProtectedPublic);
+      var Visibility = visManager.CreateWithParent(ownVisibility, parentVisibility, rule);
 
       return new ApiMemberInfo()
       {
@@ -56,7 +56,7 @@ namespace AppCode.Analyzers
         Name = MemberInfo.Name,
         LabelExtended = labels.Details,
         Label = labels.Label,
-        OwnVisibility = OwnVisibility,
+        OwnVisibility = ownVisibility,
         Visibility = Visibility,
 
         IsPublic = IsPublic,

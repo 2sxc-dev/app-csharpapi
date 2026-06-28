@@ -36,7 +36,7 @@ namespace AppCode
         + $"Public: {v.IsPublic}\n"
         + $"Docs: {v.ShowInDocs}\n"
         + $"Editor: {v.EditorStatus.Ok} ({v.EditorStatus.Icon})\n\n" + details;
-      return new Status(false, "🛅", details, icons);
+      return new Status(false, "🔏", details, icons);
     }
 
     private static string GenDocsDetails(this IVisibility v) =>
@@ -62,7 +62,27 @@ namespace AppCode
 
     #region GetSummary
 
-    public static Status GetApiStatus(this IVisibility v)
+    public static Status GetApiStatus(this IVisibility ownVis, IVisibility parentVis = null)
+    {
+      // First try with main result
+      var result = ownVis.GetApiStatus("")
+        // then try with parent
+        ?? parentVis?.GetApiStatus("parent");
+      if (result != null)
+        return result;
+
+      // something not ok
+      var exp = (ownVis as ApiVisibility)?.Expected;
+      return new Status(false, Ok0, "Something not ok.\n"
+        + $"Public: {ownVis.IsPublic}\n"
+        + $"Docs: {ownVis.ShowInDocs}\n"
+        + $"Editor: {ownVis.EditorStatus.Ok} ({ownVis.EditorStatus.Icon})\n\n"
+        + $"Expected Rule: {exp} (empty if no rule defined)\n"
+        + $"ExpectedDocs: {exp?.ExpectedDocs}\n"
+        + $"ExpectedIntellisense: {exp?.ExpectedIntellisense}");
+    }
+
+    private static Status GetApiStatus(this IVisibility v, string addOnMessage)
     {
       // not public, all is ok
       if (!v.IsPublic)
@@ -70,28 +90,21 @@ namespace AppCode
 
       // public, but private in docs and intellisense
       if (!v.ShowInDocs && !v.EditorStatus.Ok)
-        return Status.Perfect("Private/warned in docs and intellisense");
+        return Status.Perfect($"Private/warned in docs and intellisense {addOnMessage}");
 
       // public, but show in both docs and intellisense
       if (v.ShowInDocs && v.EditorStatus.Ok)
-        return new Status(true, Ok99, "Public in docs and intellisense");
+        return new Status(true, Ok99, $"Public in docs and intellisense {addOnMessage}");
 
       // internal, but show in docs and hide in intellisense
       if (v.ShowInDocs && v.HasInternalApi && !v.EditorStatus.Ok)
-        return new Status(true, Ok99, "Docs: Internal, hide intellisense");
+        return new Status(true, Ok99, $"Docs: Internal, hide intellisense {addOnMessage}");
 
       var exp = (v as ApiVisibility)?.Expected;
       if (exp != null && exp.ExpectedDocs == v.ShowInDocs && exp.ExpectedIntellisense == v.EditorStatus.Ok)
-        return new Status(true, Ok75, "Expected override in rule");
+        return new Status(true, Ok75, $"Expected override in rule {addOnMessage}");
 
-      // something not ok
-      return new Status(false, Ok0, "Something not ok.\n"
-        + $"Public: {v.IsPublic}\n"
-        + $"Docs: {v.ShowInDocs}\n"
-        + $"Editor: {v.EditorStatus.Ok} ({v.EditorStatus.Icon})\n\n"
-        + $"Expected Rule: {exp} (empty if no rule defined)\n"
-        + $"ExpectedDocs: {exp?.ExpectedDocs}\n"
-        + $"ExpectedIntellisense: {exp?.ExpectedIntellisense}");
+      return null;
     }
 
     #endregion
@@ -99,22 +112,28 @@ namespace AppCode
 
     #region GetEditorStatus
 
-    public static Status GetEditorStatus(this IVisibility v)
+    public static Status GetEditorStatus(this IVisibility ownVis, IVisibility parentVis = null) =>
+      ownVis.GetEditorStatusOne(false, "")
+        ?? parentVis?.GetEditorStatusOne(true, "parent")
+        // Fallback: use default visibility check
+        ?? new Status(true, "☀️", $"show in intellisense");
+
+    private static Status GetEditorStatusOne(this IVisibility vis, bool isParent, string addOnMessage)
     {
       // Problem: is browsable but obsolete, not ok; obsolete should be non-browsable
-      if (v.HasEditorBrowsable && v.HasObsolete)
-        return new Status(false, "🫥", "obsolete & hide in intellisense");
+      if (vis.HasEditorBrowsable && vis.HasObsolete)
+        return new Status(false, "🌚", $"obsolete & hide in intellisense {addOnMessage}");
 
       // is browsable, could be a problem
-      if (v.HasEditorBrowsable)
-        return new Status(false, "🔒", "hide in intellisense");
+      if (vis.HasEditorBrowsable)
+        return new Status(false, isParent ? "🌒" : "🌑", $"hide in intellisense {addOnMessage}");
 
-      // Is Obsolete, could be a problem
-      if (v.HasObsolete)
-        return new Status(false, "👮", "obsolete");
+      // Is Obsolete, but not hide! could be a problem
+      if (vis.HasObsolete)
+        return new Status(false, "☪️", $"obsolete {addOnMessage}");
 
-      // Fallback: use default visibility check
-      return new Status(true, "👁", "show in intellisense");
+      // Fallback: hand back as not specified yet
+      return null;
     }
 
     #endregion

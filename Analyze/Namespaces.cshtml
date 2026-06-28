@@ -14,6 +14,7 @@
       <th>Σ</th>
       <th>📊</th>
       <th>⚙️</th>
+      <th>✏️</th>
     </tr>
   </thead>
   <tbody>
@@ -46,8 +47,8 @@
         @* Configuration *@
         <td style='@(ns.Rule?.SharedRule == true ? "opacity: 0.4" : "")'>
           @if (ns.Rule != null) {
-            @(ns.Rule.IgnoreAll ? "🦘" : "")
-            @(ns.Rule.IgnoreTypeMembers ? "🎛️" : "")
+            @(ns.Rule.IgnoreAll ? "🦘*" : "")
+            @(ns.Rule.IgnoreTypeMembers ? "🦘🎛️" : "")
           }
         </td>
 

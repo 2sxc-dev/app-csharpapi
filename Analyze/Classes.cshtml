@@ -19,11 +19,11 @@
       : Kit.Toolbar.Edit(cnf);
 
     var configInfo = type.Rule?.IgnoreAllProperties == true
-      ? new InfoWithIcon("🦘", "Ignore all properties")
+      ? new InfoWithIcon("🦘*", "Ignore all properties")
       : type.RuleNamespace?.IgnoreTypeMembers == true
-        ? new InfoWithIcon("🦘", "Ignore all members")
+        ? new InfoWithIcon("🦘🎛️", "Ignore all members")
         : type.Rule?.IgnoreMembersWithoutSpecs == true
-          ? new InfoWithIcon("🛅", "Ignore members without specs")
+          ? new InfoWithIcon("🦘🔲", "Ignore members without specs")
           : null;
     
     <tr class='@(currentType == type.Name ? "selected" : "")' @tlb>
