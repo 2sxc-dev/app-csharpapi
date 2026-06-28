@@ -16,7 +16,7 @@
 </td>
 
 <td title="@(visibility.IsPublic ? "Public" : "Not public")">
-  @Show.BoolMoji(visibility.IsPublic, "👁️", "🔒")
+  @Show.BoolMoji(visibility.IsPublic, Constants.VisPublic, Constants.VisInvisible)
 </td>
 
 <td title='@visibility.Docs.Details'>

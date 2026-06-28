@@ -12,16 +12,38 @@ namespace AppCode
       "System.Runtime.CompilerServices",
     };
 
+    #region Visibility according to .net public / private
+
+    public const string VisPublic = "🌐";
+    public const string VisInvisible = "⭕";
+
+    #endregion
+
     public const string IconClass = "🟦";
     public const string IconInterface = "⏹️";
 
     public const string IconSelected = "🎯";
 
+    #region Visibility according to Docs
+
     public const string NotPublic = "🥷";
-    public const string PrivApi = "🔏";
+    public const string PrivApi = "🔐";
     public const string PubApi = "👁️";
+    public const string PrivUntagged = "🔒";
     public const string IntApi = "🔓";
     public const string WipApi = "🚧";
+
+    #endregion
+
+    #region Visibility according to Editor
+
+    public const string VisEditObsAndHidden = "🌚";
+    public const string VisEditHiddenByParent = "🌒";
+    public const string VisEditHiddenOnly = "🌑";
+    public const string VisEditVisible = "🌕";
+    public const string VisEditObsOnly = "☪️";
+
+    #endregion
 
     public const string Ok100 = "✅";
     public const string Ok99 = "🟩";

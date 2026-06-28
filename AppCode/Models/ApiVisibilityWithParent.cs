@@ -26,7 +26,7 @@ namespace AppCode.Models
         return Status.Ignored("🛅", "ignore members without specs");
 
       // Fallback: use default visibility check
-      return this.GetApiStatus(ParentVis);
+      return MemVis.GetApiStatus(ParentVis);
     })();
 
 
