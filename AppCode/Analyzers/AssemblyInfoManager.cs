@@ -108,7 +108,7 @@ namespace AppCode.Analyzers
       // From the remaining types, get the namespaces etc.
 
       // Figure out all Namespaces
-      var allNs = nsWithRules // nsList
+      var allNs = nsWithRules
         .Select(ns => new ApiNamespaceInfo(ns.Title, assembly, typeStats, ns.Rule))
         .ToList();
       
@@ -117,11 +117,16 @@ namespace AppCode.Analyzers
         .Where(ns => ns.Types.Relevant.Count > 0)
         .ToList();
 
-      var withPublic = relevantNs
-        .Where(ns => ns.Types.Relevant.Any(t => t.Visibility.IsPublic))
+      var visibleInCode = relevantNs
+        .Where(ns => ns.Types.Relevant.Any(t => t.Visibility.EditorStatus.Ok))
         .ToList();
 
-      var nsStats = new ThingStats<ApiNamespaceInfo>(allNs, relevantNs, ts => $"{withPublic.Count}/{ts.Relevant.Count}/{ts.All.Count}");
+      var nsStats = new StatisticsWithVisible<ApiNamespaceInfo>()
+      {
+        CountVisible = visibleInCode.Count,
+        All = allNs,
+        Relevant = relevantNs,
+      };
 
       var result = new ApiAssemblyInfo
       {

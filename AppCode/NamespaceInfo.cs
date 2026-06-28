@@ -16,29 +16,20 @@ namespace AppCode
       var all = types.All
         .Where(t => t.Namespace == ns)
         .ToList();
+
       var relevant = types.Relevant
         .Where(t => t.Namespace == ns)
         .ToList();
 
-      var hasBrowsable = relevant
+      var visibleInCode = relevant
         .Where(t => t.Members.Relevant.Any(m => m.Visibility.EditorStatus.Ok))
         .ToList();
 
-      var hasBrowsableInfo = hasBrowsable.Count == 0
-        ? Constants.VisEditHiddenOnly
-        : hasBrowsable.Count == relevant.Count
-          ? Constants.VisEditVisible
-          : $"{hasBrowsable.Count}";
-
-      Types = new ThingStats<ApiTypeInfo>(all, relevant,
-        ts => $"{hasBrowsableInfo}/{ts.Relevant.Count}/{ts.All.Count}",
-        ts => string.Join("\n", new [] {
-          $"Statistics",
-          "",
-          $"{hasBrowsable.Count:00} Visible in IntelliSense",
-          $"{ts.Relevant.Count:00} Relevant",
-          $"{ts.All.Count:00} Total" })
-      );
+      Types = new StatisticsWithVisible<ApiTypeInfo>() {
+        CountVisible = visibleInCode.Count,
+        All = all,
+        Relevant = relevant,
+      };
 
       Overall = (rule?.IgnoreAll ?? false)
         ? Status.Ignored()

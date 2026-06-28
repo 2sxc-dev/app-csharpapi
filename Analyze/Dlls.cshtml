@@ -1,7 +1,5 @@
 @inherits Custom.Hybrid.RazorTyped
 @using System.Linq;
-@using System.Collections.Generic;
-@using AppCode
 @using AppCode.Data
 @using AppCode.Analyzers
 
@@ -22,6 +20,7 @@
   <table>
     <tr>
       <th title="The currently selected DLL - truncated if too long">@dllGroup.Title</th>
+      <th title="Stats">📊</th>
       <th title="Assembly information incl. ignore All and overall status (if already analyzed and the analysis is cached)" >⚙️</th>
       <th title="Edit (on hover)" >✏️</th>
     </tr>
@@ -31,7 +30,8 @@
       var trunc = title.Length < 10
         ? title
         : title.Replace("ToSic.", "...");
-      var cached = assemblyInfoSvc.GetCached(dllItem.Name);
+      var info = assemblyInfoSvc.GetCached(dllItem.Name);
+      var nsInfo = info?.Namespaces;
 
       <tr class='@(title == currentDll ? "selected" : "")' @Kit.Toolbar.Edit(dllItem)>
         <td title="@title">
@@ -39,10 +39,13 @@
             @trunc
           </a>
         </td>
-        <td title='@(cached?.Overall.Details)'>
+        <td title='@(nsInfo?.SummaryInfo)'>
+          @(nsInfo?.Summary)
+        </td>
+        <td title='@(info?.Overall.Details)'>
           @(dllItem.IgnoreAll ? "🚫" : "")
           @* @(dllItem.AssemblyInfo?.Overall.Icon) *@
-          @(cached?.Overall.Icon)
+          @(info?.Overall.Icon)
         </td>
         <td>
           &nbsp;
