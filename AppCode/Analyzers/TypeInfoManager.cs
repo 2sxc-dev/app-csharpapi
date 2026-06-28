@@ -66,7 +66,7 @@ namespace AppCode.Analyzers
 
       if (!visibility.Summary.Ok) {
         ok = false;
-        percent = percent / 2;
+        percent /= 2;
       }
       // ok = ok && visSum.Ok;
       return new Status(ok, Ok(percent),

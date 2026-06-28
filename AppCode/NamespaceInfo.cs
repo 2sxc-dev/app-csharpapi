@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using AppCode.Data;
@@ -24,19 +25,18 @@ namespace AppCode
 
     public ThingStats<TypeInfo> Types { get; internal set; }
 
-    public Status Overall => _overall ??= GetOverall();
+    public Status Overall => _overall ??= GetOverall(Types.Relevant, Rule);
     private Status _overall;
 
-    private Status GetOverall()
+    private static Status GetOverall(List<TypeInfo> relevant, RuleNamespace? rule)
     {
-      var relevant = Types.Relevant;
       var ok = relevant.All(m => m.Overall.Ok);
       var notOk = relevant.Where(m => !m.Overall.Ok).ToList();
       var percent = relevant.Count == 0
         ? 100
         : 100 - (int) (100 * (double) notOk.Count / relevant.Count);
 
-      var skip = Rule?.IgnoreAll ?? false;
+      var skip = rule?.IgnoreAll ?? false;
       if (skip) return new Status(true, Ok(100), "Ignored");
       
       // var visSum = Visibility.Summary;
