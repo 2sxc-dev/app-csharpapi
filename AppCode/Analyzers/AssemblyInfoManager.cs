@@ -99,7 +99,11 @@ namespace AppCode.Analyzers
         .OrderBy(t => t.Name)
         .ToList();
 
-      var typeStats = new ThingStats<ApiTypeInfo>(allTypes, relevant);
+      var relevantTypes = relevant
+        .Where(t => t.Members.Relevant.All(m => m.Visibility.IsPublic))
+        .ToList();
+
+      var typeStats = new ThingStats<ApiTypeInfo>(allTypes, relevant, ts => $"{relevantTypes.Count}/{ts.Relevant.Count}/{ts.All.Count}");
 
       // From the remaining types, get the namespaces etc.
 
@@ -113,7 +117,11 @@ namespace AppCode.Analyzers
         .Where(ns => ns.Types.Relevant.Count > 0)
         .ToList();
 
-      var nsStats = new ThingStats<ApiNamespaceInfo>(allNs, relevantNs);
+      var withPublic = relevantNs
+        .Where(ns => ns.Types.Relevant.Any(t => t.Visibility.IsPublic))
+        .ToList();
+
+      var nsStats = new ThingStats<ApiNamespaceInfo>(allNs, relevantNs, ts => $"{withPublic.Count}/{ts.Relevant.Count}/{ts.All.Count}");
 
       var result = new ApiAssemblyInfo
       {

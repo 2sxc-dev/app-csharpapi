@@ -30,7 +30,11 @@ namespace AppCode.Analyzers
         .Select(m => apiMemberInfoManager.Create(m, visibility, rule))
         .ToList();
 
-      var members = new ThingStats<ApiMemberInfo>(allMembers, relevantMembers);
+      var publicMembers = relevantMembers
+        .Where(m => m.Visibility.IsPublic)
+        .ToList();
+
+      var members = new ThingStats<ApiMemberInfo>(allMembers, relevantMembers, ts => $"{publicMembers.Count}/{ts.Relevant.Count}/{ts.All.Count}");
       var result = new ApiTypeInfo()
       {
         Type = type,
