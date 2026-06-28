@@ -1,13 +1,11 @@
 @inherits Custom.Hybrid.RazorTyped
 @using System.IO
 @using AppCode
-@using AppCode.Data
 
 <h1 @Kit.Toolbar.Default()>Manage Public C# APIs</h1>
 
 <p>
-  Important: ATM we cache too much! because of this, adding config (eg. per namespace) won't have an affect till the app is modified.
-  thish should be fixed some day...
+  See <code>readme.md</code> for more information.
 </p>
 
 @{
@@ -46,7 +44,10 @@
   // Get the bin folder of the current razor
 
   var dllPath = System.IO.Path.Combine(App.Folder.PhysicalPath, Constants.PathToDlls);
-  var dlls = new DirectoryInfo(dllPath).GetFiles("*.dll").Select(x => x.Name).ToList();
+  var dlls = new DirectoryInfo(dllPath)
+    .GetFiles("*.dll")
+    .Select(x => x.Name)
+    .ToList();
   var currentDll = dllName + ".dll";
 }
 
@@ -60,9 +61,12 @@
 
 @{
   var assemblyInfoSvc = GetService<AssemblyInfo>();
-  var dllInfo = assemblyInfoSvc.GetOrCreate(dllName, System.IO.Path.Combine(dllPath, currentDll));
-  var nsInfo = dllInfo.Namespaces.All.FirstOrDefault(x => x.Namespace == currentNs);
-  var classInfo = nsInfo?.Types.All.FirstOrDefault(x => x.Name == currentType);
+  var dllInfo = assemblyInfoSvc
+    .GetOrCreate(name: dllName, path: System.IO.Path.Combine(dllPath, currentDll), alwaysRecreate: true);
+  var nsInfo = dllInfo.Namespaces.All
+    .FirstOrDefault(x => x.Namespace == currentNs);
+  var classInfo = nsInfo?.Types.All
+    .FirstOrDefault(x => x.Name == currentType);
 }
 
 <h2>Stats @dllInfo.Name</h2>

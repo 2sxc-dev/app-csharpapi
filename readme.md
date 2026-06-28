@@ -61,3 +61,4 @@ The information if a dll is all ok is processed the first time the DLL is analyz
 1. improve view (make wider)
 1. group by DllGroup
 1. Fix detection of `ShowApiWhenReleased` during debug build, which replaces it with another class
+1. Change loading Assembly info to always recreate for the current DLL

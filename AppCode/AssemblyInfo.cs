@@ -2,41 +2,68 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using ToSic.Sxc.Data;
 using AppCode.Data;
+using ToSic.Sxc.Services.Cache;
 using static AppCode.Constants;
 
 namespace AppCode
 {
   public class AssemblyInfo: Custom.Hybrid.CodeTyped
   {
-    public AssemblyInfo GetOrCreate(string name, string path)
+    #region Get from Cache or Setup
+
+    private ICacheSpecs GetSpecs(string name) =>
+      Kit.Cache.CreateSpecs(name)
+        .WatchAppData()
+        .WatchAppFolder();
+
+    /// <summary>
+    /// Get or create, called by the main entry file; needs to know the path.
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="path"></param>
+    /// <param name="alwaysRecreate"></param>
+    /// <returns></returns>
+    public AssemblyInfo GetOrCreate(string name, string path, bool alwaysRecreate)
     {
-      var specs = Kit.Cache.CreateSpecs(name).WatchAppData().WatchAppFolder();
-      if (Kit.Cache.TryGet<AssemblyInfo>(specs, out var result))
+      // First check cached and use that if possible
+      var specs = GetSpecs(name);
+      if (!alwaysRecreate && Kit.Cache.TryGet<AssemblyInfo>(specs, out var result))
         return result;
 
+      // Load rules from AppData and start Setup
       var rulesNs = App.Data.GetAll<RuleNamespace>().ToList();
       var rulesClass = App.Data.GetAll<RuleClass>().ToList();
       var assemblyInfo = Setup(path, rulesNs, rulesClass);
+
+      // Cache & return
       Kit.Cache.Set(specs, assemblyInfo);
       return assemblyInfo;
     }
 
-    public AssemblyInfo GetCached(string name)
-    {
-      var specs = Kit.Cache.CreateSpecs(name).WatchAppData().WatchAppFolder();
-      return Kit.Cache.Get<AssemblyInfo>(specs);
-    }
+    /// <summary>
+    /// Get already created from cache, called from sub-files which can assume that it's already in the cache.
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    public AssemblyInfo GetCached(string name) =>
+      Kit.Cache.Get<AssemblyInfo>(GetSpecs(name));
+
+    #endregion
 
     public AssemblyInfo Setup(string path, List<RuleNamespace> nsRules, List<RuleClass> rules) {
       Path = path;
       Assembly = Assembly.LoadFrom(path);
 
+      // Get all namespaces
       var nsList = Analyze.GetNamespaces(Assembly).ToList();
+
+      // Retrieve special rules for internal, backend and integration namespaces
       var ruleInternal = As<RuleNamespace>(nsRules.FirstOrDefault(r => r.Title == "Special:*.Internal")).Setup(true);
       var ruleBackend = As<RuleNamespace>(nsRules.FirstOrDefault(r => r.Title == "Special:*.Backend")).Setup(true);
       var ruleIntegration = As<RuleNamespace>(nsRules.FirstOrDefault(r => r.Title == "Special:*.Integration")).Setup(true);
+
+      // Create pairs of namespace and rule, so that we can easily find the rule for a namespace
       var nsWithRules = nsList
         .Select(ns =>
         {
@@ -58,8 +85,7 @@ namespace AppCode
       var allTypes = Assembly.GetTypes()
         .Select(t =>
         {
-          var ruleItem = rules.FirstOrDefault(r => r.Title == t.FullName);
-          var rule = ruleItem == null ? null : As<RuleClass>(ruleItem);
+          var rule = rules.FirstOrDefault(r => r.Title == t.FullName);
           var nsRule = nsWithRules.FirstOrDefault(r => r.Title == t.Namespace);
           return new TypeInfo(t, rule, nsRule?.Rule);
         })
@@ -77,12 +103,7 @@ namespace AppCode
 
       // Figure out all Namespaces
       var allNs = nsWithRules // nsList
-        .Select(ns =>
-        {
-          // var ruleItem = nsRules.FirstOrDefault(r => r.Title == ns.Title);
-          // var rule = ruleItem == null ? null : new RuleNamespace(ruleItem);
-          return new NamespaceInfo(ns.Title, Assembly, Types, ns.Rule);
-        })
+        .Select(ns => new NamespaceInfo(ns.Title, Assembly, Types, ns.Rule))
         .ToList();
       
       var relevantNs = allNs
@@ -129,25 +150,6 @@ namespace AppCode
           : $"{notOk.Count} members are not ok - {percent}%"
       );
     }
-
-    #endregion
-
-
-
-
-    #region Cache
-
-    // private static IDictionary<string, AssemblyInfo> Cache = new Dictionary<string, AssemblyInfo>();
-
-    // public static AssemblyInfo Get(string name, string path, List<RuleNamespace> nsRules, List<RuleClass> rules, Func<AssemblyInfo> generate)
-    // {
-    //   if (Cache.ContainsKey(name)) return Cache[name];
-    //   var assemblyInfo = generate().Setup(path, nsRules, rules);
-    //   Cache[name] = assemblyInfo;
-    //   return assemblyInfo;
-    // }
-
-    // public static AssemblyInfo GetIfCached(string path) => Cache.ContainsKey(path) ? Cache[path] : null;
 
     #endregion
 
