@@ -1,4 +1,4 @@
-namespace AppCode
+namespace AppCode.Models
 {
   public interface IExpectedDocsAndIntellisense
   {

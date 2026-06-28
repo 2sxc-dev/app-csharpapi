@@ -1,3 +1,4 @@
+using AppCode.Models;
 
 namespace AppCode.Data
 {

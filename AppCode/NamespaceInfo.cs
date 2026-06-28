@@ -37,7 +37,8 @@ namespace AppCode
         : 100 - (int) (100 * (double) notOk.Count / relevant.Count);
 
       var skip = rule?.IgnoreAll ?? false;
-      if (skip) return new Status(true, Ok(100), "Ignored");
+      if (skip)
+        return new Status(true, Ok(100), "Ignored");
       
       // var visSum = Visibility.Summary;
       // if (!visSum.Ok) {
