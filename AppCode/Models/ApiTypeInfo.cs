@@ -3,7 +3,7 @@ using AppCode.Data;
 
 namespace AppCode.Models
 {
-  public class ApiTypeInfo
+  public class ApiTypeInfo: ICommonInfo
   {
     public Type Type { get; internal set; }
 

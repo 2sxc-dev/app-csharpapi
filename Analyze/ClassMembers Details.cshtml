@@ -3,27 +3,43 @@
 @using AppCode.Models
 
 @{
-  @* var currentType = MyModel.String("CurrentType");
-  var nsInfo = MyModel.Get<NamespaceInfo>("NsInfo");
-  var classInfo = MyModel.Get<TypeInfo>("ClassInfo"); *@
-  var classInfo = MyModel.Get<ApiTypeInfo>("ClassInfo");
-  var memName = MyModel.String("Member");
-  var mem = classInfo.Members.Relevant.FirstOrDefault(m => m.Name == memName);
+  var parentName = MyModel.String("ParentName");
+  var info = MyModel.Get<ICommonInfo>("info");
 
-  var declType = mem.MemberInfo.DeclaringType;
-  var isObject = declType == typeof(object);
+  var visibility = info.Visibility;
 }
 
-<h2>Debug Class Member: @(classInfo.Name + "." + @mem.Name)</h2>
+<h5>Debug Class Member: @(parentName + "." + info.Name)</h5>
 
 <ol>
   <li>
-    Name: @mem.Name
+    Name: @info.Name
   </li>
   <li>
-    Summary: @mem.TypeInfo.Icon @mem.TypeInfo.Message
+    Summary: @info.TypeInfo.Icon @info.TypeInfo.Message
+  </li>
+  @if (info is ApiMemberInfo memberInfo)
+  {
+    var declType = memberInfo.MemberInfo.DeclaringType;
+    var isObject = declType == typeof(object);
+
+    <li>
+      Declaring Member: @memberInfo.MemberInfo.DeclaringType.Name (IsObject: @isObject)
+    </li>
+  }
+</ol>
+
+<h5>Public & IntelliSense</h5>
+<ol>
+  <li>
+    @Show.BoolMoji(visibility.IsPublic, "👁️", "🔒")
+    @(visibility.IsPublic ? "Public" : "Not public")
   </li>
   <li>
-    Declaring Member: @mem.MemberInfo.DeclaringType.Name (IsObject: @isObject)
+    @visibility.EditorStatus.Icon @visibility.EditorStatus.Details
   </li>
 </ol>
+
+<h5>Docs</h5>
+@visibility.Docs.Icon
+<pre>@visibility.Docs.Details</pre>

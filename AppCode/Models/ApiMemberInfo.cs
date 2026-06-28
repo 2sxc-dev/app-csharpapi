@@ -2,7 +2,7 @@ using System.Reflection;
 
 namespace AppCode.Models
 {
-  public class ApiMemberInfo
+  public class ApiMemberInfo: ICommonInfo
   {
     public string Name { get; internal set; }
 

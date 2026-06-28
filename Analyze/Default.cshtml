@@ -2,6 +2,7 @@
 @using System.IO
 @using AppCode
 @using AppCode.Analyzers
+@using AppCode.Models
 
 <h1 @Kit.Toolbar.Default()>Manage Public C# APIs</h1>
 
@@ -21,8 +22,9 @@
   var typeSelected = pars.IsNotEmpty("Type");
   var currentType = pars.Get("Type");
 
+  // Member Selection (Property, Method)
   var memberSelected = pars.IsNotEmpty("Member");
-  var member = pars.Get("Member");
+  var selectedMemberName = pars.Get("Member");
 }
 
 <a class='btn @(publicOnly ? "btn-primary" : "btn-secondary")' href='@Link.To(parameters: pars.Toggle("PublicOnly", false))'>
@@ -68,6 +70,12 @@
     .FirstOrDefault(x => x.Namespace == currentNs);
   var classInfo = nsInfo?.Types.All
     .FirstOrDefault(x => x.Name == currentType);
+
+  var infoItem = memberSelected
+    ? classInfo?.Members.Relevant
+      .FirstOrDefault(m => m.Name == selectedMemberName) as ICommonInfo
+    : classInfo as ICommonInfo;
+
 }
 
 <h2>Stats @dllInfo.Name</h2>
@@ -91,6 +99,13 @@
         (@(classInfo?.Members.Summary))
         @(classInfo?.Overall.Icon)
       </th>
+      <th>
+        @if (memberSelected) {
+          <text>Details of @selectedMemberName</text>
+        } else {
+          <text>Member Details</text>
+        }
+      </th>
     </tr>
     <tr>
       <td>
@@ -113,61 +128,21 @@
       </td>
       <td>
         @if (typeSelected) {
-          @Html.Partial("./ClassMembers.cshtml", new { dllInfo, currentNs, currentType, nsInfo, classInfo, member })
+          @Html.Partial("./ClassMembers.cshtml", new { dllInfo, currentNs, currentType, nsInfo, classInfo, selectedMemberName })
         } else {
           <text>No class Selected</text>
+        }
+      </td>
+      <td>
+        @if (infoItem != null) {
+          @Html.Partial("./ClassMembers Details.cshtml", new { parentName = currentType, info = infoItem, })
+        } else {
+          <text>No Member Selected</text>
         }
       </td>
     </tr>
   </table>
 </div>
-
-@if (memberSelected) {
-  @Html.Partial("./ClassMembers Details.cshtml", new { member, classInfo })
-}
-
-@* 
-@{
-
-
-  // Read the Dll "abc.dll" and list all the public classes and methods
-  var dll = System.Reflection.Assembly.LoadFile(System.IO.Path.Combine(dllPath, currentDll));
-
-  var types = dll.GetTypes()
-    .Where(x => x.IsPublic)
-    .Select(t => new {
-      Namespace = t.Namespace,
-      Name = t.Name,
-      Type = t,
-      Methods = t.GetMethods().Select(m => new {
-        Name = m.Name,
-        Parameters = m.GetParameters().Select(p => new {
-          Name = p.Name,
-          Type = p.ParameterType.Name
-        })
-      })
-    })
-    .OrderBy(x => x.Namespace)
-    .ThenBy(x => x.Name)
-    .ToList();
-
-  // Get all namespaces in the dll-assembly
-  
-}
-
-<h2>@currentDll Types (public)</h2>
-@foreach (var type in types)
-{
-  <div>
-    @type.Namespace.@type.Name
-    <ul>
-      @foreach (var method in type.Type.GetMethods())
-      {
-        <li>@method.Name</li>
-      }
-    </ul>
-  </div>
-} *@
 
 <style>
   a {

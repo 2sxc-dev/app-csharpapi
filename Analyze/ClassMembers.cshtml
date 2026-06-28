@@ -6,14 +6,14 @@
   var currentType = MyModel.String("CurrentType");
   var nsInfo = MyModel.Get<ApiNamespaceInfo>("NsInfo");
   var classInfo = MyModel.Get<ApiTypeInfo>("ClassInfo");
-  var memName = MyModel.String("Member");
+  var selectedMemberName = MyModel.String("selectedMemberName");
 }
 <table>
   @Html.Partial("./VisibilityHeader.cshtml")
 
   @foreach (var member in classInfo.Members.Relevant)
   {
-    <tr class='@(memName == member.Name ? "selected" : "")'>
+    <tr class='@(selectedMemberName == member.Name ? "selected" : "")'>
       <td title="@member.TypeInfo.Message">
         @member.TypeInfo.Icon
       </td>
