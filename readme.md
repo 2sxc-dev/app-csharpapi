@@ -68,3 +68,4 @@ The information if a dll is all ok is processed the first time the DLL is analyz
 1. Fix detection of `ShowApiWhenReleased` during debug build, which replaces it with another class
 1. Change loading Assembly info to always recreate for the current DLL
 1. Separate AssemblyInfo object from the service which creates it
+1. Separate TypeInfo object from the service which creates it

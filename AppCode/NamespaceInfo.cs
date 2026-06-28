@@ -1,7 +1,9 @@
 using System.Linq;
 using System.Reflection;
 using AppCode.Data;
+using AppCode.Models;
 using static AppCode.Constants;
+using TypeInfo = AppCode.Models.TypeInfo;
 
 namespace AppCode
 {
@@ -15,12 +17,12 @@ namespace AppCode
       Types = new ThingStats<TypeInfo>(types.All.Where(t => t.Namespace == ns), types.Relevant.Where(t => t.Namespace == ns));
     }
 
-    public string Namespace { get; }
+    public string Namespace { get; internal set; }
 
-    public Assembly Assembly { get; }
-    public RuleNamespace Rule { get; }
+    public Assembly Assembly { get; internal set; }
+    public RuleNamespace Rule { get; internal set; }
 
-    public ThingStats<TypeInfo> Types { get; }
+    public ThingStats<TypeInfo> Types { get; internal set; }
 
     public Status Overall => _overall ??= GetOverall();
     private Status _overall;

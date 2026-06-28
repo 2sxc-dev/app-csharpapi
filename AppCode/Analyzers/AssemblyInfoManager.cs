@@ -6,6 +6,7 @@ using AppCode.Data;
 using AppCode.Models;
 using ToSic.Sxc.Services.Cache;
 using static AppCode.Constants;
+using TypeInfo = AppCode.Models.TypeInfo;
 
 namespace AppCode.Analyzers
 {
@@ -82,12 +83,13 @@ namespace AppCode.Analyzers
         .ToList();
 
       // Get all types in assembly - and filter out the ones we don't want
+      var typeInfoManager = new TypeInfoManager();
       var allTypes = assembly.GetTypes()
         .Select(t =>
         {
           var rule = rules.FirstOrDefault(r => r.Title == t.FullName);
           var nsRule = nsWithRules.FirstOrDefault(r => r.Title == t.Namespace);
-          return new TypeInfo(t, rule, nsRule?.Rule);
+          return typeInfoManager.Create(t, rule, nsRule?.Rule);
         })
         .ToList();
       
