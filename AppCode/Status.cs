@@ -3,12 +3,8 @@ namespace AppCode
   public class Status
   {
     public Status(string icon, string message, string icons = default, string details = default)
-    {
-      Icon = icon;
-      Icons = icons ?? "";
-      Message = message;
-      Details = details ?? message;
-    }
+      : this(false, icon, message, icons, details)
+    { }
 
     public Status(bool ok, string icon, string message, string icons = default, string details = default)
     {

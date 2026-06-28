@@ -23,11 +23,13 @@ namespace AppCode
     public bool ShowInDocs => _showInDocs ?? (_showInDocs = MergeShowInDocs(MemVis, ClassVis)).Value;
     private bool? _showInDocs;
     private bool MergeShowInDocs(IVisibility own, IVisibility parent) {
-      if (!own.IsPublic) return false;
+      if (!own.IsPublic)
+        return false;
       // todo: protected if parent class is public
 
       // if own has docs attributes, it wins
-      if (own.HasDocs) return own.ShowInDocs;
+      if (own.HasDocs)
+        return own.ShowInDocs;
 
       // fallback: parent show in docs
       return parent.ShowInDocs;

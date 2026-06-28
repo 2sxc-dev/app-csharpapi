@@ -3,7 +3,7 @@ using AppCode.Data;
 
 namespace AppCode.Models
 {
-  public class TypeInfo
+  public class ApiTypeInfo
   {
     public Type Type { get; internal set; }
 
@@ -17,7 +17,7 @@ namespace AppCode.Models
     public string Namespace { get; internal set; }
     public IVisibility Visibility { get; internal set; }
 
-    public ThingStats<MemInfo> Members { get; internal set; }
+    public ThingStats<ApiMemberInfo> Members { get; internal set; }
 
     public Status Overall { get; internal set; }
 

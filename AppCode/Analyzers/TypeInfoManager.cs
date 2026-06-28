@@ -5,17 +5,17 @@ using System.Reflection;
 using AppCode.Data;
 using AppCode.Models;
 using static AppCode.Constants;
-using TypeInfo = AppCode.Models.TypeInfo;
+using ApiTypeInfo = AppCode.Models.ApiTypeInfo;
 
 namespace AppCode.Analyzers
 {
   public class TypeInfoManager
   {
-    public TypeInfo Create(Type type, RuleClass rule, RuleNamespace ruleNamespace)
+    public ApiTypeInfo Create(Type type, RuleClass rule, RuleNamespace ruleNamespace)
     {
       var visibility = new Visibility(type, type.IsPublic, type.IsAbstract, rule);
       var allMembers = type.GetMembers()
-        .Select(m => new MemInfo(m, visibility, rule))
+        .Select(m => new ApiMemberInfo(m, visibility, rule))
         .ToList();
       var typeObject = typeof(object);
       var typeEnum = typeof(Enum);
@@ -25,11 +25,11 @@ namespace AppCode.Analyzers
         // Filter out members which are from the object base class
         .Where(m => m.DeclaringType != typeObject && m.DeclaringType != typeEnum)
         .OrderBy(m => m.Name)
-        .Select(m => new MemInfo(m, visibility, rule))
+        .Select(m => new ApiMemberInfo(m, visibility, rule))
         .ToList();
 
-      var members = new ThingStats<MemInfo>(allMembers, relevantMembers);
-      var result = new TypeInfo()
+      var members = new ThingStats<ApiMemberInfo>(allMembers, relevantMembers);
+      var result = new ApiTypeInfo()
       {
         Type = type,
         Rule = rule,
@@ -49,7 +49,7 @@ namespace AppCode.Analyzers
     private Status TypeSummary(Type type) =>
       type.IsClass ? new Status(IconClass, "class") : new Status(IconInterface, "interface");
 
-    private Status GetOverall(List<MemInfo> relevant, IVisibility visibility, RuleClass? rule, RuleNamespace? ruleNamespace)
+    private Status GetOverall(List<ApiMemberInfo> relevant, IVisibility visibility, RuleClass? rule, RuleNamespace? ruleNamespace)
     {
 
       var ok = relevant.All(m => m.Visibility.Summary.Ok);

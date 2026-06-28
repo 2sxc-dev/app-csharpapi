@@ -6,7 +6,8 @@ namespace AppCode
 {
   public class Visibility<T> : Visibility
   {
-    public Visibility(T target, bool isPublic, bool isProtected = false) : base(memberInfo: target as MemberInfo, isPublic, isProtected)
+    public Visibility(T target, bool isPublic, bool isProtected = false)
+      : base(memberInfo: target as MemberInfo, isPublic, isProtected)
     {
     }
   }
@@ -71,9 +72,12 @@ namespace AppCode
 
     public static Status GetEditorStatus(IVisibility v)
     {
-      if (v.HasEditorBrowsable && v.HasObsolete) return new Status(false, "🫥", "obsolete & hide in intellisense");
-      if (v.HasEditorBrowsable) return new Status(false, "🔒", "hide in intellisense");
-      if (v.HasObsolete) return new Status(false, "👮", "obsolete");
+      if (v.HasEditorBrowsable && v.HasObsolete)
+        return new Status(false, "🫥", "obsolete & hide in intellisense");
+      if (v.HasEditorBrowsable)
+        return new Status(false, "🔒", "hide in intellisense");
+      if (v.HasObsolete)
+        return new Status(false, "👮", "obsolete");
 
       // Fallback: use default visibility check
       return new Status(true, "👁", "show in intellisense");

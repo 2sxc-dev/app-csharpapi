@@ -6,7 +6,7 @@ using AppCode.Data;
 using AppCode.Models;
 using ToSic.Sxc.Services.Cache;
 using static AppCode.Constants;
-using TypeInfo = AppCode.Models.TypeInfo;
+using ApiTypeInfo = AppCode.Models.ApiTypeInfo;
 
 namespace AppCode.Analyzers
 {
@@ -26,11 +26,11 @@ namespace AppCode.Analyzers
     /// <param name="path"></param>
     /// <param name="alwaysRecreate"></param>
     /// <returns></returns>
-    public AssemblyInfo GetOrCreate(string name, string path, bool alwaysRecreate)
+    public ApiAssemblyInfo GetOrCreate(string name, string path, bool alwaysRecreate)
     {
       // First check cached and use that if possible
       var specs = GetSpecs(name);
-      if (!alwaysRecreate && Kit.Cache.TryGet<AssemblyInfo>(specs, out var result))
+      if (!alwaysRecreate && Kit.Cache.TryGet<ApiAssemblyInfo>(specs, out var result))
         return result;
 
       // Load rules from AppData and start Setup
@@ -48,12 +48,12 @@ namespace AppCode.Analyzers
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public AssemblyInfo GetCached(string name) =>
-      Kit.Cache.Get<AssemblyInfo>(GetSpecs(name));
+    public ApiAssemblyInfo GetCached(string name) =>
+      Kit.Cache.Get<ApiAssemblyInfo>(GetSpecs(name));
 
     #endregion
 
-    public AssemblyInfo Setup(string path, List<RuleNamespace> nsRules, List<RuleClass> rules) {
+    public ApiAssemblyInfo Setup(string path, List<RuleNamespace> nsRules, List<RuleClass> rules) {
       var assembly = Assembly.LoadFrom(path);
 
       // Get all namespaces
@@ -99,13 +99,13 @@ namespace AppCode.Analyzers
         .OrderBy(t => t.Name)
         .ToList();
 
-      var types = new ThingStats<TypeInfo>(allTypes, relevant);
+      var types = new ThingStats<ApiTypeInfo>(allTypes, relevant);
 
       // From the remaining types, get the namespaces etc.
 
       // Figure out all Namespaces
       var allNs = nsWithRules // nsList
-        .Select(ns => new NamespaceInfo(ns.Title, assembly, types, ns.Rule))
+        .Select(ns => new ApiNamespaceInfo(ns.Title, assembly, types, ns.Rule))
         .ToList();
       
       var relevantNs = allNs
@@ -113,9 +113,9 @@ namespace AppCode.Analyzers
         .Where(ns => ns.Types.Relevant.Count > 0)
         .ToList();
 
-      var namespaces = new ThingStats<NamespaceInfo>(allNs, relevantNs);
+      var namespaces = new ThingStats<ApiNamespaceInfo>(allNs, relevantNs);
 
-      var result = new AssemblyInfo
+      var result = new ApiAssemblyInfo
       {
         Path = path,
         Name = System.IO.Path.GetFileName(path),
@@ -127,7 +127,7 @@ namespace AppCode.Analyzers
       return result;
     }
 
-    private static Status GetOverall(List<NamespaceInfo> relevant)
+    private static Status GetOverall(List<ApiNamespaceInfo> relevant)
     {
       var ok = relevant.All(m => m.Overall.Ok);
       var notOk = relevant.Where(m => !m.Overall.Ok).ToList();

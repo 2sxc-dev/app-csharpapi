@@ -4,18 +4,18 @@ using System.Reflection;
 using AppCode.Data;
 using AppCode.Models;
 using static AppCode.Constants;
-using TypeInfo = AppCode.Models.TypeInfo;
+using ApiTypeInfo = AppCode.Models.ApiTypeInfo;
 
 namespace AppCode
 {
-  public class NamespaceInfo
+  public class ApiNamespaceInfo
   {
-    public NamespaceInfo(string ns, Assembly assembly, ThingStats<TypeInfo> types, RuleNamespace rule)
+    public ApiNamespaceInfo(string ns, Assembly assembly, ThingStats<ApiTypeInfo> types, RuleNamespace rule)
     {
       Namespace = ns;
       Assembly = assembly;
       Rule = rule;
-      Types = new ThingStats<TypeInfo>(types.All.Where(t => t.Namespace == ns), types.Relevant.Where(t => t.Namespace == ns));
+      Types = new ThingStats<ApiTypeInfo>(types.All.Where(t => t.Namespace == ns), types.Relevant.Where(t => t.Namespace == ns));
     }
 
     public string Namespace { get; internal set; }
@@ -23,12 +23,12 @@ namespace AppCode
     public Assembly Assembly { get; internal set; }
     public RuleNamespace Rule { get; internal set; }
 
-    public ThingStats<TypeInfo> Types { get; internal set; }
+    public ThingStats<ApiTypeInfo> Types { get; internal set; }
 
     public Status Overall => _overall ??= GetOverall(Types.Relevant, Rule);
     private Status _overall;
 
-    private static Status GetOverall(List<TypeInfo> relevant, RuleNamespace? rule)
+    private static Status GetOverall(List<ApiTypeInfo> relevant, RuleNamespace? rule)
     {
       var ok = relevant.All(m => m.Overall.Ok);
       var notOk = relevant.Where(m => !m.Overall.Ok).ToList();

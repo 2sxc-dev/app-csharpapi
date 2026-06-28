@@ -4,7 +4,7 @@
 @using AppCode.Models
 
 @{
-  var dllInfo = MyModel.Get<AssemblyInfo>("DllInfo");
+  var dllInfo = MyModel.Get<ApiAssemblyInfo>("DllInfo");
   var currentNs = MyModel.String("currentNs");
 }
 <table x-class="table">

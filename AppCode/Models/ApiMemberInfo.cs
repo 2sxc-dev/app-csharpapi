@@ -2,11 +2,11 @@ using System.Linq;
 using System.Reflection;
 using AppCode.Data;
 
-namespace AppCode
+namespace AppCode.Models
 {
-  public class MemInfo
+  public class ApiMemberInfo
   {
-    public MemInfo(MemberInfo mInfo, IVisibility parentVisibility, RuleClass rule)
+    public ApiMemberInfo(MemberInfo mInfo, IVisibility parentVisibility, RuleClass rule)
     {
       MemberInfo = mInfo;
       Name = mInfo.Name;
@@ -34,8 +34,10 @@ namespace AppCode
       if (MemberInfo is PropertyInfo mInfoProp) {
         var canRead = mInfoProp.CanRead;
         var canWrite = mInfoProp.CanWrite;
-        if (canRead && canWrite) return (Name, Name + " { get; set; }");
-        if (canRead) return (Name, Name + " { get; }");
+        if (canRead && canWrite)
+          return (Name, Name + " { get; set; }");
+        if (canRead)
+          return (Name, Name + " { get; }");
         return (Name, Name + " { set; }");
       }
 
@@ -97,30 +99,19 @@ namespace AppCode
     public Status TypeSummary => _typeSummary ??= GetTypeSummary();
     private Status _typeSummary;
 
-    private Status GetTypeSummary()
+    private Status GetTypeSummary() => MemberInfo.MemberType switch
     {
-      var type = MemberInfo.MemberType;
-      switch (type) {
-        case MemberTypes.Constructor:
-          return new Status("🏗️", "constructor");
-        case MemberTypes.Event:
-          return new Status("🔫", "event");
-        case MemberTypes.Field:
-          return new Status("⏹️", "field");
-        case MemberTypes.Method:
-          return new Status("🚀", "method");
-        case MemberTypes.NestedType:
-          return new Status("❓", "nested type");
-        case MemberTypes.Property:
-          if (PropertyInfo.CanRead && PropertyInfo.CanWrite) return new Status("🧊", "property r/w");
-          if (PropertyInfo.CanRead) return new Status("📤", "property r");
-          if (PropertyInfo.CanWrite) return new Status("📥", "property w");
-          return new Status("🧊", "property");
-        default:
-          return new Status("❔", "other?");
-      }
-    }
-    // public ThingStats<MemberInfo> Members { get; }
+      MemberTypes.Constructor => new Status("🏗️", "constructor"),
+      MemberTypes.Event => new Status("🔫", "event"),
+      MemberTypes.Field => new Status("⏹️", "field"),
+      MemberTypes.Method => new Status("🚀", "method"),
+      MemberTypes.NestedType => new Status("❓", "nested type"),
+      MemberTypes.Property when PropertyInfo.CanRead && PropertyInfo.CanWrite => new Status("🧊", "property r/w"),
+      MemberTypes.Property when PropertyInfo.CanRead => new Status("📤", "property r"),
+      MemberTypes.Property when PropertyInfo.CanWrite => new Status("📥", "property w"),
+      MemberTypes.Property => new Status("🧊", "property"),
+      _ => new Status("❔", "other?"),
+    };
   }
 
 }
