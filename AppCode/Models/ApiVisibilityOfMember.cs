@@ -73,7 +73,7 @@ namespace AppCode.Models
     private Status GetMemVisibilityDocs()
     {
       var docs = this.GetDocsStatus();
-      return new Status(docs.Icon, docs.Message, docs.Icons, 
+      return new Status(docs.Icon, docs.Message, /* docs.Icons, */ 
         "**Own** "
         + MemVis?.Docs.Details
         + "\n\n**Parent** "

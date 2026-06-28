@@ -1,5 +1,6 @@
 @inherits Custom.Hybrid.RazorTyped
 @using AppCode
+@using AppCode.Models
 
 @{
   var currentType = MyModel.String("CurrentType");
@@ -12,22 +13,22 @@
   @foreach (var type in nsInfo.Types.Relevant)
   {
     var fullNs = type.Namespace + "." + type.Name;
-    var cnf = type.Rule; //?.Item;
+    var cnf = type.Rule;
     var tlb = cnf == null
       ? Kit.Toolbar.Empty().New("RuleClass", tweak: t => t.Prefill(new { Title = fullNs }))
       : Kit.Toolbar.Edit(cnf);
 
     var configInfo = type.Rule?.IgnoreAllProperties == true
-      ? new Status("🦘", "Ignore all properties")
+      ? new InfoWithIcon("🦘", "Ignore all properties")
       : type.RuleNamespace?.IgnoreTypeMembers == true
-        ? new Status("🦘", "Ignore all members")
+        ? new InfoWithIcon("🦘", "Ignore all members")
         : type.Rule?.IgnoreMembersWithoutSpecs == true
-          ? new Status("🛅", "Ignore members without specs")
+          ? new InfoWithIcon("🛅", "Ignore members without specs")
           : null;
     
     <tr class='@(currentType == type.Name ? "selected" : "")' @tlb>
-      <td title="@type.TypeSummary.Message">
-        @type.TypeSummary.Icon
+      <td title="@type.TypeInfo.Message">
+        @type.TypeInfo.Icon
       </td>
       <td>
         <a href='@Link.To(parameters: MyPage.Parameters.Filter("Dll,Namespace,Type").Toggle("Type", type.Name))'>
@@ -39,7 +40,7 @@
       @Html.Partial("./VisibilityColumns.cshtml", new { type.Visibility, Total = type.Overall })
 
       @* Configuration *@
-      <td title='@(configInfo?.Details)'>
+      <td title='@(configInfo?.Message)'>
         @(configInfo?.Icon)
       </td>
       <td>

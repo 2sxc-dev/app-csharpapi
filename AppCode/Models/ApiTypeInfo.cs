@@ -11,13 +11,15 @@ namespace AppCode.Models
 
     public RuleNamespace RuleNamespace { get; internal set; }
 
-    public Status TypeSummary { get; internal set; }
+    // public Status TypeSummary { get; internal set; }
 
     public string Name { get; internal set; }
     public string Namespace { get; internal set; }
     public IVisibility Visibility { get; internal set; }
 
     public ThingStats<ApiMemberInfo> Members { get; internal set; }
+
+    public InfoWithIcon TypeInfo { get; internal set; }
 
     public Status Overall { get; internal set; }
 

@@ -13,14 +13,14 @@ namespace AppCode
     {
       Ok = ok;
       Icon = icon;
-      Icons = icons ?? "";
+      // Icons = icons ?? "";
       Message = message;
       Details = details ?? message;
     }
 
     public bool Ok { get; }
     public string Icon { get; }
-    public string Icons {get;}
+    // public string Icons {get;}
     public string Message { get; }
     public string Details { get; }
 

@@ -42,14 +42,14 @@ namespace AppCode.Analyzers
         Visibility = visibility,
 
         Members = members,
-        TypeSummary = TypeSummary(type),
+        TypeInfo = TypeInfo(type),
         Overall = GetOverall(members.Relevant, visibility, rule, ruleNamespace),
       };
       return result;
     }
 
-    private Status TypeSummary(Type type) =>
-      type.IsClass ? new Status(IconClass, "class") : new Status(IconInterface, "interface");
+    private InfoWithIcon TypeInfo(Type type) =>
+      type.IsClass ? new InfoWithIcon(IconClass, "class") : new InfoWithIcon(IconInterface, "interface");
 
     private Status GetOverall(List<ApiMemberInfo> relevant, IVisibility visibility, RuleClass? rule, RuleNamespace? ruleNamespace)
     {

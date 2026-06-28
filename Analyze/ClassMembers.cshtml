@@ -11,18 +11,18 @@
 <table>
   @Html.Partial("./VisibilityHeader.cshtml")
 
-  @foreach (var mem in classInfo.Members.Relevant)
+  @foreach (var member in classInfo.Members.Relevant)
   {
-    <tr  class='@(memName == mem.Name ? "selected" : "")'>
-      <td title="@mem.TypeSummary.Message">
-        @mem.TypeSummary.Icon
+    <tr class='@(memName == member.Name ? "selected" : "")'>
+      <td title="@member.TypeInfo.Message">
+        @member.TypeInfo.Icon
       </td>
-      <td title="@mem.LabelExtended">
-        <a href='@Link.To(parameters: MyPage.Parameters.Toggle("Member", mem.Name))'>
-          @mem.Label
+      <td title="@member.LabelExtended">
+        <a href='@Link.To(parameters: MyPage.Parameters.Toggle("Member", member.Name))'>
+          @member.Label
         </a>
       </td>
-      @Html.Partial("./VisibilityColumns.cshtml", new { mem.Visibility })
+      @Html.Partial("./VisibilityColumns.cshtml", new { member.Visibility })
     </tr>
   }
 </table>

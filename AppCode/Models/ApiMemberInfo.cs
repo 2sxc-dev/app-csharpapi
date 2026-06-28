@@ -29,24 +29,24 @@ namespace AppCode.Models
     public IVisibility Visibility { get; internal set; }
     public IVisibility OwnVisibility { get; internal set; }
 
-    public Status TypeSummary => _typeSummary ??= GetTypeStatus();
-    private Status _typeSummary;
+    public InfoWithIcon TypeInfo => _typeInfo ??= GetTypeInfo();
+    private InfoWithIcon _typeInfo;
 
-    private Status GetTypeStatus() => MemberInfo.MemberType switch
+    private InfoWithIcon GetTypeInfo() => MemberInfo.MemberType switch
     {
-      MemberTypes.Constructor => new Status("🏗️", "constructor"),
-      MemberTypes.Event => new Status("🔫", "event"),
-      MemberTypes.Field => new Status("⏹️", "field"),
-      MemberTypes.Method => new Status("🚀", "method"),
-      MemberTypes.NestedType => new Status("❓", "nested type"),
+      MemberTypes.Constructor => new InfoWithIcon("🏗️", "constructor"),
+      MemberTypes.Event => new InfoWithIcon("🔫", "event"),
+      MemberTypes.Field => new InfoWithIcon("⏹️", "field"),
+      MemberTypes.Method => new InfoWithIcon("🚀", "method"),
+      MemberTypes.NestedType => new InfoWithIcon("❓", "nested type"),
       MemberTypes.Property => (MemberInfo as PropertyInfo) switch
       {
-        { CanRead: true, CanWrite: true } => new Status("🧊", "property r/w"),
-        { CanRead: true } => new Status("📤", "property r"),
-        { CanWrite: true } => new Status("📥", "property w"),
-        _ => new Status("🧊", "property")
+        { CanRead: true, CanWrite: true } => new InfoWithIcon("🧊", "property r/w"),
+        { CanRead: true } => new InfoWithIcon("📤", "property r"),
+        { CanWrite: true } => new InfoWithIcon("📥", "property w"),
+        _ => new InfoWithIcon("🧊", "property")
       },
-      _ => new Status("❔", "other?"),
+      _ => new InfoWithIcon("❔", "other?"),
     };
   }
 
