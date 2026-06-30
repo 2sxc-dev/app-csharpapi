@@ -1,5 +1,6 @@
 @inherits Custom.Hybrid.RazorTyped
-@using ToSic.Razor.Blade;
+@using ToSic.Razor.Blade
+@using System.Linq
 @using AppCode
 @using AppCode.Models
 
@@ -31,6 +32,19 @@
         ? Kit.Toolbar.Empty().New("RuleNamespace", tweak: t => t.Prefill(new { Title = title }))
         : Kit.Toolbar.Edit(cnf);
 
+      var nsRule = ns.Rule;
+
+    var configInfo = nsRule?.IgnoreAll == true
+      ? new InfoWithIcon("🦘*", "Ignore everything")
+      : nsRule?.IgnoreTypeMembers == true
+        ? new InfoWithIcon("🦘🎛️", "Ignore type members")
+        : null;
+
+
+      var relevantSubRules = ns.Types.Relevant
+        .Where(t => t.Rule != null)
+        .ToList();
+
       <tr class='@(ns.Namespace == currentNs ? "selected" : "")' @tlb>
         <td>
           <a href='@Link.To(parameters: MyPage.Parameters.Filter("Dll,Namespace").Toggle("Namespace", title))' title="@title">
@@ -45,10 +59,16 @@
         </td>
 
         @* Configuration *@
-        <td style='@(ns.Rule?.SharedRule == true ? "opacity: 0.4" : "")'>
-          @if (ns.Rule != null) {
-            @(ns.Rule.IgnoreAll ? "🦘*" : "")
-            @(ns.Rule.IgnoreTypeMembers ? "🦘🎛️" : "")
+        <td style='@(nsRule?.SharedRule == true ? "opacity: 0.4" : "")'>
+          @if (configInfo != null) {
+            <span  title='@configInfo.Message'>
+              @configInfo.Icon
+            </span>
+          }
+          @if (relevantSubRules.Count > 0) {
+            <span title="has sub-rules for types">
+              (@relevantSubRules.Count)
+            </span>
           }
         </td>
 
