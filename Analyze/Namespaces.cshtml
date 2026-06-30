@@ -38,7 +38,7 @@
       ? new InfoWithIcon("🦘*", "Ignore everything")
       : nsRule?.IgnoreTypeMembers == true
         ? new InfoWithIcon("🦘🎛️", "Ignore type members")
-        : null;
+        : new InfoWithIcon("", "");
 
 
       var relevantSubRules = ns.Types.Relevant
@@ -60,11 +60,9 @@
 
         @* Configuration *@
         <td style='@(nsRule?.SharedRule == true ? "opacity: 0.4" : "")'>
-          @if (configInfo != null) {
-            <span  title='@configInfo.Message'>
-              @configInfo.Icon
-            </span>
-          }
+          <span title='@configInfo.Message'>
+            @configInfo.Icon
+          </span>
           @if (relevantSubRules.Count > 0) {
             <span title="has sub-rules for types">
               (@relevantSubRules.Count)

@@ -24,7 +24,9 @@
         ? new InfoWithIcon("🦘🎛️", "Ignore all members")
         : type.Rule?.IgnoreMembersWithoutSpecs == true
           ? new InfoWithIcon("🦘🔲", "Ignore members without specs")
-          : null;
+          : type.Rule != null
+            ? new InfoWithIcon("⚙️", "Has rules")
+            : new InfoWithIcon("", "");
     
     <tr class='@(currentType == type.Name ? "selected" : "")' @tlb>
       <td title="@type.TypeInfo.Message">
@@ -40,8 +42,8 @@
       @Html.Partial("./VisibilityColumns.cshtml", new { type.Visibility, Total = type.Overall })
 
       @* Configuration *@
-      <td title='@(configInfo?.Message)'>
-        @(configInfo?.Icon)
+      <td title='@configInfo.Message'>
+        @configInfo.Icon
       </td>
       <td>
         

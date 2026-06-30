@@ -34,7 +34,7 @@
       var nsInfo = info?.Namespaces;
 
       <tr class='@(title == currentDll ? "selected" : "")' @Kit.Toolbar.Edit(dllItem)>
-        <td title="@title">
+        <td title='@title (@(dllItem.ExportingDocs ? "" : "not") exporting XML docs)' style='@(dllItem.ExportingDocs ? "" : "opacity: 0.4")'>
           <a href='@Link.To(parameters: "Dll=" + title)'>
             @trunc
           </a>
