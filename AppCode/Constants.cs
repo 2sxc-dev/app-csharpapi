@@ -47,6 +47,7 @@ namespace AppCode
 
     public const string Ok100 = "✅";
     public const string Ok99 = "🟩";
+    public const string Ok95Sys = "💚";
     public const string Ok75 = "🟢";
     public const string Ok50 = "🟡";
     public const string Ok25 = "🟠";
@@ -56,6 +57,7 @@ namespace AppCode
     {
       if (percent >= 100) return Ok100;
       if (percent >= 99) return Ok99;
+      if (percent >= 95) return Ok95Sys;
       if (percent >= 75) return Ok75;
       if (percent >= 50) return Ok50;
       if (percent >= 25) return Ok25;

@@ -1,27 +1,27 @@
-@inherits Custom.Hybrid.RazorTyped
+@inherits Custom.Hybrid.RazorTyped<AppCode.Razor.DetailsSpecs>
 @using AppCode
-@using AppCode.Models
 
-@{
-  var currentType = MyModel.String("CurrentType");
-  var nsInfo = MyModel.Get<ApiNamespaceInfo>("NsInfo");
-  var classInfo = MyModel.Get<ApiTypeInfo>("ClassInfo");
-  var selectedMemberName = MyModel.String("selectedMemberName");
-}
 <table>
+  @* Show header row with icons etc. *@
   @Html.Partial("./VisibilityHeader.cshtml")
 
-  @foreach (var member in classInfo.Members.Relevant)
+  @foreach (var member in Model.ClassInfo.Members.Relevant)
   {
-    <tr class='@(selectedMemberName == member.Name ? "selected" : "")'>
+    @* Row with selection active *@
+    <tr class='@(Model.SelectedMemberName == member.Name ? "selected" : "")'>
+      @* Type icon with status tooltip *@
       <td title="@member.TypeInfo.Message">
         @member.TypeInfo.Icon
       </td>
+
+      @* Member label with link to select it *@
       <td title="@member.LabelExtended">
         <a href='@Link.To(parameters: MyPage.Parameters.Toggle("Member", member.Name))'>
           @member.Label
         </a>
       </td>
+
+      @* Visibility info-details for the member *@
       @Html.Partial("./VisibilityColumns.cshtml", new { visibility = member.Visibility })
     </tr>
   }

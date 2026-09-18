@@ -1,0 +1,114 @@
+@inherits Custom.Hybrid.RazorTyped<AppCode.Razor.DetailsSpecs>
+@using AppCode.Models
+
+
+<h2>Stats @Model.DllInfo.Name</h2>
+<ul>
+  <li>Types: @Model.DllInfo.Types.Summary</li>
+  <li>Namespaces: @Model.DllInfo.Namespaces.Summary</li>
+</ul>
+
+<div class="viewport-breakout" style="background: white; padding-left: 10px">
+  <table class="table">
+    <tr>
+      <th>Dll</th>
+      <th>Namespace in @Model.DllInfo.Name (@Model.DllInfo.Namespaces.Summary)</th>
+      <th>
+        Classes in @(Model.NsInfo?.Namespace)
+        (@(Model.NsInfo?.Types.Summary))
+        @(Model.NsInfo?.Overall.Icon)
+      </th>
+      <th>
+        Members in @(Model.ClassInfo?.Name)
+        (@(Model.ClassInfo?.Members.Summary))
+        @(Model.ClassInfo?.Overall.Icon)
+      </th>
+      <th>
+        @if (Model.Selected is ApiMemberInfo)
+        {
+          <text>Details of @Model.Selected.Name</text>
+        }
+        else
+        {
+          <text>Member Details</text>
+        }
+      </th>
+    </tr>
+    <tr>
+      <td>
+        @Html.Partial("./Table Dlls.cshtml", Model)
+      </td>
+      @* Show Namespaces if a DLL is selected *@
+      <td>
+        @if (Model.DllInfo != null)
+        {
+          @Html.Partial("./Table Namespaces.cshtml", Model)
+        }
+        else
+        {
+          <text>No Dll Selected</text>
+        }
+      </td>
+      @* Show Classes if a Namespace is selected *@
+      <td>
+        @if (Model.NsInfo != null)
+        {
+          @Html.Partial("./Table Classes.cshtml", Model)
+        }
+        else
+        {
+          <text>No Namespace Selected</text>
+        }
+      </td>
+      @* Show Class Members if a Class is selected *@
+      <td>
+        @if (Model.ClassInfo != null)
+        {
+          @Html.Partial("./Table ClassMembers.cshtml", Model)
+        }
+        else
+        {
+          <text>No class Selected</text>
+        }
+      </td>
+      @* Show Details if a Member is selected *@
+      <td>
+        @if (Model.Selected != null)
+        {
+          @Html.Partial("./ClassMembers Details.cshtml", Model)
+        }
+        else
+        {
+          <text>No Member Selected</text>
+        }
+      </td>
+    </tr>
+  </table>
+</div>
+
+<style>
+  a {
+    text-decoration: underline;
+  }
+
+  tr.selected {
+    background-color: #eee;
+  }
+
+  .viewport-breakout {
+    /* Step 1: Make the width 100vw minus the 80px sidebar */
+    width: calc(100vw - 80px);
+    
+    position: relative;
+    
+    /* Step 2: Push it 80px to the right to clear the CMS bar, 
+      then pull it back by half of the NEW viewport width */
+    /* left: calc(50% + 80px); */
+    left: calc(50% + 0px);
+    right: 50%;
+    
+    margin-left: calc(-50vw + 40px);
+    /* 40px is half of 80px */
+    margin-right: -50vw;
+  }
+</style>

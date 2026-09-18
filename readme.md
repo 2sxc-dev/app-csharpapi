@@ -13,6 +13,7 @@ Basically it's a tree of rules to determine what should happen in a specific are
 and using this the UI should if something isn't as should be.
 This is then refined by either fixing the code or by adding a rule to again specify that area should behave as it does.
 The rules are stored in 2sxc.
+
 Rules are about:
 
 - Which DLLs should be considered `Dll`
@@ -54,7 +55,18 @@ The information if a dll is all ok is processed the first time the DLL is analyz
 
 1. wait for c# 10 support for records, then change the data objects to be records - would allow better copying / nicer code
 
+## Flow of the Code
+
+1. Start in `Default.cshtml`
+1. This will create a list of DLLs based on current App path
+1. This will load the `AssemblyInfoManager` service which handles the analysis of the DLLs.
+
 ## History
+
+### 2026-09-18 (@iJungleboy)
+
+1. Reorganized all Razor files to be clearer
+1. All Razor files now use a typed model
 
 ### 2026-06-28 (@iJungleboy)
 

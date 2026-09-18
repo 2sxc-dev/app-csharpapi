@@ -1,10 +1,10 @@
-@inherits Custom.Hybrid.RazorTyped
+@inherits Custom.Hybrid.RazorTyped<AppCode.Razor.DetailsSpecs>
 @using System.Linq;
 @using AppCode.Data
 @using AppCode.Analyzers
 
 @{
-  var currentDll = MyModel.String("currentDll");
+  var currentDll = Model.DllInfo.Name;
   var assemblyInfoSvc = GetService<AssemblyInfoManager>();
 
   var dllGroups = App.Data.GetAll<DllGroup>()

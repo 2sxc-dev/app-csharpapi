@@ -1,0 +1,41 @@
+@inherits Custom.Hybrid.RazorTyped<AppCode.Razor.DetailsSpecs>
+@using AppCode
+@using AppCode.Models
+
+<h5>Debug Class Member: @(Model.CurrentType + "." + Model.Selected.Name)</h5>
+
+<ol>
+  <li>
+    Name: @Model.Selected.Name
+  </li>
+  <li>
+    Summary: @Model.Selected.TypeInfo.Icon @Model.Selected.TypeInfo.Message
+  </li>
+  @if (Model.Selected is ApiMemberInfo memberInfo)
+  {
+    var declType = memberInfo.MemberInfo.DeclaringType;
+    var isObject = declType == typeof(object);
+
+    <li>
+      Declaring Member: @memberInfo.MemberInfo.DeclaringType.Name (IsObject: @isObject)
+    </li>
+  }
+</ol>
+
+<h5>Public & IntelliSense</h5>
+@{
+  var vis = Model.Selected.Visibility;
+}
+<ol>
+  <li>
+    @Show.BoolMoji(vis.IsPublic, Constants.VisPublic, Constants.VisInvisible)
+    @(vis.IsPublic ? "Public" : "Not public")
+  </li>
+  <li>
+    @vis.EditorStatus.Icon @vis.EditorStatus.Details
+  </li>
+</ol>
+
+<h5>Docs</h5>
+@vis.Docs.Icon
+<pre>@vis.Docs.Details</pre>

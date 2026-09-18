@@ -1,13 +1,14 @@
-@inherits Custom.Hybrid.RazorTyped
+@inherits Custom.Hybrid.RazorTyped<AppCode.Razor.DetailsSpecs>
 @using AppCode
 @using AppCode.Models
 
 @{
-  var currentType = MyModel.String("CurrentType");
-  var nsInfo = MyModel.Get<ApiNamespaceInfo>("NsInfo");
+  var currentType = Model.CurrentType;
+  var nsInfo = Model.NsInfo;
 
 }
 <table>
+  @* Show header row with icons etc. *@
   @Html.Partial("./VisibilityHeader.cshtml")
 
   @foreach (var type in nsInfo.Types.Relevant)
@@ -38,7 +39,7 @@
         </a>
       </td>
 
-      @* Standard infos / checkboxes *@
+      @* Visibility info-details for the member *@
       @Html.Partial("./VisibilityColumns.cshtml", new { type.Visibility, Total = type.Overall })
 
       @* Configuration *@

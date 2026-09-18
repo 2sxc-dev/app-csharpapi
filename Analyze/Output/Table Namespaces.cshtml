@@ -1,12 +1,12 @@
-@inherits Custom.Hybrid.RazorTyped
+@inherits Custom.Hybrid.RazorTyped<AppCode.Razor.DetailsSpecs>
 @using ToSic.Razor.Blade
 @using System.Linq
 @using AppCode
 @using AppCode.Models
 
 @{
-  var dllInfo = MyModel.Get<ApiAssemblyInfo>("DllInfo");
-  var currentNs = MyModel.String("currentNs");
+  var dllInfo = Model.DllInfo;
+  var currentNs = Model.CurrentNs;
 }
 <table x-class="table">
   <thead>
@@ -19,7 +19,8 @@
     </tr>
   </thead>
   <tbody>
-    @foreach (var ns in dllInfo.Namespaces.Relevant) {
+    @foreach (var ns in dllInfo.Namespaces.Relevant)
+    {
       var title = ns.Namespace;
       var trunc = title.Length < 10
         ? title
@@ -48,7 +49,7 @@
       <tr class='@(ns.Namespace == currentNs ? "selected" : "")' @tlb>
         <td>
           <a href='@Link.To(parameters: MyPage.Parameters.Filter("Dll,Namespace").Toggle("Namespace", title))' title="@title">
-            @Html.Raw(Text.Ellipsis(trunc, 20))
+            @Html.Raw(Text.Ellipsis(trunc, 40))
           </a>
         </td>
         <td>
