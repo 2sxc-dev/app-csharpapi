@@ -24,7 +24,8 @@
       <th title="Assembly information incl. ignore All and overall status (if already analyzed and the analysis is cached)" >⚙️</th>
       <th title="Edit (on hover)" >✏️</th>
     </tr>
-    @foreach (var dllItem in dllItems) {
+    @foreach (var dllItem in dllItems)
+    {
 
       var title = dllItem.Title;
       var trunc = title.Length < 10
@@ -33,7 +34,7 @@
       var info = assemblyInfoSvc.GetCached(dllItem.Name);
       var nsInfo = info?.Namespaces;
 
-      <tr class='@(title == currentDll ? "selected" : "")' @Kit.Toolbar.Edit(dllItem)>
+      <tr class='@(title + ".dll" == currentDll ? "selected" : "")' @Kit.Toolbar.Edit(dllItem)>
         <td title='@title (@(dllItem.ExportingDocs ? "" : "not") exporting XML docs)' style='@(dllItem.ExportingDocs ? "" : "opacity: 0.4")'>
           <a href='@Link.To(parameters: "Dll=" + title)'>
             @trunc

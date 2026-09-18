@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="21.08.00" ExportDate="2026-06-26T15:36:11.0510311+02:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="22.00.00" ExportDate="2026-09-18T22:09:02.8031614+02:00">
   <Header>
     <App Guid="9e126f21-f211-4bea-be14-3b5b9ad69d6d" />
     <Language Default="en-us" />
@@ -16,9 +16,59 @@
       <Attributes>
         <Attribute StaticName="Name" Type="String" IsTitle="true">
           <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="c6df4a49-60b0-4c80-8bb9-ce9be36908ea" Json="True" KeyNumber="35615">
+            <Value Key="CustomJavaScript" Value="" Type="String" />
+            <Value Key="DefaultValue" Value="" Type="String" />
+            <Value Key="Disabled" Value="False" Type="Boolean" />
+            <Value Key="DisableTranslation" Value="False" Type="Boolean" />
+            <Value Key="EnableExperimental" Value="True" Type="Boolean" />
             <Value Key="InputType" Value="string-default" Type="String" />
+            <Value Key="IsUnique" Value="True" Type="Boolean" />
             <Value Key="Name" Value="Name" Type="String" />
+            <Value Key="Notes" Value="" Type="String" />
+            <Value Key="Placeholder" Value="" Type="String" />
+            <Value Key="Required" Value="False" Type="Boolean" />
+            <Value Key="ValidationRegExJavaScript" Value="" Type="String" />
             <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
+          </Entity>
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@String" AttributeSetName="@String" EntityGUID="39ddf7e8-5ef6-42ea-8d8f-06795f634ebf" Json="True" KeyNumber="35615">
+            <Value Key="DropdownValues" Value="" Type="String" />
+            <Value Key="InputType" Value="" Type="String" />
+          </Entity>
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@string-default" AttributeSetName="@string-default" EntityGUID="1ba18e2b-99d6-4367-81f5-d7d535ba9b1c" Json="True" KeyNumber="35615">
+            <Value Key="InputFontFamily" Value="" Type="String" />
+            <Value Key="TextWrapping" Value="" Type="String" />
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="IgnoreAll" Type="Boolean" IsTitle="false">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="3b4dfcef-0db1-4389-bb0b-3461ac06a5bb" Json="True" KeyNumber="35629">
+            <Value Key="InputType" Value="boolean-default" Type="String" />
+            <Value Key="Name" Value="IgnoreAll" Type="String" />
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="Group" Type="Entity" IsTitle="false">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="c976f8c6-3c86-4eda-bae8-e5dfdf5c6367" Json="True" KeyNumber="46107">
+            <Value Key="CustomJavaScript" Value="" Type="String" />
+            <Value Key="DefaultValue" Value="" Type="String" />
+            <Value Key="Disabled" Value="False" Type="Boolean" />
+            <Value Key="DisableTranslation" Value="False" Type="Boolean" />
+            <Value Key="InputType" Value="entity-default" Type="String" />
+            <Value Key="Name" Value="Group" Type="String" />
+            <Value Key="Notes" Value="" Type="String" />
+            <Value Key="Placeholder" Value="" Type="String" />
+            <Value Key="Required" Value="True" Type="Boolean" />
+            <Value Key="ValidationRegExJavaScript" Value="" Type="String" />
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
+          </Entity>
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@Entity" AttributeSetName="@Entity" EntityGUID="b35c57e0-30ce-42ad-b090-904549566ad1" Json="True" KeyNumber="46107">
+            <Value Key="AllowMultiValue" Value="False" Type="Boolean" />
+            <Value Key="EnableAddExisting" Value="True" Type="Boolean" />
+            <Value Key="EnableCreate" Value="True" Type="Boolean" />
+            <Value Key="EnableDelete" Value="False" Type="Boolean" />
+            <Value Key="EnableEdit" Value="True" Type="Boolean" />
+            <Value Key="EnableRemove" Value="True" Type="Boolean" />
+            <Value Key="EntityType" Value="DllGroup" Type="String" />
+            <Value Key="Prefill" Value="" Type="String" />
           </Entity>
         </Attribute>
         <Attribute StaticName="Description" Type="String" IsTitle="false">
@@ -28,10 +78,48 @@
             <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
           </Entity>
         </Attribute>
-        <Attribute StaticName="IgnoreAll" Type="Boolean" IsTitle="false">
-          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="3b4dfcef-0db1-4389-bb0b-3461ac06a5bb" Json="True" KeyNumber="35629">
+        <Attribute StaticName="ExportingDocs" Type="Boolean" IsTitle="false">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="024a910a-185d-494e-a156-2d09e5591afb" Json="True" KeyNumber="46108">
+            <Value Key="CustomJavaScript" Value="" Type="String" />
+            <Value Key="DefaultValue" Value="" Type="String" />
+            <Value Key="Disabled" Value="False" Type="Boolean" />
+            <Value Key="DisableTranslation" Value="False" Type="Boolean" />
             <Value Key="InputType" Value="boolean-default" Type="String" />
-            <Value Key="Name" Value="IgnoreAll" Type="String" />
+            <Value Key="Name" Value="Exporting Docs Enabled" Type="String" />
+            <Value Key="Notes" Value="&lt;p&gt;Determines if we're exporting the docs in production build (in the .csproj)&lt;/p&gt;" Type="String" />
+            <Value Key="Placeholder" Value="" Type="String" />
+            <Value Key="Required" Value="False" Type="Boolean" />
+            <Value Key="ValidationRegExJavaScript" Value="" Type="String" />
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
+          </Entity>
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@Boolean" AttributeSetName="@Boolean" EntityGUID="8ce76a4a-543d-4c76-a1ed-0542548b7d4b" Json="True" KeyNumber="46108">
+            <Value Key="TitleFalse" Value="" Type="String" />
+            <Value Key="TitleIndeterminate" Value="" Type="String" />
+            <Value Key="TitleTrue" Value="" Type="String" />
+          </Entity>
+        </Attribute>
+      </Attributes>
+    </AttributeSet>
+    <AttributeSet StaticName="7dc1e3f8-293a-4e7e-8b70-3c15350ccd89" Name="DllGroup" Scope="Default" AlwaysShareConfiguration="false">
+      <Attributes>
+        <Attribute StaticName="Title" Type="String" IsTitle="true">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="592c3e19-7e57-468b-970e-a161667b1f85" Json="True" KeyNumber="46103">
+            <Value Key="InputType" Value="string-default" Type="String" />
+            <Value Key="Name" Value="Title" Type="String" />
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="Order" Type="Number" IsTitle="false">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="7b6793c8-c658-4d81-95e2-0074e89cb414" Json="True" KeyNumber="46104">
+            <Value Key="InputType" Value="number-default" Type="String" />
+            <Value Key="Name" Value="Order" Type="String" />
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="Description" Type="String" IsTitle="false">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="77dc3e9e-aaeb-4914-b139-0a0caf2bfb9c" Json="True" KeyNumber="46105">
+            <Value Key="InputType" Value="string-wysiwyg" Type="String" />
+            <Value Key="Name" Value="Description" Type="String" />
             <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
           </Entity>
         </Attribute>
@@ -182,7 +270,7 @@
       <Value Key="ListPresentationTypeStaticName" Value="" Type="String" />
       <Value Key="Location" Value="Site" Type="String" />
       <Value Key="Name" Value="Default" Type="String" />
-      <Value Key="Path" Value="Default.cshtml" Type="String" />
+      <Value Key="Path" Value="Analyze/Default.cshtml" Type="String" />
       <Value Key="PresentationTypeStaticName" Value="" Type="String" />
       <Value Key="PublishData" Value="False" Type="Boolean" />
       <Value Key="SearchIndexingDisabled" Value="False" Type="Boolean" />
@@ -195,87 +283,130 @@
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="5f8e468e-a4be-464e-826e-5bfc370363bf">
       <Value Key="Description" Value="&lt;p&gt;Main DLL containing most of the public APIs&lt;/p&gt;" Type="String" />
+      <Value Key="ExportingDocs" Value="True" Type="Boolean" />
+      <Value Key="Group" Value="25f42405-1b5f-481c-ae68-1dc09777b547" Type="Entity" />
       <Value Key="IgnoreAll" Value="False" Type="Boolean" />
       <Value Key="Name" Value="ToSic.Sxc.Core" Type="String" />
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="88507ce3-1712-4359-950a-355b02bd804f">
       <Value Key="Description" Value="&lt;p&gt;Dnn DLL&lt;/p&gt;" Type="String" />
+      <Value Key="Group" Value="7f0b149a-4eac-4e2b-b398-c68af00f48b3" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
       <Value Key="Name" Value="ToSic.Sxc.Dnn" Type="String" />
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="b5306c50-aae4-42c4-9c94-5effaf9a8d8c">
       <Value Key="Description" Value="" Type="String" />
+      <Value Key="ExportingDocs" Value="True" Type="Boolean" />
+      <Value Key="Group" Value="7f0b149a-4eac-4e2b-b398-c68af00f48b3" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
       <Value Key="Name" Value="ToSic.Sxc.Dnn.Razor" Type="String" />
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="d19df884-2ecc-4f44-90ef-573d24675a6d">
       <Value Key="Description" Value="" Type="String" />
+      <Value Key="ExportingDocs" Value="True" Type="Boolean" />
+      <Value Key="Group" Value="7f0b149a-4eac-4e2b-b398-c68af00f48b3" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
       <Value Key="Name" Value="ToSic.Sxc.Dnn.WebApi" Type="String" />
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="2d11fe0c-2d47-423d-87c2-1a8bc35dc355">
       <Value Key="Description" Value="" Type="String" />
+      <Value Key="ExportingDocs" Value="True" Type="Boolean" />
+      <Value Key="Group" Value="7f0b149a-4eac-4e2b-b398-c68af00f48b3" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
       <Value Key="Name" Value="ToSic.Sxc.Dnn.Core" Type="String" />
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="819504db-6f60-464c-b6c6-a20b4cc37887">
       <Value Key="Description" Value="" Type="String" />
+      <Value Key="Group" Value="25f42405-1b5f-481c-ae68-1dc09777b547" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
       <Value Key="Name" Value="ToSic.Sxc.WebApi" Type="String" />
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="069756f2-d438-42f7-aad0-924697ac042d">
       <Value Key="Description" Value="" Type="String" />
-      <Value Key="Name" Value="ToSic.Eav" Type="String" />
+      <Value Key="Group" Value="b9a85974-6f81-40f6-9be5-eade350e87ab" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
+      <Value Key="Name" Value="ToSic.Eav.Insights" Type="String" />
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="4dbedbfe-1cc9-461d-b0f1-7721413887d9">
       <Value Key="Description" Value="" Type="String" />
+      <Value Key="ExportingDocs" Value="True" Type="Boolean" />
+      <Value Key="Group" Value="b9a85974-6f81-40f6-9be5-eade350e87ab" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
       <Value Key="Name" Value="ToSic.Eav.Apps" Type="String" />
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="e32d1a12-4b6f-4edb-95d4-8167e148b64a">
       <Value Key="Description" Value="" Type="String" />
+      <Value Key="Group" Value="b9a85974-6f81-40f6-9be5-eade350e87ab" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
       <Value Key="Name" Value="ToSic.Eav.WebApi" Type="String" />
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="6e9ee1ca-de2f-4b7b-8928-1019c97c1099">
       <Value Key="Description" Value="" Type="String" />
+      <Value Key="ExportingDocs" Value="True" Type="Boolean" />
+      <Value Key="Group" Value="b9a85974-6f81-40f6-9be5-eade350e87ab" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
       <Value Key="Name" Value="ToSic.Eav.DataSources" Type="String" />
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="63c0129a-9e95-407c-9e26-bc9de74706d6">
       <Value Key="Description" Value="" Type="String" />
+      <Value Key="Group" Value="b9a85974-6f81-40f6-9be5-eade350e87ab" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
       <Value Key="Name" Value="ToSic.Eav.ImportExport" Type="String" />
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="fc984fc6-10ac-4952-aaf4-2d4fe3d7e215">
       <Value Key="Description" Value="" Type="String" />
+      <Value Key="Group" Value="b9a85974-6f81-40f6-9be5-eade350e87ab" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
       <Value Key="Name" Value="ToSic.Eav.Persistence.Efc" Type="String" />
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="db90db5d-9a91-4b5b-8c16-65fafa525424">
       <Value Key="Description" Value="" Type="String" />
+      <Value Key="Group" Value="b9a85974-6f81-40f6-9be5-eade350e87ab" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
       <Value Key="Name" Value="ToSic.Eav.Repository.Efc" Type="String" />
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="3d158f41-372a-49bf-97cc-5d6016acd651">
       <Value Key="Description" Value="" Type="String" />
-      <Value Key="Name" Value="ToSic.Eav.Core" Type="String" />
+      <Value Key="ExportingDocs" Value="True" Type="Boolean" />
+      <Value Key="Group" Value="b9a85974-6f81-40f6-9be5-eade350e87ab" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
+      <Value Key="Name" Value="ToSic.Eav.DataSource" Type="String" />
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="0e155039-5333-417f-9293-7e5796482cdc">
       <Value Key="Description" Value="" Type="String" />
-      <Value Key="Name" Value="ToSic.Lib.Core" Type="String" />
+      <Value Key="ExportingDocs" Value="True" Type="Boolean" />
+      <Value Key="Group" Value="c194f55c-d1a1-4ab6-b85d-8e2e60574411" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
+      <Value Key="Name" Value="ToSic.Sys.Core" Type="String" />
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="3b4f06a2-e802-4f2b-809c-558d579a80bf">
       <Value Key="Description" Value="" Type="String" />
+      <Value Key="ExportingDocs" Value="False" Type="Boolean" />
+      <Value Key="Group" Value="78d45a59-2905-482b-a718-63faafd4bff9" Type="Entity" />
       <Value Key="IgnoreAll" Value="True" Type="Boolean" />
       <Value Key="Name" Value="ToSic.Razor" Type="String" />
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="e0677efc-ea7b-401a-8b44-4f14c8b8d707">
       <Value Key="Description" Value="" Type="String" />
+      <Value Key="Group" Value="78d45a59-2905-482b-a718-63faafd4bff9" Type="Entity" />
       <Value Key="IgnoreAll" Value="True" Type="Boolean" />
       <Value Key="Name" Value="ToSic.Razor.Dnn" Type="String" />
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="fb29973f-37c8-47a6-b1a4-6be4fb772850">
       <Value Key="Description" Value="" Type="String" />
+      <Value Key="Group" Value="78d45a59-2905-482b-a718-63faafd4bff9" Type="Entity" />
       <Value Key="IgnoreAll" Value="True" Type="Boolean" />
       <Value Key="Name" Value="ToSic.Imageflow.Dnn" Type="String" />
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="b524714c-b202-4f01-948f-6dd1a3888eec">
       <Value Key="Description" Value="" Type="String" />
+      <Value Key="Group" Value="78d45a59-2905-482b-a718-63faafd4bff9" Type="Entity" />
       <Value Key="IgnoreAll" Value="True" Type="Boolean" />
       <Value Key="Name" Value="Connect.Koi" Type="String" />
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="1bdd0286-5ed8-4069-aebf-f36e62508f6b">
       <Value Key="Description" Value="" Type="String" />
+      <Value Key="Group" Value="78d45a59-2905-482b-a718-63faafd4bff9" Type="Entity" />
       <Value Key="IgnoreAll" Value="True" Type="Boolean" />
       <Value Key="Name" Value="Connect.Dnn.Koi" Type="String" />
     </Entity>
@@ -777,6 +908,7 @@
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="52df4826-699b-485d-8efe-29e7bad701e3">
       <Value Key="Description" Value="" Type="String" />
+      <Value Key="Group" Value="c08b37f7-2835-436a-af6d-1bb82998f846" Type="Entity" />
       <Value Key="IgnoreAll" Value="False" Type="Boolean" />
       <Value Key="Name" Value="ToSic.Sxc.Code.Generate" Type="String" />
     </Entity>
@@ -801,6 +933,389 @@
       <Value Key="IgnoreMembersWithoutSpecs" Value="" Type="Boolean" />
       <Value Key="Notes" Value="" Type="String" />
       <Value Key="Title" Value="ToSic.Eav.Factory" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="27380d82-abb4-4e78-bded-8f99045edef4">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="Group" Value="c194f55c-d1a1-4ab6-b85d-8e2e60574411" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
+      <Value Key="Name" Value="ToSic.Sys.Caching" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="c131acf0-e61c-471f-b186-0676a306d2e7">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="Group" Value="c194f55c-d1a1-4ab6-b85d-8e2e60574411" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
+      <Value Key="Name" Value="ToSic.Sys.Code" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="d355cc9d-bd75-4c38-94a8-f46a37c8ff14">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="Group" Value="c194f55c-d1a1-4ab6-b85d-8e2e60574411" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
+      <Value Key="Name" Value="ToSic.Sys.Features" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="d9f37ae9-e80f-4d5a-9296-9f55fb7cb7a8">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="Group" Value="c194f55c-d1a1-4ab6-b85d-8e2e60574411" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
+      <Value Key="Name" Value="ToSic.Sys.OData" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="c7db2df4-16b8-4ac7-bb3a-77eb42e2e3d2">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="Group" Value="c194f55c-d1a1-4ab6-b85d-8e2e60574411" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
+      <Value Key="Name" Value="ToSic.Sys.Security" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="14d973ae-d251-4756-bfbb-8820676f0f2a">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="ExportingDocs" Value="True" Type="Boolean" />
+      <Value Key="Group" Value="c194f55c-d1a1-4ab6-b85d-8e2e60574411" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
+      <Value Key="Name" Value="ToSic.Sys.Utils" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="e40c3e05-7504-4ac6-a803-42da1f9b9a19">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="Group" Value="b9a85974-6f81-40f6-9be5-eade350e87ab" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
+      <Value Key="Name" Value="ToSic.Eav.LookUp" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="55369443-8142-4aed-8ef7-a9886199d4fd">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="ExportingDocs" Value="True" Type="Boolean" />
+      <Value Key="Group" Value="b9a85974-6f81-40f6-9be5-eade350e87ab" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
+      <Value Key="Name" Value="ToSic.Eav.Data" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="0e38ac9f-6ef8-44db-8611-183e889cc159">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="Group" Value="b9a85974-6f81-40f6-9be5-eade350e87ab" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
+      <Value Key="Name" Value="ToSic.Eav.Data.Build" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="b041f0ac-928f-450b-887d-01fbbf8f4b05">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="Group" Value="b9a85974-6f81-40f6-9be5-eade350e87ab" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
+      <Value Key="Name" Value="ToSic.Eav.Data.Stack" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="e7af2c97-378b-4c0a-8059-f27e97ad2956">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="Group" Value="b9a85974-6f81-40f6-9be5-eade350e87ab" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
+      <Value Key="Name" Value="ToSic.Eav.Persistence" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="14340e0f-e895-460d-b6fc-e08b45b815a8">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="Group" Value="b9a85974-6f81-40f6-9be5-eade350e87ab" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
+      <Value Key="Name" Value="ToSic.Eav.Apps.Persistence" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="026eb4e4-7ec7-4e1b-b9d2-5a897988f10c">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="ExportingDocs" Value="False" Type="Boolean" />
+      <Value Key="Group" Value="b9a85974-6f81-40f6-9be5-eade350e87ab" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
+      <Value Key="Name" Value="ToSic.Eav.Context" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="85344b9c-182b-4f4d-b393-424ac5764d20">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="ExportingDocs" Value="False" Type="Boolean" />
+      <Value Key="Group" Value="b9a85974-6f81-40f6-9be5-eade350e87ab" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
+      <Value Key="Name" Value="ToSic.Eav.Work" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="de3961e1-650e-49c6-b071-92233657b617">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="ExportingDocs" Value="True" Type="Boolean" />
+      <Value Key="Group" Value="25f42405-1b5f-481c-ae68-1dc09777b547" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
+      <Value Key="Name" Value="ToSic.Sxc.Data" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="18fa83c5-c5f8-4d69-afb4-b6d2ec30263d">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="ExportingDocs" Value="True" Type="Boolean" />
+      <Value Key="Group" Value="25f42405-1b5f-481c-ae68-1dc09777b547" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
+      <Value Key="Name" Value="ToSic.Sxc.Adam" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="23849b0f-d439-44f8-a1fb-e5ab2286907a">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="Group" Value="25f42405-1b5f-481c-ae68-1dc09777b547" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
+      <Value Key="Name" Value="ToSic.Sxc.Blocks" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="414fa134-9636-4e6a-913c-9de0c23f1248">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="ExportingDocs" Value="True" Type="Boolean" />
+      <Value Key="Group" Value="25f42405-1b5f-481c-ae68-1dc09777b547" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
+      <Value Key="Name" Value="ToSic.Sxc.Apps" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="7e97e8d9-2694-4a86-9d54-95e779476a44">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="ExportingDocs" Value="True" Type="Boolean" />
+      <Value Key="Group" Value="25f42405-1b5f-481c-ae68-1dc09777b547" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
+      <Value Key="Name" Value="ToSic.Sxc.Cms" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="bbc4b16c-e272-41a5-b0b5-258284d5ceaa">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="ExportingDocs" Value="True" Type="Boolean" />
+      <Value Key="Group" Value="25f42405-1b5f-481c-ae68-1dc09777b547" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
+      <Value Key="Name" Value="ToSic.Sxc.Edit" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="5101dd32-cafe-4f09-b6c5-354b7e36d48b">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="Group" Value="25f42405-1b5f-481c-ae68-1dc09777b547" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
+      <Value Key="Name" Value="ToSic.Sxc.Engines" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="63877f1d-543e-44fa-9cc3-32580f3a31b3">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="Group" Value="25f42405-1b5f-481c-ae68-1dc09777b547" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
+      <Value Key="Name" Value="ToSic.Sxc.Images" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="1f68cae7-8105-4910-8664-3a9bf1843697">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="ExportingDocs" Value="True" Type="Boolean" />
+      <Value Key="Group" Value="25f42405-1b5f-481c-ae68-1dc09777b547" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
+      <Value Key="Name" Value="ToSic.Sxc.Services" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="4a6dc2f0-0067-4e7f-981e-32bc9897ac37">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="ExportingDocs" Value="True" Type="Boolean" />
+      <Value Key="Group" Value="c08b37f7-2835-436a-af6d-1bb82998f846" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
+      <Value Key="Name" Value="ToSic.Sxc.Code" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="44aa5f18-902e-4c99-a2b9-5a613dde6821">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="Group" Value="c08b37f7-2835-436a-af6d-1bb82998f846" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
+      <Value Key="Name" Value="ToSic.Sxc.Code.HotBuild" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="cf8a7189-feb5-4e55-b360-3e540b28b195">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="ExportingDocs" Value="True" Type="Boolean" />
+      <Value Key="Group" Value="c08b37f7-2835-436a-af6d-1bb82998f846" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
+      <Value Key="Name" Value="ToSic.Sxc.Custom" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="289e71d5-4dad-49c9-af45-fa05714b3dfc">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="Group" Value="25f42405-1b5f-481c-ae68-1dc09777b547" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
+      <Value Key="Name" Value="ToSic.Sxc.LightSpeed" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="d5b5f1da-f82e-46c7-af4b-9d638f68fb81">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="Group" Value="25f42405-1b5f-481c-ae68-1dc09777b547" Type="Entity" />
+      <Value Key="IgnoreAll" Value="False" Type="Boolean" />
+      <Value Key="Name" Value="ToSic.Sxc.Web" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="7dc1e3f8-293a-4e7e-8b70-3c15350ccd89" AttributeSetName="DllGroup" EntityGUID="c194f55c-d1a1-4ab6-b85d-8e2e60574411">
+      <Value Key="Description" Value="&lt;p&gt;All in the ToSic.Sys section / namespace&lt;/p&gt;" Type="String" />
+      <Value Key="Order" Value="1" Type="Number" />
+      <Value Key="Title" Value="ToSic.Sys" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="7dc1e3f8-293a-4e7e-8b70-3c15350ccd89" AttributeSetName="DllGroup" EntityGUID="7f0b149a-4eac-4e2b-b398-c68af00f48b3">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="Order" Value="301" Type="Number" />
+      <Value Key="Title" Value="Dnn" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="7dc1e3f8-293a-4e7e-8b70-3c15350ccd89" AttributeSetName="DllGroup" EntityGUID="78d45a59-2905-482b-a718-63faafd4bff9">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="Order" Value="999" Type="Number" />
+      <Value Key="Title" Value="Excluded" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="7dc1e3f8-293a-4e7e-8b70-3c15350ccd89" AttributeSetName="DllGroup" EntityGUID="b9a85974-6f81-40f6-9be5-eade350e87ab">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="Order" Value="11" Type="Number" />
+      <Value Key="Title" Value="ToSic.Eav" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="7dc1e3f8-293a-4e7e-8b70-3c15350ccd89" AttributeSetName="DllGroup" EntityGUID="c08b37f7-2835-436a-af6d-1bb82998f846">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="Order" Value="205" Type="Number" />
+      <Value Key="Title" Value="Sxc.Code" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="7dc1e3f8-293a-4e7e-8b70-3c15350ccd89" AttributeSetName="DllGroup" EntityGUID="25f42405-1b5f-481c-ae68-1dc09777b547">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="Order" Value="201" Type="Number" />
+      <Value Key="Title" Value="ToSic.Sxc" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="b08dcd23-2eb0-4a5e-a3d0-3178d2aae451" AttributeSetName="DataCopilotConfiguration" EntityGUID="02d28a36-cf50-46de-bcd9-cca5a2ff42ce" Json="True">
+      <Value Key="AutoGenerate" Value="False" Type="Boolean" />
+      <Value Key="CodeGenerator" Value="CSharpTypedDataModelsGenerator" Type="String" />
+      <Value Key="ContentTypes" Value="" Type="String" />
+      <Value Key="ContentTypeSet" Value="" Type="String" />
+      <Value Key="Edition" Value="" Type="String" />
+      <Value Key="Namespace" Value="AppCode.Data" Type="String" />
+      <Value Key="OutputType" Value="DataModel" Type="String" />
+      <Value Key="Prefix" Value="" Type="String" />
+      <Value Key="Scope" Value="Default" Type="String" />
+      <Value Key="Suffix" Value="" Type="String" />
+      <Value Key="TargetFolder" Value="AppCode/Data" Type="String" />
+      <Value Key="Title" Value="Main Export" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="2de22565-609b-4f77-9b71-240a683678a2">
+      <Value Key="ExpectedDocs" Value="" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="True" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="35b336d1-899e-405b-84e9-4b5b187521b6">
+      <Value Key="IgnoreAll" Value="True" Type="Boolean" />
+      <Value Key="IgnoreTypeMembers" Value="" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="System.Diagnostics.CodeAnalysis" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="3d5d2505-7086-4758-9af1-c9fe4c618ce8">
+      <Value Key="ExpectedDocs" Value="" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Sys.SysConstants" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="392c92b2-9e28-4b22-83af-4da6879f045a">
+      <Value Key="ExpectedDocs" Value="" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Sys.Assembly.SharedAssemblyInfo" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="080da3cd-6892-4a72-a45e-382d55dfa827">
+      <Value Key="ExpectedDocs" Value="True" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="False" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Sys.Coding.NoParamOrder" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="2SexyContent-Template" AttributeSetName="2SexyContent-Template" EntityGUID="17b3b6d1-c34d-4a3b-95fe-147fbcd9726c" Json="True">
+      <Value Key="ContentTypeStaticName" Value="" Type="String" />
+      <Value Key="Icon" Value="" Type="Hyperlink" />
+      <Value Key="Identifier" Value="" Type="String" />
+      <Value Key="IsHidden" Value="False" Type="Boolean" />
+      <Value Key="ListContentTypeStaticName" Value="" Type="String" />
+      <Value Key="ListPresentationTypeStaticName" Value="" Type="String" />
+      <Value Key="Location" Value="Site" Type="String" />
+      <Value Key="Name" Value="Analyze All Into Cache" Type="String" />
+      <Value Key="Path" Value="Analyze/Analyze All.cshtml" Type="String" />
+      <Value Key="PresentationTypeStaticName" Value="" Type="String" />
+      <Value Key="SearchIndexingDisabled" Value="False" Type="Boolean" />
+      <Value Key="SearchIndexingStreams" Value="" Type="String" />
+      <Value Key="StreamsToPublish" Value="" Type="String" />
+      <Value Key="Type" Value="C# Razor" Type="String" />
+      <Value Key="UseForList" Value="False" Type="Boolean" />
+      <Value Key="ViewController" Value="" Type="String" />
+      <Value Key="ViewNameInUrl" Value="analyze-all/.*" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="cbf73f9d-2d45-49c2-964b-10824d57b9a8">
+      <Value Key="ExpectedDocs" Value="True" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="False" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Sxc.Code.IDynamicCode12" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="21672a33-114c-4727-a46a-27155c90bf83">
+      <Value Key="ExpectedDocs" Value="True" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="False" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Sxc.Services.IDynamicCodeService" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="49da0150-f81e-463e-8b94-bd31625221c0">
+      <Value Key="ExpectedDocs" Value="False" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="True" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Sxc.Code.Sys.CustomCodeBase" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="7dc1e3f8-293a-4e7e-8b70-3c15350ccd89" AttributeSetName="DllGroup" EntityGUID="16b76df2-878d-415d-ba71-81284e8373e8">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="Order" Value="350" Type="Number" />
+      <Value Key="Title" Value="Oqtane" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="38150b47-0408-4639-9057-25faed8e1081" AttributeSetName="Dll" EntityGUID="47bb02b3-faca-4772-85c2-15748487e757">
+      <Value Key="Description" Value="&lt;p&gt;Oqtane Razor&lt;/p&gt;" Type="String" />
+      <Value Key="ExportingDocs" Value="False" Type="Boolean" />
+      <Value Key="Group" Value="16b76df2-878d-415d-ba71-81284e8373e8" Type="Entity" />
+      <Value Key="IgnoreAll" Value="True" Type="Boolean" />
+      <Value Key="Name" Value="ToSic.Sxc.Razor" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="31f46872-d176-4551-8059-17da20331e8e">
+      <Value Key="ExpectedDocs" Value="True" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="False" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Eav.DataSource.DataSourceConstants" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="7fca42d3-e47b-4021-a163-c616ef950d58">
+      <Value Key="ExpectedDocs" Value="False" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="True" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Sxc.Web.Sys.Html.HybridHtmlString" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="4864da5f-236a-4242-b8d1-f06c2f6d372c">
+      <Value Key="ExpectedDocs" Value="False" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="True" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Sxc.Services.Sys.ServiceWithContext" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="e4eac78e-aacd-4c51-bc1c-704e4a830a66">
+      <Value Key="IgnoreAll" Value="True" Type="Boolean" />
+      <Value Key="IgnoreTypeMembers" Value="" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="System.Reflection.Metadata" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="b18f312d-b870-472e-b66c-a370decacf6e">
+      <Value Key="IgnoreAll" Value="True" Type="Boolean" />
+      <Value Key="IgnoreTypeMembers" Value="" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Sxc.Dnn.WebApi.Sys" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="1e640f25-88ab-4191-ac81-6f0fb749a60a" AttributeSetName="RuleNamespace" EntityGUID="5b1adc22-b547-450b-9f7d-bf4f8c79c1e3">
+      <Value Key="IgnoreAll" Value="True" Type="Boolean" />
+      <Value Key="IgnoreTypeMembers" Value="" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Sxc.Dnn.DnnWebForms.Skins" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="241000de-c651-4413-a1d7-bd2097c7e827">
+      <Value Key="ExpectedDocs" Value="False" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="True" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Sxc.Web.RazorComponentBase" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="59ad710e-eeb4-4365-a061-dc106c47c9fe">
+      <Value Key="ExpectedDocs" Value="False" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="True" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="" Type="Boolean" />
+      <Value Key="Notes" Value="" Type="String" />
+      <Value Key="Title" Value="ToSic.Sxc.Services.Sys.ServiceKit" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d39631d7-112c-45d3-9332-6a6dd22215a7" AttributeSetName="RuleClass" EntityGUID="d8a88e6f-82b8-437a-8efa-20780b3c997f">
+      <Value Key="ExpectedDocs" Value="True" Type="Boolean" />
+      <Value Key="ExpectedIntellisense" Value="True" Type="Boolean" />
+      <Value Key="IgnoreAllProperties" Value="True" Type="Boolean" />
+      <Value Key="IgnoreMembersWithoutSpecs" Value="" Type="Boolean" />
+      <Value Key="Notes" Value="inherits various visibility attributes, so the checker is confused" Type="String" />
+      <Value Key="Title" Value="ToSic.Eav.DataSources.RecycleBin" Type="String" />
     </Entity>
   </Entities>
   <PortalFiles />
