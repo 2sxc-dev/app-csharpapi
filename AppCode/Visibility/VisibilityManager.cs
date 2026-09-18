@@ -6,6 +6,15 @@ namespace AppCode.Visibility
 {
   public class VisibilityManager
   {
+
+    /// <summary>
+    /// Create visibility info for a property or method.
+    /// </summary>
+    /// <param name="memberInfo"></param>
+    /// <param name="isPublic"></param>
+    /// <param name="isProtected"></param>
+    /// <param name="expected"></param>
+    /// <returns></returns>
     public IVisibility Create(MemberInfo memberInfo, bool isPublic, bool isProtected, IExpectedDocsAndIntellisense expected = null)
     {
       var hasPrivateApi = memberInfo?.HasPrivateApi() ?? false;

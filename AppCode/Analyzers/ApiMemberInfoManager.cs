@@ -74,10 +74,10 @@ namespace AppCode.Analyzers
       if (MemberInfo is MethodInfo mInfoMethod) {
         var parameters = mInfoMethod.GetParameters();
         if (parameters.Length > 0) {
-          var parameterNames = string.Join(", ", parameters.Select(p => p.ParameterType.Name + " " + p.Name));
-          return (Name + $"({parameters.Count()})", Name + $"({parameterNames})");
+          var parameterNames = string.Join(", ", parameters.Select(p => $"{p.ParameterType.Name} {p.Name}"));
+          return ($"{Name}({parameters.Count()})", $"{Name}({parameterNames})");
         } else {
-          return (Name + "()", Name + "()");
+          return ($"{Name}()", $"{Name}()");
         }
       }
 

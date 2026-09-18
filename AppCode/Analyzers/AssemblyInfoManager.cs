@@ -60,16 +60,16 @@ namespace AppCode.Analyzers
       var nsList = Analyze.GetNamespaces(assembly).ToList();
 
       // Retrieve special rules for internal, backend and integration namespaces
-      var ruleInternal = As<RuleNamespace>(nsRules.FirstOrDefault(r => r.Title == "Special:*.Internal")).Setup(true);
-      var ruleBackend = As<RuleNamespace>(nsRules.FirstOrDefault(r => r.Title == "Special:*.Backend")).Setup(true);
-      var ruleIntegration = As<RuleNamespace>(nsRules.FirstOrDefault(r => r.Title == "Special:*.Integration")).Setup(true);
+      var ruleInternal = nsRules.First(r => r.Title == "Special:*.Internal").Setup(shared: true);
+      var ruleBackend = nsRules.First(r => r.Title == "Special:*.Backend").Setup(shared: true);
+      var ruleIntegration = nsRules.First(r => r.Title == "Special:*.Integration").Setup(shared: true);
 
       // Create pairs of namespace and rule, so that we can easily find the rule for a namespace
       var nsWithRules = nsList
         .Select(ns =>
         {
           var currentNsRule = nsRules.FirstOrDefault(r => r.Title == ns);
-          var nsRule = currentNsRule == null ? null : As<RuleNamespace>(currentNsRule);
+          var nsRule = currentNsRule == null ? null : currentNsRule;
           nsRule ??= ns?.Contains(".Internal") == true ? ruleInternal : null;
           nsRule ??= ns?.Contains(".Backend") == true ? ruleBackend : null;
           nsRule ??= ns?.Contains(".Integration") == true ? ruleIntegration : null;

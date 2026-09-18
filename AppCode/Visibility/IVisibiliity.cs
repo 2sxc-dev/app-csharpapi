@@ -6,6 +6,7 @@ namespace AppCode.Visibility
     /// Member or type is publicly visible.
     /// </summary>
     bool IsPublic { get; }
+
     /// <summary>
     /// Member or type is protected.
     /// </summary>

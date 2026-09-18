@@ -30,10 +30,7 @@ namespace AppCode.Visibility
     })();
 
 
-    public Status Docs => _docs ??= GetDocsVisibilityStatus();
-
-
-    private Status GetDocsVisibilityStatus()
+    public Status Docs => _docs ??= new Func<Status>(() =>
     {
       var docs = this.GetDocsStatus();
       return new Status(docs.Ok, docs.Icon, docs.Message, docs.Icons,
@@ -43,7 +40,7 @@ namespace AppCode.Visibility
         + ParentVis?.Docs.Details
         + "\n\n**Merged** "
         + docs.Details);
-    }
+    })();
 
   }
 }
