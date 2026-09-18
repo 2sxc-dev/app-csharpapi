@@ -2,7 +2,7 @@ using System.Reflection;
 using AppCode.Data;
 using AppCode.Models;
 
-namespace AppCode.Analyzers
+namespace AppCode.Visibility
 {
   public class VisibilityManager
   {

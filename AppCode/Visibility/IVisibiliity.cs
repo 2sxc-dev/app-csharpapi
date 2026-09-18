@@ -1,8 +1,14 @@
-namespace AppCode.Models
+namespace AppCode.Visibility
 {
   public interface IVisibility
   {
+    /// <summary>
+    /// Member or type is publicly visible.
+    /// </summary>
     bool IsPublic { get; }
+    /// <summary>
+    /// Member or type is protected.
+    /// </summary>
     bool IsProtected { get; }
 
     Status Docs { get; }

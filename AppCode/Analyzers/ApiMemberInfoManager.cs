@@ -2,6 +2,7 @@ using System.Linq;
 using System.Reflection;
 using AppCode.Data;
 using AppCode.Models;
+using AppCode.Visibility;
 
 namespace AppCode.Analyzers
 {

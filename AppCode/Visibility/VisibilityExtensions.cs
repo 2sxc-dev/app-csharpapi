@@ -1,6 +1,6 @@
 using AppCode.Models;
 
-namespace AppCode
+namespace AppCode.Visibility
 {
   public static class VisibilityExtensions
   {

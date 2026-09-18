@@ -1,7 +1,7 @@
 using System;
 using AppCode.Data;
 
-namespace AppCode.Models
+namespace AppCode.Visibility
 {
   public class ApiVisibilityWithParent: ApiVisibility, IVisibility
   {

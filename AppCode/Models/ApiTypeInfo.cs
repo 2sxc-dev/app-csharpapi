@@ -1,5 +1,6 @@
 using System;
 using AppCode.Data;
+using AppCode.Visibility;
 
 namespace AppCode.Models
 {

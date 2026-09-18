@@ -1,3 +1,5 @@
+using AppCode.Visibility;
+
 namespace AppCode.Models
 {
   public interface ICommonInfo
@@ -7,7 +9,7 @@ namespace AppCode.Models
     public IVisibility Visibility { get; }
     // public IVisibility OwnVisibility { get; internal set; }
 
-    public InfoWithIcon TypeInfo  { get; }
- }
+    public InfoWithIcon TypeInfo { get; }
+  }
 
 }

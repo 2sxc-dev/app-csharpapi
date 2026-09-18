@@ -1,6 +1,7 @@
 using System.Reflection;
+using AppCode.Models;
 
-namespace AppCode.Models
+namespace AppCode.Visibility
 {
 
   public class ApiVisibility: IVisibility

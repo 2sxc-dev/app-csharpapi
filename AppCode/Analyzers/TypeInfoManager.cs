@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using AppCode.Data;
 using AppCode.Models;
+using AppCode.Visibility;
 using static AppCode.Constants;
 using ApiTypeInfo = AppCode.Models.ApiTypeInfo;
 
